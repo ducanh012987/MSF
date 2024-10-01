@@ -1,0 +1,709 @@
+<app-navbar></app-navbar>
+<div class="home-container">
+    <ng-scrollbar buttons>
+        <div class="wrapper">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-top">
+                    <button class="button-mail" type="button">
+                        <img src="https://res.cdn.office.net/owamail/hashed-v1/scripts/../resources/images/Mail_22px-hash-ef494f7f.m.svg"
+                            alt="Mail" class="" data-clicklog="custom" style="width: 20px; height: 20px" />
+                    </button>
+                    <button class="button-calendar" type="button">
+                        <img src="https://res.cdn.office.net/owamail/hashed-v1/scripts/../resources/images/Calendar_22px-hash-4b5e2360.m.svg"
+                            alt="Calendar" class="" data-clicklog="custom" style="width: 20px; height: 20px" />
+                    </button>
+                    <button class="button-people" type="button">
+                        <img src="https://res.cdn.office.net/owamail/hashed-v1/scripts/../resources/images/People_22px-hash-6b8f0c5c.m.svg"
+                            alt="People" class="" data-clicklog="custom" style="width: 20px; height: 20px" />
+                    </button>
+                    <button class="button-groups" type="button">
+                        <img src="https://res.cdn.office.net/owamail/hashed-v1/scripts/../resources/images/Groups_22px-hash-af23fed2.m.svg"
+                            alt="Groups" class="" data-clicklog="custom" style="width: 20px; height: 20px" />
+                    </button>
+                    <button class="button-todo" type="button">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAL1SURBVHgB7VVPaxNBFH8zidHWViNoUpHWePGcD6DQiBSqIlUEqxcdBEFE/AhZP4FfYUHEQlEqBf8cdAsF8daeRFCwR2+phPqn7b7xzezOZrLZZJOaXCQPktnd2Znfn/fmLcAw/ve47v18OL+y9W1+9Vc1aZ7BAOPau60qATiMA3CFlOHOwtmRR/Y7HAYUV9/Wq9KXjpQSJALQAOCjE3diIA5cfl2v8kg5AzXSQCNrcaLvDlxarlfBUo40YuiAvqef7URfHbjwsk45R4eRXK5Ua+WsSb0ao5qQWMkmbXTsplfOwO4cYNb9vlDZ6AZ85vkPyrnvhDuTUqbVcSYDNKRnigRK/T4SK8nYJksC5ww9Wpen2w1aVUkjcX6xRjlnTqCU8HhcdehEOOpnEsTizJjLOoCb6Eji3LNalfZ04vZGgIaENU9z4gWBq/UsBbwjiemnBA7SacmxccJSbU4C51wszQbgEYEU8EQSZ57UdMFx1qywyXIWpsPcZ0AsXzzk2puyiXmvJDO4lgLeRKI0W77FNXioKkYiAG4oV/MZQLF85Ygb3zBLZTndJbiK0uHTxTWJmMcweaqRIKjKZkFTwaDq1ZkHLlW5A2ZQvEoA1+t/5/iSBLYOXcT4qSKMTRXyqrmoxoIY4OnrpoYj9XM9z6R40wYcIKyB/G0vv39besS73O7Fg6UijJcmoGF747gp5cZ2XXgQXAND8f7GURc6hHZt061s/smxSjsnRk8WYXSqCKq9NhQrhbLhAhhHZHC9mw4eOWAiyYkDk0UYIQKcASQVXaITKMWqSAePHDARdyJH4LnJQkOxnW/biTD/qu4k+l2DtxCIk9h3ohABtCNhik2lB3xffBAFF3qIxM+xIeFv767bKm0S8Wf0Lz7e6Q1cRcfPcelxLc/4jkcpLkf5Nh3OrgE6aut3ewdPJWCTILAyTyBBHohP9/YG3hUBm0TcCYIXn+/vHbxrAkkkqMeLL/8I3hMBQwJgZy6b9Te+Pji+AsMYRh/iL5mvmIzqBzX8AAAAAElFTkSuQmCC"
+                            alt="To Do" class="" data-clicklog="custom" style="width: 20px; height: 20px" />
+                    </button>
+                    <button class="button-word" type="button">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGRlZnM+PHN0eWxlPi5jbHMtNHtmaWxsOiMxODVhYmR9PC9zdHlsZT48L2RlZnM+PGcgaWQ9IldvcmQiPjxnIGlkPSJfMjQiIGRhdGEtbmFtZT0iMjQiPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIHN0eWxlPSJmaWxsOm5vbmUiLz48cGF0aCBkPSJNMjQgN1YyYTEgMSAwIDAgMC0xLTFIN2ExIDEgMCAwIDAtMSAxdjVsOSAyWiIgc3R5bGU9ImZpbGw6IzQxYTVlZSIvPjxwYXRoIGQ9Ik0yNCA3SDZ2NWw5LjUgMiA4LjUtMlY3eiIgc3R5bGU9ImZpbGw6IzJiN2NkMyIvPjxwYXRoIGQ9Ik0yNCAxMkg2djVsOSAxLjUgOS0xLjV2LTV6IiBjbGFzcz0iY2xzLTQiLz48cGF0aCBkPSJNNiAxN2gxOHY1YTEgMSAwIDAgMS0xIDFIN2ExIDEgMCAwIDEtMS0xdi01WiIgc3R5bGU9ImZpbGw6IzEwM2Y5MSIvPjxwYXRoIGQ9Ik0xMy44MyA2SDZ2MTRoNy42YTEuNSAxLjUgMCAwIDAgMS40LTEuMzVWNy4xN0ExLjE4IDEuMTggMCAwIDAgMTMuODMgNloiIHN0eWxlPSJvcGFjaXR5Oi41Ii8+PHJlY3QgaWQ9IkJhY2tfUGxhdGUiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgeT0iNSIgY2xhc3M9ImNscy00IiBkYXRhLW5hbWU9IkJhY2sgUGxhdGUiIHJ4PSIxLjE3Ii8+PHBhdGggaWQ9IkxldHRlciIgZD0iTTEwLjE2IDE2SDguNzJMNyAxMC40OCA1LjI4IDE2SDMuODRsLTEuNi04aDEuNDRsMS4xMiA1LjYgMS42OC01LjQ0aDEuMmwxLjYgNS40NEwxMC40IDhoMS4zNloiIHN0eWxlPSJmaWxsOiNmZmYiLz48L2c+PC9nPjwvc3ZnPg=="
+                            alt="" class="" data-clicklog="custom" style="width: 20px; height: 20px" />
+                    </button>
+                    <button class="button-excel" type="button">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGRlZnM+PHN0eWxlPi5jbHMtM3tmaWxsOiMxMDdjNDF9PC9zdHlsZT48L2RlZnM+PGcgaWQ9IkV4Y2VsIj48ZyBpZD0iXzI0IiBkYXRhLW5hbWU9IjI0Ij48cGF0aCBkPSJNMTYgMUg3YTEgMSAwIDAgMC0xIDF2NWwxMCA1IDQgMS41IDQtMS41VjdaIiBzdHlsZT0iZmlsbDojMjFhMzY2Ii8+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgc3R5bGU9ImZpbGw6bm9uZSIvPjxwYXRoIGQ9Ik02IDcuMDJoMTBWMTJINnoiIGNsYXNzPSJjbHMtMyIvPjxwYXRoIGQ9Ik0yNCAydjVoLThWMWg3YTEgMSAwIDAgMSAxIDFaIiBzdHlsZT0iZmlsbDojMzNjNDgxIi8+PHBhdGggZD0iTTE2IDEySDZ2MTBhMSAxIDAgMCAwIDEgMWgxNmExIDEgMCAwIDAgMS0xdi01WiIgc3R5bGU9ImZpbGw6IzE4NWMzNyIvPjxwYXRoIGQ9Ik0xMy44MyA2SDZ2MTRoNy42YTEuNSAxLjUgMCAwIDAgMS40LTEuMzVWNy4xN0ExLjE4IDEuMTggMCAwIDAgMTMuODMgNloiIHN0eWxlPSJvcGFjaXR5Oi41Ii8+PHJlY3QgaWQ9IkJhY2tfUGxhdGUiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgeT0iNSIgY2xhc3M9ImNscy0zIiBkYXRhLW5hbWU9IkJhY2sgUGxhdGUiIHJ4PSIxLjE3Ii8+PHBhdGggZD0iTTMuNDMgMTYgNiAxMiAzLjY0IDhoMS45MWwxLjMgMi41NWE0LjYzIDQuNjMgMCAwIDEgLjI0LjU0IDUuNzcgNS43NyAwIDAgMSAuMjctLjU2TDguNzYgOGgxLjc1bC0yLjQzIDQgMi40OSA0SDguNzFsLTEuNS0yLjhhMi4xNCAyLjE0IDAgMCAxLS4yMS0uMzcgMS41NCAxLjU0IDAgMCAxLS4xNy4zNkw1LjMgMTZaIiBzdHlsZT0iZmlsbDojZmZmIi8+PHBhdGggZD0iTTE2IDEyaDh2NWgtOHoiIGNsYXNzPSJjbHMtMyIvPjwvZz48L2c+PC9zdmc+"
+                            alt="" class="" data-clicklog="custom" style="width: 20px; height: 20px" />
+                    </button>
+                    <button class="button-powerpoint" type="button">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgc3R5bGU9ImZpbGw6bm9uZSIvPjxwYXRoIGQ9Ik0xMyAxQTExIDExIDAgMCAwIDIgMTJsMTQuODQgMy44NFoiIHN0eWxlPSJmaWxsOiNlZDZjNDciLz48cGF0aCBkPSJNMTMgMWExMSAxMSAwIDAgMSAxMSAxMWwtNS41IDMtNS41LTNaIiBzdHlsZT0iZmlsbDojZmY4ZjZiIi8+PHBhdGggZD0iTTIgMTJhMTEgMTEgMCAwIDAgMjIgMFoiIHN0eWxlPSJmaWxsOiNkMzUyMzAiLz48cGF0aCBkPSJNMTUgMTguNjVWNy4xN0ExLjE4IDEuMTggMCAwIDAgMTMuODMgNkgzLjhhMTAuOTEgMTAuOTEgMCAwIDAgMS42OSAxNGg4LjExYTEuNSAxLjUgMCAwIDAgMS40LTEuMzVaIiBzdHlsZT0ib3BhY2l0eTouNSIvPjxwYXRoIGQ9Ik0xNSAxOC42NVY3LjE3QTEuMTggMS4xOCAwIDAgMCAxMy44MyA2SDMuOGExMC45MSAxMC45MSAwIDAgMCAxLjY5IDE0aDguMTFhMS41IDEuNSAwIDAgMCAxLjQtMS4zNVoiIHN0eWxlPSJvcGFjaXR5Oi4xIi8+PHJlY3Qgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiB5PSI1IiBkYXRhLW5hbWU9IkJhY2sgUGxhdGUiIHJ4PSIxLjE3IiBzdHlsZT0iZmlsbDojYzQzZTFjIi8+PHBhdGggZD0iTTcuNCA4YTMuMzIgMy4zMiAwIDAgMSAyLjIuNjQgMi4zMiAyLjMyIDAgMCAxIC43NiAxLjg2IDMuNDIgMy40MiAwIDAgMS0uMzYgMS42MSAyLjU0IDIuNTQgMCAwIDEtMS4wNyAxIDMuNyAzLjcgMCAwIDEtMS42MS4zNEg1Ljc4VjE2SDQuMjJWOFptLTEuNjIgNGgxLjM0YTEuNzggMS43OCAwIDAgMCAxLjE5LS4zNSAxLjQ2IDEuNDYgMCAwIDAgLjQtMS4xYzAtLjg4LS41MS0xLjMyLTEuNTQtMS4zMkg1Ljc4WiIgc3R5bGU9ImZpbGw6I2ZmZiIvPjwvc3ZnPg=="
+                            alt="" class="" data-clicklog="custom" style="width: 20px; height: 20px" />
+                    </button>
+                </div>
+                <div class="sidebar-center">
+                    <button class="button-dataset" type="button">
+                        <ng-icon class="icon-matDatasetOutline" name="matDatasetOutline"></ng-icon>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="content">
+                <div class="topbar">
+                    <button class="button-horizontal" type="button">
+                        <ng-icon class="icon-matHorizontalSplitOutline" name="matHorizontalSplitOutline"
+                            style="font-size: 22px"></ng-icon>
+                    </button>
+                    <button class="button-trangchu" type="button">
+                        <span>Trang chủ</span>
+                    </button>
+                    <button class="button-xem" type="button">
+                        <span>Xem</span>
+                    </button>
+                    <button class="button-trogiup" type="button">
+                        <span>Trợ giúp</span>
+                    </button>
+                </div>
+                <div class="bottombar">
+                    <div class="bottombar-content" [class.simple]="!isClassic">
+                        <div class="bottombar-mail">
+                            <div class="bottombar-mail-top">
+                                <button class="button-mail">
+                                    <ng-icon class="icon-matMailOutline" name="matMailOutline"
+                                        style="font-size: 30px;"></ng-icon>
+                                    <span>Thư mới</span>
+                                </button>
+                                <div class="bottombar-mail-icon-arrowdown">
+                                    <span>Mới</span>
+                                    <i>
+                                        <ng-icon class="icon-matKeyboardArrowDownOutline"
+                                            name="matKeyboardArrowDownOutline"></ng-icon>
+                                    </i>
+                                </div>
+                            </div>
+                            <div class="button-mail-label">
+                                <label for="">Mới</label>
+                            </div>
+                        </div>
+
+                        <div class="bottombar-divider">
+                            <div class="bottombar-divider divider"></div>
+                        </div>
+
+                        <div class="bottombar-delete">
+                            <div class="bottombar-delete-child">
+                                <div class="bottombar-delete-button">
+                                    <button class="button-volumeMute" disabled>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                            viewBox="0 0 94.25 100.25" style="
+                                                          enable-background: new 0 0 94.25 100.25;
+                                                          width: 16px;
+                                                          height: 16px;
+                                                        " xml:space="preserve">
+                                            <path
+                                                d="M74.121,50l8.939-8.939c0.586-0.585,0.586-1.536,0-2.121c-0.586-0.586-1.535-0.586-2.121,0L72,47.879l-8.939-8.939
+                                                                            c-0.586-0.586-1.535-0.586-2.121,0c-0.586,0.585-0.586,1.536,0,2.121L69.879,50l-8.939,8.939c-0.586,0.585-0.586,1.536,0,2.121
+                                                                            c0.293,0.293,0.677,0.439,1.061,0.439s0.768-0.146,1.061-0.439l8.939-8.939l8.939,8.939c0.293,0.293,0.677,0.439,1.061,0.439
+                                                                            s0.768-0.146,1.061-0.439c0.586-0.585,0.586-1.536,0-2.121L74.121,50z"
+                                                id="id_107" style="fill: rgb(255, 9, 0)">
+                                            </path>
+                                            <path d="M51.191,11.659c-0.508-0.254-1.116-0.2-1.571,0.141L23.202,31.593H8.22c-0.829,0-1.5,0.671-1.5,1.5V67.06
+                                                                            c0,0.829,0.671,1.5,1.5,1.5h14.985l26.419,19.644c0.264,0.196,0.579,0.296,0.895,0.296c0.23,0,0.46-0.053,0.674-0.16
+                                                                            c0.506-0.255,0.826-0.773,0.826-1.34V13C52.02,12.433,51.699,11.913,51.191,11.659z M49.02,84.016l-24.423-18.16
+                                                                            c-0.259-0.192-0.573-0.296-0.895-0.296H9.72V34.593h13.982c0.324,0,0.64-0.105,0.899-0.299l24.418-18.295L49.02,84.016L49.02,84.016
+                                                                            z" id="id_108"
+                                                style="fill: rgb(255, 9, 0)">
+                                            </path>
+                                        </svg>
+                                        <span>Bỏ qua</span>
+                                    </button>
+                                    <div class="button-block-arrowdown">
+                                        <button class="button-personBlock" disabled>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125" x="0px"
+                                                y="0px" style="width: 20px; height: 20px">
+                                                <path
+                                                    d="M12.14,77.05c.63.34,15.45,8.33,30.59,8.33a56.73,56.73,0,0,0,11.4-1.21A19,19,0,1,0,68.59,52.72c-.37,0-.73,0-1.09,0A30.06,30.06,0,0,0,50.13,40.06a16.33,16.33,0,1,0-14.79,0,29.59,29.59,0,0,0-14.8,9.32c-5.87,6.73-9.1,16.14-9.1,26.47a1.37,1.37,0,0,0,.7,1.2Zm72.78-5.28A16.32,16.32,0,0,1,59.49,85.32l20.32-25.4a16.31,16.31,0,0,1,5.11,11.85ZM68.59,55.44a16.31,16.31,0,0,1,9.1,2.78L57.36,83.62A16.33,16.33,0,0,1,68.59,55.44ZM29.13,25.51a13.6,13.6,0,1,1,13.6,13.6,13.61,13.61,0,0,1-13.6-13.6ZM22.59,51.17a26.47,26.47,0,0,1,41.88,2A19,19,0,0,0,52.36,81.74a52.71,52.71,0,0,1-9.63.92c-12.62,0-25.44-6-28.57-7.63.17-9.35,3.15-17.8,8.43-23.86Zm0,0"
+                                                    style="fill: rgb(255, 9, 0)" />
+                                            </svg>
+                                            <span>Chặn</span>
+                                        </button>
+                                        <button class="button-arrowDown" disabled>
+                                            <ng-icon class="icon-matKeyboardArrowDownOutline"
+                                                name="matKeyboardArrowDownOutline" style="font-size: 13px"></ng-icon>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button class="button-delete" disabled>
+                                    <ng-icon class="icon-matDeleteOutline" name="matDeleteOutline"
+                                        style="font-size: 35px"></ng-icon>
+                                    <span>Xoá</span>
+                                </button>
+                                <button class="button-dataset" disabled>
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25"
+                                        viewBox="0 0 50 50">
+                                        <path
+                                            d="M 1 3 L 1 15 L 3 15 L 3 48 L 47 48 L 47 15 L 49 15 L 49 3 Z M 3 5 L 47 5 L 47 13 L 3 13 Z M 5 15 L 45 15 L 45 46 L 5 46 Z M 17.5 19 C 15.578125 19 14 20.578125 14 22.5 C 14 24.421875 15.578125 26 17.5 26 L 32.5 26 C 34.421875 26 36 24.421875 36 22.5 C 36 20.578125 34.421875 19 32.5 19 Z M 17.5 21 L 32.5 21 C 33.339844 21 34 21.660156 34 22.5 C 34 23.339844 33.339844 24 32.5 24 L 17.5 24 C 16.660156 24 16 23.339844 16 22.5 C 16 21.660156 16.660156 21 17.5 21 Z"
+                                            style="fill: rgb(6, 178, 6)"></path>
+                                    </svg>
+                                    <span>Lưu trữ</span>
+                                </button>
+                            </div>
+                            <div class="button-delete-label">
+                                <label for="">Xoá</label>
+                            </div>
+                        </div>
+
+                        <div class="bottombar-divider">
+                            <div class="bottombar-divider divider"></div>
+                        </div>
+
+                        <div class="bottombar-report">
+                            <button class="button-report" disabled>
+                                <ng-icon class="icon-matReportGmailerrorredOutline" name="matReportGmailerrorredOutline"
+                                    style="font-size: 34px; color: red"></ng-icon>
+                            </button>
+                            <button class="text-report" disabled>
+                                Báo cáo
+                                <i>
+                                    <ng-icon class="icon-matKeyboardArrowDownOutline" name="matKeyboardArrowDownOutline"
+                                        style="font-size: 12px"></ng-icon>
+                                </i>
+                            </button>
+                            <div class="button-report-label">
+                                <label for="">Báo cáo</label>
+                            </div>
+                        </div>
+
+                        <div class="bottombar-divider">
+                            <div class="bottombar-divider divider"></div>
+                        </div>
+
+                        <div class="bottombar-feedback">
+                            <button class="button-feedback" disabled>
+                                <ng-icon class="icon-matReplyAllOutline" name="matReplyAllOutline"
+                                    style="font-size: 34px; color: rgb(255, 0, 247)"></ng-icon>
+                            </button>
+                            <button class="text-feedback" disabled>
+                                Trả lời tất cả
+                                <i>
+                                    <ng-icon class="icon-matKeyboardArrowDownOutline" name="matKeyboardArrowDownOutline"
+                                        style="font-size: 12px"></ng-icon>
+                                </i>
+                            </button>
+                            <div class="button-feedback-label">
+                                <label for="">Phản hồi</label>
+                            </div>
+                        </div>
+
+                        <div class="bottombar-divider">
+                            <div class="bottombar-divider divider"></div>
+                        </div>
+
+                        <div class="bottombar-move">
+                            <div class="bottombar-move-child">
+                                <button class="button-cleaning" disabled>
+                                    <ng-icon class="icon-matCleaningServicesOutline" name="matCleaningServicesOutline"
+                                        style="font-size: 27px; transform: rotate(45deg);"></ng-icon>
+                                    <span>Dọn dẹp</span>
+                                </button>
+                                <button class="button-filemove" disabled>
+                                    <ng-icon class="icon-matDriveFileMoveOutline" name="matDriveFileMoveOutline"
+                                        style="font-size: 35px; color: rgb(0, 149, 255)"></ng-icon>
+                                    <div>
+                                        <span>Di chuyển</span>
+                                        <ng-icon class="icon-matKeyboardArrowDownOutline"
+                                            name="matKeyboardArrowDownOutline" style="font-size: 12px"></ng-icon>
+                                    </div>
+                                </button>
+                                <button class="button-foldermail">
+                                    <ng-icon class="icon-matFolderSharedOutline" name="matFolderSharedOutline"
+                                        style="font-size: 34px;"></ng-icon>
+                                    <div>
+                                        <span>Quy tắc</span>
+                                        <ng-icon class="icon-matKeyboardArrowDownOutline"
+                                            name="matKeyboardArrowDownOutline" style="font-size: 12px"></ng-icon>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="button-move-label">
+                                <label for="">Di chuyển</label>
+                            </div>
+                        </div>
+
+                        <div class="bottombar-divider">
+                            <div class="bottombar-divider divider"></div>
+                        </div>
+
+                        <div class="bottombar-card">
+                            <div class="bottombar-card-child">
+                                <button class="button-read" disabled>
+                                    <svg width="32" height="32" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M9.74275 3.07125C9.90109 2.97625 10.0989 2.97625 10.2572 3.07125L17.029 7.1343C17.6314 7.49575 18 8.14676 18 8.84929V14.5C18 15.8807 16.8807 17 15.5 17H4.5C3.11929 17 2 15.8807 2 14.5V8.84929C2 8.14676 2.3686 7.49575 2.97101 7.1343L3.18358 7.48859L2.97101 7.1343L9.74275 3.07125ZM10 4.0831L3.4855 7.99179C3.48096 7.99452 3.47644 7.99728 3.47195 8.00007L10 11.9169L16.5281 8.00007C16.5236 7.99728 16.519 7.99452 16.5145 7.99179L10 4.0831ZM17 8.88309L10.2572 12.9287C10.0989 13.0238 9.90109 13.0238 9.74275 12.9287L3 8.88309V14.5C3 15.3284 3.67157 16 4.5 16H15.5C16.3284 16 17 15.3284 17 14.5V8.88309Z"
+                                            fill="#212121" />
+                                    </svg>
+                                    <span>Đã đọc/Chưa đọc</span>
+                                </button>
+                                <button class="button-tag" disabled>
+                                    <svg fill="#000000" height="26" width="26" version="1.1" id="Layer_1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 442.688 442.688" xml:space="preserve">
+                                        <path
+                                            d="M442.666,178.822l-4.004-145.078c-0.447-16.222-13.504-29.279-29.727-29.728l-145.08-4.004
+                                c-8.475-0.237-16.493,2.97-22.468,8.945L8.954,241.391c-11.924,11.924-11.924,31.325,0,43.249l149.083,149.082
+                                c11.951,11.953,31.296,11.956,43.25,0.001L433.721,201.29C439.636,195.374,442.897,187.184,442.666,178.822z M412.507,180.078
+                                L180.073,412.51c-0.056,0.056-0.171,0.171-0.411,0.171s-0.355-0.115-0.412-0.171L30.167,263.427
+                                c-0.227-0.227-0.227-0.597,0-0.823L262.601,30.17c0.108-0.108,0.257-0.17,0.426-0.17c0,0,0,0,0.001,0l145.079,4.004
+                                c0.309,0.009,0.558,0.257,0.566,0.566l4.004,145.079C412.682,179.809,412.619,179.965,412.507,180.078z" />
+                                        <path d="M302.699,66.44c-20.275,20.274-20.275,53.264,0,73.539c20.323,20.323,53.214,20.324,73.539,0
+                                c20.274-20.275,20.274-53.265,0-73.539C355.915,46.117,323.023,46.116,302.699,66.44z M355.025,118.766
+                                c-8.596,8.596-22.514,8.599-31.112,0c-8.578-8.578-8.578-22.535,0-31.113c8.597-8.597,22.514-8.599,31.113,0
+                                C363.602,96.231,363.602,110.188,355.025,118.766z" />
+                                    </svg>
+                                    <div>
+                                        <span>Phân loại</span>
+                                        <ng-icon class="icon-matKeyboardArrowDownOutline"
+                                            name="matKeyboardArrowDownOutline" style="font-size: 12px"></ng-icon>
+                                    </div>
+                                </button>
+                                <button class="button-flag" disabled>
+                                    <ng-icon class="icon-matOutlinedFlagOutline" name="matOutlinedFlagOutline"
+                                        style="font-size: 32px; color: red;"></ng-icon>
+                                    <div>
+                                        <span>Gắn cờ</span>
+                                        <ng-icon class="icon-matKeyboardArrowDownOutline"
+                                            name="matKeyboardArrowDownOutline" style="font-size: 12px"></ng-icon>
+                                    </div>
+                                </button>
+                                <button class="button-pin" disabled>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                        class="bi bi-pin-angle" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146zm.122 2.112v-.002.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a4.507 4.507 0 0 0-.288-.076 4.922 4.922 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a4.924 4.924 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034.114 0 .23-.011.343-.04L9.927 2.028c-.029.113-.04.23-.04.343a1.779 1.779 0 0 0 .062.46z"
+                                            style="fill: rgb(0, 149, 255)" />
+                                    </svg>
+                                    <span>Ghim</span>
+                                </button>
+                                <button class="button-clock" disabled>
+                                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px"
+                                        height="30px" viewBox="0 0 510 510" style="enable-background:new 0 0 510 510;"
+                                        xml:space="preserve">
+                                        <path style="fill-opacity:0.9;"
+                                            d="M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z
+                                    M255,459c-112.2,0-204-91.8-204-204S142.8,51,255,51s204,91.8,204,204S367.2,459,255,459z" />
+                                        <polygon style="fill-opacity:0.9;"
+                                            points="267.75,127.5 229.5,127.5 229.5,280.5 362.1,362.1 382.5,328.95 267.75,260.1 		" />
+                                    </svg>
+                                    <div>
+                                        <span>Giấc ngủ ngắn</span>
+                                        <ng-icon class="icon-matKeyboardArrowDownOutline"
+                                            name="matKeyboardArrowDownOutline" style="font-size: 12px"></ng-icon>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="button-card-label">
+                                <label for="">Thẻ</label>
+                            </div>
+                        </div>
+
+                        <div class="bottombar-divider">
+                            <div class="bottombar-divider divider"></div>
+                        </div>
+
+                        <div class="bottombar-print">
+                            <button class="button-print" disabled>
+                                <ng-icon class="icon-matPrintOutline" name="matPrintOutline"
+                                    style="font-size: 34px;"></ng-icon>
+                                <span>In</span>
+                            </button>
+                            <div class="button-print-label">
+                                <label for="">In</label>
+                            </div>
+                        </div>
+
+                        <div class="bottombar-divider">
+                            <div class="bottombar-divider divider"></div>
+                        </div>
+
+                        <div class="bottombar-search">
+                            <button class="button-search">
+                                <svg width="34" height="34" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8.75 3.75C8.75 2.23122 7.51878 1 6 1C4.48122 1 3.25 2.23122 3.25 3.75C3.25 5.26878 4.48122 6.5 6 6.5C7.51878 6.5 8.75 5.26878 8.75 3.75ZM4.25 3.75C4.25 2.7835 5.0335 2 6 2C6.9665 2 7.75 2.7835 7.75 3.75C7.75 4.7165 6.9665 5.5 6 5.5C5.0335 5.5 4.25 4.7165 4.25 3.75Z"
+                                        fill="#212121" />
+                                    <path
+                                        d="M2.5 7.5H6.68252C6.51859 7.81013 6.39687 8.14601 6.32501 8.5H2.5C2.22386 8.5 2 8.72386 2 9V9.5C2 10.7591 3.09851 12.1138 5.09636 12.4309C4.77396 12.6501 4.50546 12.9426 4.31486 13.2845C2.20563 12.7119 1 11.0874 1 9.5V9C1 8.17157 1.67157 7.5 2.5 7.5Z"
+                                        fill="#212121" />
+                                    <path
+                                        d="M7.87858 7.5C8.38298 6.88925 9.14603 6.5 10 6.5C10.854 6.5 11.617 6.88925 12.1214 7.5C12.3605 7.78952 12.5415 8.12881 12.6465 8.5C12.7139 8.73842 12.75 8.98999 12.75 9.25C12.75 10.32 12.1389 11.2473 11.2466 11.7019C10.8919 11.8825 10.4929 11.9885 10.0702 11.9991C10.0469 11.9997 10.0235 12 10 12C9.97654 12 9.95315 11.9997 9.92983 11.9991C9.50709 11.9885 9.10806 11.8826 8.75342 11.7019C7.86115 11.2473 7.25 10.32 7.25 9.25C7.25 8.98999 7.28608 8.73842 7.35352 8.5C7.4585 8.12881 7.63948 7.78952 7.87858 7.5ZM8.41841 8.5C8.31042 8.72731 8.25 8.9816 8.25 9.25C8.25 9.96407 8.67768 10.5782 9.29086 10.8504C9.50763 10.9466 9.74757 11 10 11C10.2524 11 10.4924 10.9466 10.7091 10.8504C11.3223 10.5782 11.75 9.96407 11.75 9.25C11.75 8.9816 11.6896 8.72731 11.5816 8.5C11.3362 7.98351 10.8453 7.60627 10.2597 7.51914C10.175 7.50653 10.0883 7.5 10 7.5C9.91175 7.5 9.82502 7.50653 9.74028 7.51914C9.15468 7.60627 8.66377 7.98351 8.41841 8.5Z"
+                                        fill="#212121" />
+                                    <path
+                                        d="M15.6851 13.2845C15.4945 12.9426 15.226 12.6501 14.9036 12.4309C16.9015 12.1138 18 10.7591 18 9.5V9C18 8.72386 17.7761 8.5 17.5 8.5H13.675C13.6031 8.14601 13.4814 7.81013 13.3175 7.5H17.5C18.3284 7.5 19 8.17157 19 9V9.5C19 11.0874 17.7944 12.7119 15.6851 13.2845Z"
+                                        fill="#212121" />
+                                    <path
+                                        d="M14.4872 13.3706C14.2234 13.1398 13.878 13 13.5 13H6.5C6.06797 13 5.6786 13.1826 5.40489 13.4749C5.15376 13.7431 5 14.1036 5 14.5V15C5 16.9714 6.85951 19 10 19C13.1405 19 15 16.9714 15 15V14.5C15 14.0496 14.8015 13.6456 14.4872 13.3706ZM6 14.5C6 14.2239 6.22386 14 6.5 14H13.5C13.7761 14 14 14.2239 14 14.5V15C14 16.4376 12.5678 18 10 18C7.43216 18 6 16.4376 6 15V14.5Z"
+                                        fill="#212121" />
+                                    <path
+                                        d="M14 1C15.5188 1 16.75 2.23122 16.75 3.75C16.75 5.26878 15.5188 6.5 14 6.5C12.4812 6.5 11.25 5.26878 11.25 3.75C11.25 2.23122 12.4812 1 14 1ZM14 2C13.0335 2 12.25 2.7835 12.25 3.75C12.25 4.7165 13.0335 5.5 14 5.5C14.9665 5.5 15.75 4.7165 15.75 3.75C15.75 2.7835 14.9665 2 14 2Z"
+                                        fill="#212121" />
+                                </svg>
+                                <span>Khám phá các nhóm</span>
+                            </button>
+                            <div class="button-search-label">
+                                <label for="">Tìm</label>
+                            </div>
+                        </div>
+
+                        <div class="bottombar-divider">
+                            <div class="bottombar-divider divider"></div>
+                        </div>
+
+                        <div class="bottombar-undo">
+                            <button class="button-undo" disabled>
+                                <svg width="30" height="30" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5 2.5C5 2.22386 4.77614 2 4.5 2C4.22386 2 4 2.22386 4 2.5V7.4C4 7.73137 4.26863 8 4.6 8H9.5C9.77614 8 10 7.77614 10 7.5C10 7.22386 9.77614 7 9.5 7H5.90603L9.37872 3.98124C11.046 2.53191 13.5725 2.70858 15.0218 4.37584C16.4711 6.0431 16.2945 8.56959 14.6272 10.0189L6.45529 17.1226C6.24688 17.3038 6.2248 17.6196 6.40596 17.828C6.58713 18.0364 6.90294 18.0585 7.11135 17.8774L15.2833 10.7736C17.3673 8.96197 17.5882 5.80385 15.7765 3.71978C13.9648 1.63571 10.8067 1.41487 8.72266 3.22653L5 6.46259V2.5Z"
+                                        fill="#212121" />
+                                </svg>
+                                <span>Hoàn tác</span>
+                            </button>
+                            <div class="button-undo-label">
+                                <label for="">Hoàn tác</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bottombar-optional">
+                        <button class="button-arrowDown" (click)="menuRibbon()">
+                            <ng-icon class="icon-matKeyboardArrowDownOutline" name="matKeyboardArrowDownOutline"
+                                style="font-size: 20px"></ng-icon>
+                        </button>
+                        <div class="ribbon" *ngIf="isMenuRibbon">
+                            <ul class="ribbon-menu">
+                                <li class="ribbon-item">
+                                    <div class="item-header">
+                                        <div style="width: 16px;"></div>
+                                        <span>Bố cục</span>
+                                    </div>
+                                </li>
+                                <li class="ribbon-item">
+                                    <button class="item-content" (click)="switchToClassic()">
+                                        <div style="width: 16px;"></div>
+                                        <span>Ribbon cổ điển</span>
+                                    </button>
+                                </li>
+                                <li class="ribbon-item">
+                                    <button class="item-content" (click)="switchToSimple()">
+                                        <div style="width: 16px;"></div>
+                                        <span>Ribbon đơn giản</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-main">
+                    <div class="content-main-title">
+                        <ng-scrollbar buttons>
+                            <div class="focus-zone">
+                                <!-- ------------- -->
+                                <div class="focus-item">
+                                    <div class="box-focus-title">
+                                        <div class="focus-title-left">
+                                            <ng-icon class="icon" name="matKeyboardArrowDownOutline"></ng-icon>
+                                            <span class="title">Yêu thích</span>
+                                        </div>
+                                        <div class="focus-title-right">
+                                            <div class="action">
+                                                <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="group-item">
+                                        <div class="item active">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matInboxOutline" />
+                                                <span class="name">Hộp thư</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matSendOutline" />
+                                                <span class="name">Các mục đã gửi</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matCreateOutline" />
+                                                <span class="name">Bản thảo</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item add-new">
+                                            <div class="title">
+                                                <span class="name">Thêm nội dung yêu thích</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ------------- -->
+                                <div class="focus-item">
+                                    <div class="box-focus-title">
+                                        <div class="focus-title-left">
+                                            <ng-icon class="icon" name="matKeyboardArrowDownOutline"></ng-icon>
+                                            <span class="title">Thư mục</span>
+                                        </div>
+                                        <div class="focus-title-right">
+                                            <div class="action">
+                                                <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="group-item">
+                                        <div class="item">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matInboxOutline" />
+                                                <span class="name">Hộp thư</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matMailLockOutline" />
+                                                <span class="name">Mail rác</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matCreateOutline" />
+                                                <span class="name">Bản thảo</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matSendOutline" />
+                                                <span class="name">Các mục đã gửi</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matDeleteOutline" />
+                                                <span class="name">Các mục đã xóa</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matInventory2Outline" />
+                                                <span class="name">Lưu trữ</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matNoteOutline" />
+                                                <span class="name">Ghi chú</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="item-left">
+                                                <ng-icon class="icon" name="matFolderOutline" />
+                                                <span class="name">Lịch sử hội thoại</span>
+                                            </div>
+
+                                            <div class="item-right">
+                                                <div class="action">
+                                                    <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item add-new">
+                                            <div class="title">
+                                                <span class="name">Tạo thư mục mới</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ----------------- -->
+                                <div class="focus-item">
+                                    <div class="box-focus-title">
+                                        <div class="focus-title-left">
+                                            <ng-icon class="icon" name="matKeyboardArrowDownOutline"></ng-icon>
+                                            <span class="title">Nhóm</span>
+                                        </div>
+                                        <div class="focus-title-right">
+                                            <div class="action">
+                                                <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="group-item">
+                                        <!-- <div class="item active">
+                            <div class="item-left">
+                              <ng-icon class="icon" name="matInboxOutline" />
+                              <span class="name">Hộp thư</span>
+                            </div>
+                
+                            <div class="item-right">
+                              <div class="action">
+                                <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="item">
+                            <div class="item-left">
+                              <ng-icon class="icon" name="matSendOutline" />
+                              <span class="name">Các mục đã gửi</span>
+                            </div>
+                
+                            <div class="item-right">
+                              <div class="action">
+                                <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="item">
+                            <div class="item-left">
+                              <ng-icon class="icon" name="matCreateOutline" />
+                              <span class="name">Bản thảo</span>
+                            </div>
+                
+                            <div class="item-right">
+                              <div class="action">
+                                <ng-icon class="icon" name="matMoreHorizOutline"></ng-icon>
+                              </div>
+                            </div>
+                          </div> -->
+                                        <div class="item add-new">
+                                            <div class="title">
+                                                <span class="name">Nhóm mới</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-scrollbar>
+                    </div>
+                    <div class="content-main-wrapper">
+                        <div class="wrapper-box-list">
+                            <div class="wrapper-box-list-title">
+                                <div class="box-title">
+                                    <div>
+                                        <button class="button-prioritize">
+                                            <span>Ưu tiên</span>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button class="button-other">
+                                            <span>Khác</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="box-icon">
+                                    <div>
+                                        <button class="button-listfilter">
+                                            <ng-icon class="icon-matFilterListOutline"
+                                                name="matFilterListOutline"></ng-icon>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button class="button-listsort">
+                                            <svg xmlns="http://www.w3.org/2000/svg" style="width:20px; height:20px;"
+                                                viewBox="0 0 320 512">
+                                                <path
+                                                    d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8L32 224c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8l256 0c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper-box-maillist">
+                                <div class="box-mailmessage">
+                                    <img src="//res.public.onecdn.static.microsoft/assets/mail/illustrations/emptyInbox/v1/light.svg"
+                                        alt="" style="width: 200px; height: 200px;">
+                                    <span class="empty-message" id="EmptyState_MainMessage">Đã xong công việc hôm
+                                        nay</span>
+                                    <span class="text-message">Tận hưởng hộp thư đến trống.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-main-reading">
+                        <div class="reading-container">
+                            <div class="container-img">
+                                <img
+                                    src="https://res.public.onecdn.static.microsoft/owamail/20240822057.12/resources/img/qr-code.png">
+                            </div>
+                            <div class="container-message">
+                                Bạn sắp thành công rồi. Outlook luôn đồng hành miễn phí cùng bạn.
+                            </div>
+                            <div class="container-text">
+                                Quét mã QR bằng camera điện thoại để tải xuống Outlook dành cho thiết bị di động
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </ng-scrollbar>
+</div>

@@ -1,0 +1,14 @@
+F:\ASP .NET\WebApp_API\Data\bin\Debug\net8.0\Data.deps.json
+F:\ASP .NET\WebApp_API\Data\bin\Debug\net8.0\Data.runtimeconfig.json
+F:\ASP .NET\WebApp_API\Data\bin\Debug\net8.0\Data.dll
+F:\ASP .NET\WebApp_API\Data\bin\Debug\net8.0\Data.pdb
+F:\ASP .NET\WebApp_API\Data\obj\Debug\net8.0\Data.csproj.AssemblyReference.cache
+F:\ASP .NET\WebApp_API\Data\obj\Debug\net8.0\Data.GeneratedMSBuildEditorConfig.editorconfig
+F:\ASP .NET\WebApp_API\Data\obj\Debug\net8.0\Data.AssemblyInfoInputs.cache
+F:\ASP .NET\WebApp_API\Data\obj\Debug\net8.0\Data.AssemblyInfo.cs
+F:\ASP .NET\WebApp_API\Data\obj\Debug\net8.0\Data.csproj.CoreCompileInputs.cache
+F:\ASP .NET\WebApp_API\Data\obj\Debug\net8.0\Data.dll
+F:\ASP .NET\WebApp_API\Data\obj\Debug\net8.0\refint\Data.dll
+F:\ASP .NET\WebApp_API\Data\obj\Debug\net8.0\Data.pdb
+F:\ASP .NET\WebApp_API\Data\obj\Debug\net8.0\Data.genruntimeconfig.cache
+F:\ASP .NET\WebApp_API\Data\obj\Debug\net8.0\ref\Data.dll

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" (ngSubmit)="onSubmit($event)" #loginForm="ngForm">
+            <div class="form-group">
+                <input [ngClass]="{'is-invalid' : username.invalid && (username.dirty || username.touched) }"
+                    id="Username" type="text" name="Username" placeholder="Username" [(ngModel)]="model.username"
+                    #username="ngModel" required>
+                <div *ngIf="username.invalid && (username.dirty || username.touched)">
+                    <div *ngIf="username.errors?.['required']" class="error-message">
+                        Không được để trống mục này
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input [ngClass]="{'is-invalid' : password.invalid && (password.dirty || password.touched) }"
+                    id="Password" [type]="passwordFieldType" name="Password" placeholder="Password"
+                    [(ngModel)]="model.password" #password="ngModel" required>
+                <div class="input-group-append">
+                    <span class="input-group-text" (click)="togglePasswordVisibility()">
+                        <i [ngClass]="passwordFieldType === 'password' ? 'fas fa-eye-slash' : 'fas fa-eye'"
+                            title="Ẩn/Hiện mật khẩu"></i>
+                    </span>
+                </div>
+                <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <div *ngIf="password.errors?.['required']" class="error-message">
+                        Không được để trống mục này
+                    </div>
+                </div>
+            </div>
+            <div class="form-captcha">
+                <div class="textCaptcha">
+                    <input id="captchaInput" type="text" name="CaptchaInput" class="form-control" placeholder="Captcha"
+                        required />
+                </div>
+                <img id="captchaImage" [src]="generateCaptchaUrl" alt="CAPTCHA" />
+                <i class="fas fa-sync" (click)="captchaService.refreshCaptcha()" title="Refresh CAPTCHA"></i>
+            </div>
+            <button type="submit" [disabled]="lockoutRemainingTime > 0">Login</button>
+            <p class="signup">Bạn chưa có tài khoản? <a routerLink="/signup">Sign up</a></p>
+            <div *ngIf="lockoutRemainingTime > 0" class="alert alert-danger">
+                <p>Tài khoản bị khoá. Vui lòng thử lại sau {{ lockoutRemainingTime }} giây.</p>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

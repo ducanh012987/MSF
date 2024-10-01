@@ -1,0 +1,284 @@
+nav {
+  position: relative;
+  background-color: #1a7ff9;
+  height: 48px;
+  line-height: 48px;
+  display: flex;
+  box-sizing: border-box;
+
+  .nav-left {
+    .btn-icon-app {
+      line-height: 48px;
+      width: 48px;
+      height: 48px;
+      background-color: #1a7ff9;
+      border: 0;
+
+      .icon-matAppsOutline {
+        font-size: 30px;
+        color: white;
+        margin: 9px;
+      }
+    }
+
+    .btn-icon-app:hover {
+      background-color: rgb(85, 84, 84);
+      cursor: pointer;
+    }
+  }
+
+  .nav-center {
+    display: flex;
+
+    .nav-center-name {
+      width: 225px;
+
+      .nav-center-name-appName {
+        padding-left: 10px;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s ease;
+        font-weight: bold;
+      }
+
+      .nav-center-name-appName:hover {
+        color: white;
+      }
+    }
+
+    .nav-center-input {
+      display: flex;
+      border: 1px solid white;
+      width: 350px;
+      height: 32px;
+      margin-top: 8px;
+      border-radius: 5px;
+      background-color: white;
+
+      .icon-matSearchOutline {
+        margin-left: 5px;
+        margin-top: 5px;
+        font-size: 22px;
+        color: gray;
+      }
+
+      .nav-center-input-search {
+        width: 310px;
+        height: 20px;
+        border: 0;
+        margin-top: 6px;
+        margin-left: 10px;
+        font-size: 15px;
+      }
+    }
+
+    .nav-center-button {
+      display: flex;
+      margin-left: 462px;
+
+      .button-msteams,
+      .button-onenote,
+      .button-date,
+      .button-notification,
+      .button-settings,
+      .button-tips {
+        width: 48px;
+        height: 48px;
+        background-color: #1a7ff9;
+        border: 0;
+        color: white;
+      }
+
+      .button-notification,
+      .button-settings {
+        padding-top: 3px;
+      }
+
+      .button-videocall:hover,
+      .button-msteams:hover,
+      .button-onenote:hover,
+      .button-date:hover,
+      .button-notification:hover,
+      .button-settings:hover,
+      .button-tips:hover {
+        background-color: rgb(85, 84, 84);
+        cursor: pointer;
+      }
+
+      .button-videocall {
+        display: flex;
+        padding-top: 13px;
+        padding-right: 10px;
+        padding-left: 10px;
+        background-color: #1a7ff9;
+        border: 0;
+      }
+
+      .button-videocall .icon-matVideocamOutline,
+      .button-tips .icon-matLightbulbOutline {
+        font-size: 20px;
+        color: white;
+      }
+
+      .button-tips .icon-matLightbulbOutline {
+        margin-top: 2px;
+      }
+
+      .button-videocall .text-videocall {
+        width: 65px;
+        color: white;
+        font-size: 14px;
+        margin-left: 10px;
+        font-family: "Segoe UI Web (Vietnamese)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      }
+    }
+  }
+
+  .nav-right {
+    width: 48px;
+    height: 48px;
+
+    .main-dropDown {
+      width: 48px;
+      height: 48px;
+
+      .button-user {
+        border: 0;
+        background: none;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .button-user:hover {
+        background-color: rgb(85, 84, 84);
+        cursor: pointer;
+      }
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  .user_body {
+    position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 10px;
+    background-color: white;
+    width: 320px;
+    right: 0;
+    top: 48px;
+    z-index: 1;
+
+    .currentAccount {
+      .company {
+        display: flex;
+
+        .company-box {
+          display: flex;
+          align-items: center;
+          width: 230px;
+          padding: 0 14px;
+        }
+
+        .body_signOut {
+          width: 88px;
+          text-align: center;
+
+          a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+          }
+        }
+
+        .body_signOut:hover {
+          cursor: pointer;
+          background-color: rgb(218 215 215);
+        }
+      }
+
+      .accountInfo {
+        display: flex;
+        width: 100%;
+        align-items: center;
+
+        img {
+          width: 88px;
+          height: 88px;
+          margin: 20px 20px 20px 16px;
+        }
+
+        .accountDetails {
+          padding-right: 12px;
+
+          .accountName {
+            font-size: 18px;
+            font-weight: 700;
+            padding: 1px;
+            height: 26px;
+            font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+            line-height: normal;
+          }
+
+          .accountMicrosoft {
+            font-size: 14px;
+            color: #0068ff;
+          }
+
+          .account_commands {
+            line-height: normal;
+
+            .shellAboutMe {
+              font-size: 14px;
+              color: #0068ff;
+            }
+          }
+        }
+      }
+    }
+
+    .accountList_container {
+      border-top: 1px solid #f6f6f6;
+      background-color: #f6f6f6;
+
+      .accountItem {
+        .signIn-Item {
+          display: flex;
+          align-items: center;
+          height: 60px;
+          width: 100%;
+          padding-left: 20px;
+          text-decoration: none;
+
+          .signInItem_picture {
+            width: 40px;
+            height: 40px;
+            border: 1px solid gray;
+            border-radius: 50%;
+
+            svg {
+              margin: 9px;
+            }
+          }
+
+          .accountItemInfo {
+            .mectrl_truncate {
+              padding-left: 15px;
+              font-size: 15px;
+              color: black;
+            }
+          }
+        }
+      }
+
+      .accountItem:hover {
+        background-color: #d9d9d9;
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+nav {
+    .navbar-nav-accordion {
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+
+            .sidebar-brand-text {
+                p {
+                    font-size: 30px;
+                    color: black;
+
+                }
+            }
+        }
+    }
+}

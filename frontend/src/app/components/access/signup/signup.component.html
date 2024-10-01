@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form id="signupForm" (ngSubmit)="signup(registerForm)" #registerForm="ngForm">
+            <div class="form-group">
+                <label for="Username">Username: </label>
+                <input [ngClass]="{'is-valid' : username.invalid && (username.dirty || username.touched) }"
+                    id="Username" type="text" name="Username" [(ngModel)]="model.username" #username="ngModel"
+                    class="form-control" required />
+                <div *ngIf="username.invalid && (username.dirty || username.touched)">
+                    <div *ngIf="username.errors?.['required']" class="error-message">Không được để trống mục này</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Password">Password: </label>
+                <input [ngClass]="{'is-valid' : password.invalid && (password.dirty || password.touched) }"
+                    id="Password" [type]="passwordFieldType" name="Password" [(ngModel)]="model.password"
+                    #password="ngModel" class="form-control" required
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" />
+                <div class="input-group-append">
+                    <span class="input-group-text" (click)="togglePasswordVisibility()">
+                        <i [ngClass]="passwordFieldType === 'password' ? 'fas fa-eye-slash' : 'fas fa-eye'"
+                            title="Ẩn/Hiện mật khẩu"></i>
+                    </span>
+                </div>
+                <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <div *ngIf="password.errors?.['required']" class="error-message">Không được để trống mục này</div>
+                    <div *ngIf="password.errors?.['pattern']" class="error-message">
+                        Mật khẩu phải có ít nhất 6 ký tự, bao gồm chữ hoa, chữ thường và số
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fullName">Full Name: </label>
+                <input [ngClass]="{'is-valid' : fullname.invalid && (fullname.dirty || fullname.touched) }"
+                    id="fullName" type="text" name="fullName" [(ngModel)]="model.fullName" #fullname="ngModel"
+                    class="form-control" required />
+                <div *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)">
+                    <div *ngIf="fullname.errors?.['required']" class="error-message">Không được để trống mục này</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Email">Email: </label>
+                <input [ngClass]="{'is-valid' : email.invalid && (email.dirty || email.touched) }" id="Email"
+                    type="email" name="Email" [(ngModel)]="model.email" #email="ngModel" class="form-control"
+                    placeholder="example@gmail.com" email required />
+                <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <div *ngIf="email.errors?.['required']" class="error-message">Không được để trống mục này</div>
+                    <div *ngIf="email.errors?.['email']" class="error-message">Định dạng email không đúng</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <p class="signup">Bạn đã có tài khoản? <a routerLink="/login">Login</a></p>
+        </form>
+    </div>
+</body>
+
+</html>

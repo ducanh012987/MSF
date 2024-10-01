@@ -1,0 +1,15 @@
+F:\ASP .NET\WebApp_API\DTOs\bin\Debug\net8.0\DTOs.deps.json
+F:\ASP .NET\WebApp_API\DTOs\bin\Debug\net8.0\DTOs.dll
+F:\ASP .NET\WebApp_API\DTOs\bin\Debug\net8.0\DTOs.pdb
+F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\DTOs.GeneratedMSBuildEditorConfig.editorconfig
+F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\DTOs.AssemblyInfoInputs.cache
+F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\DTOs.AssemblyInfo.cs
+F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\DTOs.csproj.CoreCompileInputs.cache
+F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\DTOs.dll
+F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\refint\DTOs.dll
+F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\DTOs.pdb
+F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\ref\DTOs.dll
+F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\DTOs.csproj.AssemblyReference.cache
+F:\ASP .NET\WebApp_API\DTOs\bin\Debug\net8.0\Data.dll
+F:\ASP .NET\WebApp_API\DTOs\bin\Debug\net8.0\Data.pdb
+F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\DTOs.csproj.Up2Date
