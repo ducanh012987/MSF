@@ -2833,11 +2833,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\ASP .NET\\WebApp_API\\DTOs\\DTOs.csproj",
+      "projectUniqueName": "F:\\MSF\\backend\\DTOs\\DTOs.csproj",
       "projectName": "DTOs",
-      "projectPath": "F:\\ASP .NET\\WebApp_API\\DTOs\\DTOs.csproj",
+      "projectPath": "F:\\MSF\\backend\\DTOs\\DTOs.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "F:\\ASP .NET\\WebApp_API\\DTOs\\obj\\",
+      "outputPath": "F:\\MSF\\backend\\DTOs\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2858,8 +2858,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "F:\\ASP .NET\\WebApp_API\\Models\\Data.csproj": {
-              "projectPath": "F:\\ASP .NET\\WebApp_API\\Models\\Data.csproj"
+            "F:\\MSF\\backend\\Models\\Data.csproj": {
+              "projectPath": "F:\\MSF\\backend\\Models\\Data.csproj"
             }
           }
         }

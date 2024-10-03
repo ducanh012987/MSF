@@ -4315,11 +4315,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\ASP .NET\\WebApp_API\\WebApp_API\\WebApp_API.csproj",
+      "projectUniqueName": "F:\\MSF\\backend\\WebApp_API\\WebApp_API.csproj",
       "projectName": "WebApp_API",
-      "projectPath": "F:\\ASP .NET\\WebApp_API\\WebApp_API\\WebApp_API.csproj",
+      "projectPath": "F:\\MSF\\backend\\WebApp_API\\WebApp_API.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "F:\\ASP .NET\\WebApp_API\\WebApp_API\\obj\\",
+      "outputPath": "F:\\MSF\\backend\\WebApp_API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4340,11 +4340,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "F:\\ASP .NET\\WebApp_API\\Business\\Business.csproj": {
-              "projectPath": "F:\\ASP .NET\\WebApp_API\\Business\\Business.csproj"
+            "F:\\MSF\\backend\\Business\\Business.csproj": {
+              "projectPath": "F:\\MSF\\backend\\Business\\Business.csproj"
             },
-            "F:\\ASP .NET\\WebApp_API\\DTOs\\DTOs.csproj": {
-              "projectPath": "F:\\ASP .NET\\WebApp_API\\DTOs\\DTOs.csproj"
+            "F:\\MSF\\backend\\DTOs\\DTOs.csproj": {
+              "projectPath": "F:\\MSF\\backend\\DTOs\\DTOs.csproj"
             }
           }
         }

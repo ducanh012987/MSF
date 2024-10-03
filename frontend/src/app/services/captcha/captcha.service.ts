@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import baseUrl from '../../types/baseUrl';
 
 interface CaptchaValidationResponse {
   success: boolean;
@@ -10,7 +11,7 @@ interface CaptchaValidationResponse {
   providedIn: 'root'
 })
 export class CaptchaService {
-  private captchaUrl = 'https://localhost:44300/api/Captcha';
+  private captchaUrl = `${baseUrl}/api/Captcha`;
 
   constructor(private http: HttpClient) { }
 

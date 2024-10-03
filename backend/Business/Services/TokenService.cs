@@ -86,7 +86,7 @@ namespace Business.Services
             var tokenDto = new RefreshTokenDto
             {
                 RefreshToken = refreshToken,
-                TimeExpired = DateTime.Now.AddMinutes(2),
+                TimeExpired = DateTime.Now.AddDays(_jwtSettings.ExpiresInDays),
                 UserId = userDto.Id
             };
             SaveRefreshToken(tokenDto);
@@ -98,7 +98,7 @@ namespace Business.Services
                 HttpOnly = false,
                 Secure = true, // Đảm bảo sử dụng HTTPS
                 SameSite = SameSiteMode.None,
-                Expires = DateTime.Now.AddMinutes(2),
+                Expires = DateTime.Now.AddDays(_jwtSettings.ExpiresInDays),
                 Path = "/",
                 Domain = "localhost"
             });

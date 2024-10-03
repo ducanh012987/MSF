@@ -1,13 +1,13 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import { AuthorizeService } from '../../services/authorize/authorize.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const cookieService = inject(CookieService);
+  const authorize = inject(AuthorizeService)
 
-  const userData = cookieService.get('AccessToken');
-  if (userData) {
+  // Kiểm tra role
+  if (authorize.getToken()) {
     return true;
   } else {
     router.navigate(['login']);

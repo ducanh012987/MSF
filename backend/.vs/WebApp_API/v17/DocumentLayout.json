@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\MSF\\backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2BF91A7-9FA9-4439-B650-38FA1ADA964D}|Business\\Business.csproj|f:\\msf\\backend\\business\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2BF91A7-9FA9-4439-B650-38FA1ADA964D}|Business\\Business.csproj|solutionrelative:business\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|f:\\msf\\backend\\webapp_api\\middlewares\\activityloggermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|solutionrelative:webapp_api\\middlewares\\activityloggermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2BF91A7-9FA9-4439-B650-38FA1ADA964D}|Business\\Business.csproj|f:\\msf\\backend\\business\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2BF91A7-9FA9-4439-B650-38FA1ADA964D}|Business\\Business.csproj|solutionrelative:business\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ActivityLoggerMiddleware.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Middlewares\\ActivityLoggerMiddleware.cs",
+              "RelativeDocumentMoniker": "WebApp_API\\Middlewares\\ActivityLoggerMiddleware.cs",
+              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Middlewares\\ActivityLoggerMiddleware.cs",
+              "RelativeToolTip": "WebApp_API\\Middlewares\\ActivityLoggerMiddleware.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAQwB8AAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-02T08:55:01.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\Business\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "Business\\Services\\UserService.cs",
+              "ToolTip": "F:\\MSF\\backend\\Business\\Services\\UserService.cs",
+              "RelativeToolTip": "Business\\Services\\UserService.cs",
+              "ViewState": "AQIAAGIAAAAAAAAAAAAQwG0AAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-02T08:42:58.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\Business\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "Business\\Services\\TokenService.cs",
+              "ToolTip": "F:\\MSF\\backend\\Business\\Services\\TokenService.cs",
+              "RelativeToolTip": "Business\\Services\\TokenService.cs",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAgwGQAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T02:51:13.687Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

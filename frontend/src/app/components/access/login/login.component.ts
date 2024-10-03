@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
-import { CaptchaService } from '../../../services/captcha.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { CaptchaService } from '../../../services/captcha/captcha.service';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { of } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import baseUrl from '../../../types/baseUrl';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   private lockoutTime = 60; // Thời gian khóa 60 giây
   private maxFailedAttempts = 2;
   passwordFieldType: string = 'password';
-  generateCaptchaUrl = "https://localhost:44300/api/Captcha/GenerateCaptcha";
+  generateCaptchaUrl = `${baseUrl}/api/Captcha/GenerateCaptcha`;
   lockoutRemainingTime: number = 0;
   interval: any;
 
@@ -69,7 +70,7 @@ export class LoginComponent implements OnInit {
 
               console.log(response, alert("Đăng nhập thành công."));
               this.lockoutRemainingTime = 0;
-              this.authService.isLoggedIn = true;
+              //this.authService.isLoggedIn = true;
               this.router.navigate(['home']);
             }),
             catchError(error => {

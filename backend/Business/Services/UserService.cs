@@ -103,10 +103,17 @@ namespace Business.Services
                 parameters.Add("@PageSize", pageSize, DbType.Int32);
 
                 //Gọi Stored Procedure bằng Dappper
-                var result = connection.Query<UserDto>(
+                var result = connection.Query<UserDto, Roles, UserDto>(
                     "GetAllUser",        //Tên Stored Procedure
+                    (userDto, role) =>  // Callback function để ánh xạ role vào user
+                    {
+                        userDto.RoleId = role.Id;
+                        userDto.Roles = role;
+                        return userDto;
+                    },
                     parameters,         //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure
+                    commandType: CommandType.StoredProcedure,
+                    splitOn: "RoleId" // Dapper sẽ chia dữ liệu tại RoleId
                 ).ToList();
 
                 var pagedResult = new PagedResult<UserDto>

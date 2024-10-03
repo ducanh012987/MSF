@@ -25,7 +25,7 @@ import {
   matSendOutline,
 } from '@ng-icons/material-icons/outline';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { NavbarComponent } from '../layout/client/navbar/navbar.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
