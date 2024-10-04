@@ -100,14 +100,9 @@
                         </table>
                     </div>
                 </div>
-                <div>
-                    <p>Tổng số người dùng: {{totalRecords}}</p>
-                    <button *ngFor="let page of pages" (click)="onPageChange(page)">
-                        {{ page }}
-                    </button>
-                </div>
             </div>
         </div>
-        <!-- <app-pagination [pagination]="pagination" (onPageChange)="handlePageChange($event)"></app-pagination> -->
+        <app-pagination [totalUsers]="totalUsers" [currentPage]="pageNumber" (pageChange)="onPageChange($event)">
+        </app-pagination>
     </section>
 </div>

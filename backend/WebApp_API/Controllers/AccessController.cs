@@ -31,9 +31,9 @@ namespace WebApp_API.Controllers
         }
 
         [HttpPost("Refresh-Token")]
-        public async Task<IActionResult> RefreshAccessToken(string accessToken, string refreshToken)
+        public async Task<IActionResult> RefreshAccessToken(string refreshToken)
         {
-            return Ok(await _tokenRepository.RefreshAccessToken(accessToken, refreshToken));
+            return Ok(await _tokenRepository.RefreshAccessToken(refreshToken));
         }
     }
 }

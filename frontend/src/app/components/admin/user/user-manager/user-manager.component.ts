@@ -11,13 +11,14 @@ import {
 } from '@ng-icons/material-icons/outline';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { RouterLink } from '@angular/router';
+import { PaginationComponent } from '../../../../pages/pagination/pagination.component';
 
 @Component({
-  selector: 'app-use-manager',
+  selector: 'app-user-manager',
   standalone: true,
-  imports: [CommonModule, NgIconComponent, RouterLink],
-  templateUrl: './use-manager.component.html',
-  styleUrl: './use-manager.component.scss',
+  imports: [CommonModule, NgIconComponent, RouterLink, PaginationComponent],
+  templateUrl: './user-manager.component.html',
+  styleUrl: './user-manager.component.scss',
   providers: [
     provideIcons({
       matHomeOutline,
@@ -29,27 +30,26 @@ import { RouterLink } from '@angular/router';
     }),
   ],
 })
-export class UseManagerComponent implements OnInit {
+export class UserManagerComponent implements OnInit {
   users: any[] = [];
   isLoading: boolean = false;
   pageNumber: number = 1;
   pageSize: number = 10;
-  totalRecords: number = 0;
-  pages: number[] = [];
+  totalUsers: number = 0;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.getAllUser();
+    this.isLoading = true;
+    this.getAllUser(this.pageNumber);
   }
 
-  getAllUser(): void {
-    this.userService.getAllUser(this.pageNumber, this.pageSize).subscribe({
+  getAllUser(page: number): void {
+    this.userService.getAllUser(page, this.pageSize).subscribe({
       next: (response) => {
         console.log(response);
         this.users = response.data.data;
-        this.totalRecords = response.data.totalRecords;
-        this.calculatePages();
+        this.totalUsers = response.data.totalRecords;
         this.isLoading = false;
       },
       error: (error) => {
@@ -59,14 +59,9 @@ export class UseManagerComponent implements OnInit {
     });
   }
 
-  calculatePages() {
-    const totalPages = Math.ceil(this.totalRecords / this.pageSize);
-    this.pages = Array.from({ length: totalPages }, (_, i) => i + 1); // Tạo mảng [1, 2, ..., totalPages]
-  }
-
   onPageChange(page: number) {
     this.pageNumber = page; // Cập nhật trang hiện tại
-    this.getAllUser(); // Tải lại danh sách người dùng
+    this.getAllUser(page); // Tải lại danh sách người dùng
   }
 
   editUser(user: any): void {

@@ -1,12 +1,25 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../auth/auth.service';
+import { catchError, filter, Subject, switchMap, take, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthorizeService } from '../authorize/authorize.service';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const cookieService = inject(CookieService);
+  const authService = inject(AuthService);
+  const router = inject(Router);
+  const authorize = inject(AuthorizeService);
 
   // Danh sách các URL không thêm token
-  const excludedUrls = ['/Login', '/Register', '/Refresh-Token'];
+  const excludedUrls = [
+    '/Login',
+    '/Register',
+    '/Refresh-Token',
+    '/GenerateCaptcha',
+    '/ValidateCaptcha',
+  ];
   // Kiểm tra nếu URL của request nằm trong danh sách excludedUrls
   const shouldExclude = excludedUrls.some((url) => req.url.includes(url));
 
@@ -15,18 +28,41 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
-  // Lấy token từ cookie
-  const AccessToken = cookieService.get('AccessToken');
+  const tokenAccess = cookieService.get('AccessToken');
+  if (authorize.checkTokenExpired()) {
+    const token = cookieService.get('RefreshToken');
+    return authService.refreshToken(token).pipe(
+      switchMap((response) => {
+        console.log(response);
 
-  // Nếu có token, thêm nó vào headers của request
-  if (AccessToken) {
-    req = req.clone({
-      setHeaders: {
-        Authorization: `${AccessToken}`,
-      },
-    });
+        cookieService.set('AccessToken', response.data.accessToken, {
+          expires: new Date(new Date().getTime() + 30 * 60000),
+          path: '/',
+          domain: 'localhost',
+          secure: true,
+          sameSite: 'None',
+        });
+
+        return next(
+          req.clone({
+            setHeaders: {
+              Authorization: `${response.data.accessToken}`,
+            },
+          })
+        );
+      }),
+      catchError((error) => {
+        console.log('Không thể làm mới token. Lỗi: ' + error);
+        return throwError(error);
+      })
+    );
   }
 
-  // Gửi request tiếp tục xử lý
-  return next(req);
+  return next(
+    req.clone({
+      setHeaders: {
+        Authorization: `${tokenAccess}`,
+      },
+    })
+  );
 };

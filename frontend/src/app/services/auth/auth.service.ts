@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, of, switchMap, tap, throwError } from 'rxjs';
+import {
+  catchError,
+  map,
+  Observable,
+  of,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import baseUrl from '../../types/baseUrl';
+import { AuthorizeService } from '../authorize/authorize.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +24,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private authorize: AuthorizeService
   ) {}
 
   login(user: any): Observable<any> {
@@ -32,14 +42,10 @@ export class AuthService {
     });
   }
 
-  refreshToken() {
-    const accessToken = this.cookieService.get('AccessToken');
-    const refreshToken = this.cookieService.get('RefreshToken');
+  refreshToken(refreshToken: string): Observable<any> {
     return this.http.post(
-      `${this.accessUrl}/Refresh-Token`,
-      { accessToken: accessToken, refreshToken: refreshToken },
+      `${this.accessUrl}/Refresh-Token?refreshToken=${refreshToken}`,
       {
-        responseType: 'text',
         withCredentials: true,
       }
     );

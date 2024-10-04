@@ -5,7 +5,7 @@ import { SignupComponent } from './components/access/signup/signup.component';
 import { authGuard } from './guards/auth/auth.guard';
 import { HomeAdminComponent } from './components/layout/admin/home-admin/home-admin.component';
 import { adminGuard } from './guards/admin/admin.guard';
-import { UseManagerComponent } from './components/admin/user/use-manager/use-manager.component';
+import { UserManagerComponent } from './components/admin/user/user-manager/user-manager.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -29,11 +29,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'user-manager',
-        component: UseManagerComponent,
+        component: UserManagerComponent,
       },
       {
         path: 'role',
-        component: UseManagerComponent,
+        component: UserManagerComponent,
       },
     ],
   },
