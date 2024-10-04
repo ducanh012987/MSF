@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jTOrWjELK2rsUWocwS3r3eIEA1ILk8zTRNFCYaQ+4Lguj55DtoKsHb8LXEKHiaW/kMCYtD86HWsul0fmNI+cFg==",
+  "dgSpecHash": "IuwVc4KlCQ+aL23uYqYkdaGkNv1CZ4HUhiBytYewq7bDMyoTdpcRH3rrPT82lokOaS5/os5JDrZ/mn1C4JW74Q==",
   "success": true,
-  "projectFilePath": "F:\\ASP .NET\\WebApp_API\\DTOs\\DTOs.csproj",
+  "projectFilePath": "F:\\MSF\\backend\\DTOs\\DTOs.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

@@ -86,7 +86,7 @@ namespace Business.Services
             var tokenDto = new RefreshTokenDto
             {
                 RefreshToken = refreshToken,
-                TimeExpired = DateTime.Now.AddMinutes(2),
+                TimeExpired = DateTime.Now.AddDays(_jwtSettings.ExpiresInDays),
                 UserId = userDto.Id
             };
             SaveRefreshToken(tokenDto);
@@ -98,7 +98,7 @@ namespace Business.Services
                 HttpOnly = false,
                 Secure = true, // Đảm bảo sử dụng HTTPS
                 SameSite = SameSiteMode.None,
-                Expires = DateTime.Now.AddMinutes(2),
+                Expires = DateTime.Now.AddDays(_jwtSettings.ExpiresInDays),
                 Path = "/",
                 Domain = "localhost"
             });
@@ -107,33 +107,17 @@ namespace Business.Services
         }
 
         // tạo mới access token
-        public async Task<ResponseObject<TokenResult>> RefreshAccessToken(string accessToken, string refreshToken)
+        public async Task<ResponseObject<TokenResult>> RefreshAccessToken(string refreshToken)
         {
-            // Kiểm tra xem access token có còn hạn không
-            if (IsAccessTokenValid(accessToken))
-            {
-                // Nếu access token còn hạn, tiếp tục phiên đăng nhập
-                return new ResponseObject<TokenResult>
-                {
-                    Status = StatusCodes.Status200OK,
-                    Message = "AccessToken còn hạn.",
-                    Data = new TokenResult
-                    {
-                        AccessToken = accessToken,
-                        RefreshToken = refreshToken
-                    }
-                };
-            }
-
-            // Nếu accessToken hết hạn, kiểm tra refreshToken
+            // Kiểm tra RefreshToken
             var token = await GetRefreshTokenByToken(refreshToken);
             if (token.TimeExpired < DateTime.Now)
             {
-                // Nếu refresh token hết hạn, yêu cầu đăng nhập lại
+                // Nếu RefreshToken hết hạn, yêu cầu đăng nhập lại
                 throw new CustomException(StatusCodes.Status400BadRequest, "RefreshToken đã hết hạn. Vui lòng đăng nhập lại!");
             }
 
-            // nếu refreshtoken còn hạn, lấy ra user
+            // nếu Refreshtoken còn hạn, lấy ra user
             var userRepo = GetUserRepository();
             var user = await userRepo.GetUser(token.UserId);
 
@@ -160,12 +144,15 @@ namespace Business.Services
                 parameters.Add("@UserId", tokenDto.UserId, DbType.Int32);
 
                 //Gọi Stored Procedure bằng Dappper
-                var result = connection.ExecuteAsync(
+                var result = connection.Execute(
                     "SaveRefreshToken",   //Tên Stored Procedure
                     parameters,   //Tham số truyền vào
                     commandType: CommandType.StoredProcedure
                 );
-
+                if (result <= 0)
+                {
+                    throw new Exception("Không lưu được refreshtoken!");
+                }
                 return ResponseText.ResponseSuccess("Lưu thành công.", StatusCodes.Status200OK);
             }
         }
@@ -186,26 +173,6 @@ namespace Business.Services
 
                 return result ?? throw new CustomException(StatusCodes.Status404NotFound, "Không tìm thấy RefreshToken.");
             }
-        }
-
-        // Kiểm tra thời hạn Token
-        public bool IsAccessTokenValid(string token)
-        {
-            if (string.IsNullOrWhiteSpace(token))
-            {
-                return false; // Token không hợp lệ nếu rỗng hoặc null
-            }
-
-            var handler = new JwtSecurityTokenHandler();
-            
-            // Giải mã token để lấy thông tin payload
-            var jwtToken = handler.ReadJwtToken(token);
-
-            // Lấy thời gian hết hạn từ payload
-            var expirationTime = jwtToken.ValidTo;
-
-            // Kiểm tra xem thời gian hết hạn có lớn hơn thời gian hiện tại không
-            return expirationTime > DateTime.UtcNow;
         }
     }
 }

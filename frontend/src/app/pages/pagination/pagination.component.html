@@ -1,0 +1,19 @@
+<div class="pagination">
+    <div class="totalUser">
+        <p>Tổng số người dùng: <b>{{ totalUsers }}</b></p>
+    </div>
+    <div class="page">
+        <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="gotopage">
+            <ng-icon class="icon" name="matKeyboardArrowLeftOutline"></ng-icon>
+        </button>
+
+        <button *ngFor="let page of pages" (click)="onPageChange(page)" [class.active]="page === currentPage"
+            class="pagenumber">
+            {{ page }}
+        </button>
+
+        <button (click)="goToNextPage()" [disabled]="currentPage === totalPages" class="gotopage">
+            <ng-icon class="icon" name="matKeyboardArrowRightOutline"></ng-icon>
+        </button>
+    </div>
+</div>

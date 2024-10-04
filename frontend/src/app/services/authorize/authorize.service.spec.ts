@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CaptchaService } from './captcha.service';
+import { AuthorizeService } from '../authorize/authorize.service';
 
-describe('CaptchaService', () => {
-  let service: CaptchaService;
+describe('AuthorizeService', () => {
+  let service: AuthorizeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CaptchaService);
+    service = TestBed.inject(AuthorizeService);
   });
 
   it('should be created', () => {

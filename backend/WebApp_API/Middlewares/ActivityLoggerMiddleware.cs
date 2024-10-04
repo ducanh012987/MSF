@@ -26,10 +26,10 @@ namespace WebApp_API.Middlewares
             var clientName = context.Request.Headers["User-Agent"].ToString();
             var userName = context.User.FindFirst("name")?.Value ?? "Anonymous"; // Lấy username nếu có
 
-            foreach (var claim in context.User.Claims)
-            {
-                System.Diagnostics.Debug.WriteLine($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
-            }
+            //foreach (var claim in context.User.Claims)
+            //{
+            //    System.Diagnostics.Debug.WriteLine($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
+            //}
             context.Response.OnStarting(() =>
             {
                 watch.Stop();

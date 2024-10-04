@@ -8,7 +8,7 @@ namespace Business.Repository
     {
         string GenerateToken(UserDto userDto);
         string GenerateRefreshToken(UserDto userDto);
-        Task<ResponseObject<TokenResult>> RefreshAccessToken(string accessToken, string refreshToken);
+        Task<ResponseObject<TokenResult>> RefreshAccessToken(string refreshToken);
         ResponseText SaveRefreshToken(RefreshTokenDto refreshTokenDto);
         Task<RefreshTokenDto> GetRefreshTokenByToken(string refreshToken);
     }

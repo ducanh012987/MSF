@@ -1,0 +1,108 @@
+<div class="user-manager-container">
+    <section class="breadcumrb">
+        <ol class="breadcumrb-nav">
+            <li>
+                <ng-icon class="icon" name="matHomeOutline"></ng-icon>
+            </li>
+            <li class="breadcumrb-nav-item">Người dùng</li>
+        </ol>
+        <div class="box-breadcumrb">
+            <h3 class="breadcumrb-title">Danh sách người dùng</h3>
+            <a [routerLink]="'create'" class="btn-add">
+                <ng-icon name="matAddCircleOutlineOutline" class="icon" />
+                <span>Thêm người dùng</span>
+            </a>
+        </div>
+    </section>
+    <section class="main">
+        <div class="main-container">
+            <div class="main-wrapper">
+                <div class="main-box">
+                    <div class="table-box">
+                        <table class="table">
+                            <thead class="thead">
+                                <tr>
+                                    <th class="th-item">ID</th>
+                                    <th class="th-item">Tên người dùng</th>
+                                    <th class="th-item">Họ và tên</th>
+                                    <th class="th-item">Email</th>
+                                    <th class="th-item">Quyền</th>
+                                    <th class="th-item">Trạng thái</th>
+                                    <th class="th-item ctr">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                <!-- Hiển thị loading -->
+                                <tr *ngIf="isLoading">
+                                    <td colspan="5">
+                                        <div class="loading flex items-center justify-center gap-x-4 py-20">
+                                            <ng-icon class="icon mr-2 animate-spin text-4xl"
+                                                name="matAcUnitOutline"></ng-icon>
+                                            <h2 class="title text-xl">Xin chờ</h2>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Hiển thị dữ liệu người dùng -->
+                                <tr *ngFor="let user of users" [attr.key]="user.id">
+                                    <td class="td-id"><b>{{ user.id }}</b></td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ user.username }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ user.fullname }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ user.email }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ user.roles.roleName }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ user.locked === false ? "Mở" : "Khoá" }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-action">
+                                        <div class="box-action">
+                                            <a [routerLink]="'update/' + user.id" class="update">
+                                                <ng-icon class="icon" name="matCreateOutline"></ng-icon>
+                                                <span>Sửa</span>
+                                            </a>
+                                        </div>
+                                        <div class="box-action">
+                                            <a [routerLink]="'delete/' + user.id" class="delete">
+                                                <ng-icon class="icon" name="matDeleteOutline"></ng-icon>
+                                                <span>Xoá</span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Hiển thị khi không có dữ liệu -->
+                                <tr *ngIf="!isLoading && users.length === 0">
+                                    <td colspan="5">
+                                        <div class="no-data flex flex-col items-center justify-center py-20">
+                                            <ng-icon class="icon text-5xl" name="matDatasetOutline"></ng-icon>
+                                            <h2 class="title text-xl">Không có dữ liệu</h2>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-pagination [totalUsers]="totalUsers" [currentPage]="pageNumber" (pageChange)="onPageChange($event)">
+        </app-pagination>
+    </section>
+</div>

@@ -60,13 +60,13 @@ namespace Business.Services
         public async Task<ResponseText> Register(RegisterRequest registerRequest)
         {
             // Check user
-            if (await CheckUserByUsername(registerRequest.Username))
+            if (await CheckUserByUsername(registerRequest.Username!))
             {
                 throw new CustomException(StatusCodes.Status400BadRequest, "User đã tồn tại!");
             }
 
             // mã hoá mật khẩu
-            var hashedPassword = HashPassword(registerRequest.Password);
+            var hashedPassword = HashPassword(registerRequest.Password!);
 
             // Add vào db
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -102,16 +102,26 @@ namespace Business.Services
                 parameters.Add("@PageNumber", pageNumber, DbType.Int32);
                 parameters.Add("@PageSize", pageSize, DbType.Int32);
 
-                //Gọi Stored Procedure bằng Dappper
-                var result = connection.Query<UserDto>(
+                // Lấy tổng số user
+                int totalUsers = await connection.ExecuteScalarAsync<int>("GetTotalUserCount", commandType: CommandType.StoredProcedure);
+
+                // Lấy danh sách user
+                var result = connection.Query<UserDto, Roles, UserDto>(
                     "GetAllUser",        //Tên Stored Procedure
+                    (userDto, role) =>  // Callback function để ánh xạ role vào user
+                    {
+                        userDto.RoleId = role.Id;
+                        userDto.Roles = role;
+                        return userDto;
+                    },
                     parameters,         //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure
+                    commandType: CommandType.StoredProcedure,
+                    splitOn: "RoleId" // Dapper sẽ chia dữ liệu tại RoleId
                 ).ToList();
 
                 var pagedResult = new PagedResult<UserDto>
                 {
-                    TotalRecords = result.Count,
+                    TotalRecords = totalUsers,
                     PageNumber = pageNumber,
                     PageSize = pageSize,
                     Data = result

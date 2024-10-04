@@ -4112,11 +4112,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\ASP .NET\\WebApp_API\\Models\\Data.csproj",
+      "projectUniqueName": "F:\\MSF\\backend\\Models\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "F:\\ASP .NET\\WebApp_API\\Models\\Data.csproj",
+      "projectPath": "F:\\MSF\\backend\\Models\\Data.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "F:\\ASP .NET\\WebApp_API\\Models\\obj\\",
+      "outputPath": "F:\\MSF\\backend\\Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

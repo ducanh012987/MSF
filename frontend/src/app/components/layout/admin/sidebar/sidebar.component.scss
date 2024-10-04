@@ -1,0 +1,92 @@
+// Sidebar container
+#accordionSidebar {
+    background-color: #0051a3;
+    width: 250px;
+    height: 100vh;
+
+    .sidebar-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 0;
+        color: #fff;
+        text-decoration: none;
+
+        .sidebar-brand-icon {
+            margin-right: 10px;
+        }
+
+        .sidebar-brand-text {
+            p {
+                margin: 0;
+                font-size: 40px;
+                font-weight: bold;
+            }
+        }
+
+        &:hover {
+            color: #adb5bd;
+        }
+    }
+
+    .nav-item {
+        .nav-link {
+            padding: 10px 20px;
+            font-size: 17px;
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                background-color: #495057;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .icon-matKeyboardArrow {
+                margin-left: 120px;
+            }
+        }
+
+        &.active {
+            .icon-matHomeOutline {
+                font-size: 20px;
+            }
+
+            span {
+                font-size: 20px;
+                padding-left: 5px;
+            }
+        }
+    }
+
+    .sidebar-heading {
+        font-size: 19px;
+        color: #fff;
+        padding: 10px 20px;
+        text-transform: uppercase;
+    }
+
+    .collapse {
+        .collapse-inner {
+            padding: 0 15px;
+
+            .collapse-item {
+                color: #fff;
+                padding: 8px 15px;
+                display: block;
+                text-decoration: none;
+
+                &:hover {
+                    background-color: #495057;
+                }
+            }
+        }
+    }
+
+    // Divider styles
+    .sidebar-divider {
+        border-color: #adb5bd;
+    }
+}

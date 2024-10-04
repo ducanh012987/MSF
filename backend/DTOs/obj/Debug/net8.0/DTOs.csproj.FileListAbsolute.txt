@@ -13,3 +13,19 @@ F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\DTOs.csproj.AssemblyReference.cache
 F:\ASP .NET\WebApp_API\DTOs\bin\Debug\net8.0\Data.dll
 F:\ASP .NET\WebApp_API\DTOs\bin\Debug\net8.0\Data.pdb
 F:\ASP .NET\WebApp_API\DTOs\obj\Debug\net8.0\DTOs.csproj.Up2Date
+F:\MSF\backend\DTOs\bin\Debug\net8.0\DTOs.deps.json
+F:\MSF\backend\DTOs\bin\Debug\net8.0\DTOs.dll
+F:\MSF\backend\DTOs\bin\Debug\net8.0\DTOs.pdb
+F:\MSF\backend\DTOs\bin\Debug\net8.0\Data.dll
+F:\MSF\backend\DTOs\bin\Debug\net8.0\Data.pdb
+F:\MSF\backend\DTOs\obj\Debug\net8.0\DTOs.csproj.AssemblyReference.cache
+F:\MSF\backend\DTOs\obj\Debug\net8.0\DTOs.GeneratedMSBuildEditorConfig.editorconfig
+F:\MSF\backend\DTOs\obj\Debug\net8.0\DTOs.AssemblyInfoInputs.cache
+F:\MSF\backend\DTOs\obj\Debug\net8.0\DTOs.AssemblyInfo.cs
+F:\MSF\backend\DTOs\obj\Debug\net8.0\DTOs.csproj.CoreCompileInputs.cache
+F:\MSF\backend\DTOs\obj\Debug\net8.0\DTOs.sourcelink.json
+F:\MSF\backend\DTOs\obj\Debug\net8.0\DTOs.csproj.Up2Date
+F:\MSF\backend\DTOs\obj\Debug\net8.0\DTOs.dll
+F:\MSF\backend\DTOs\obj\Debug\net8.0\refint\DTOs.dll
+F:\MSF\backend\DTOs\obj\Debug\net8.0\DTOs.pdb
+F:\MSF\backend\DTOs\obj\Debug\net8.0\ref\DTOs.dll

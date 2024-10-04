@@ -8,7 +8,6 @@ namespace WebApp_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class CaptchaController : ControllerBase
     {
         private static readonly Dictionary<string, string> Captchas = new Dictionary<string, string>(); 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zrKIqR+PAYuLWiE727QjAi2yvm+sutVWytJBTiLBbpsJKUsvDnyWGRnkk1gj3I2DPtWM0cvSahirE5wlRaz/GA==",
+  "dgSpecHash": "LjQfX5pOLfOvvUcAk5aU1KXYsbrH9K89KLuNOV4tNm/OTFLJW2j0uW2AInNbF/F7gBpUsahYTQAgm6OzpMmT+g==",
   "success": true,
-  "projectFilePath": "F:\\ASP .NET\\WebApp_API\\ServicesTest\\ServicesTest.csproj",
+  "projectFilePath": "F:\\MSF\\backend\\ServicesTest\\ServicesTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
