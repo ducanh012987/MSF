@@ -1,0 +1,100 @@
+<div class="log-manager-container">
+    <section class="breadcumrb">
+        <ol class="breadcumrb-nav">
+            <li>
+                <ng-icon class="icon" name="matHomeOutline"></ng-icon>
+            </li>
+            <li class="breadcumrb-nav-item">Nhật ký hoạt động</li>
+        </ol>
+        <div class="box-breadcumrb">
+            <h3 class="breadcumrb-title">Danh sách nhật ký</h3>
+        </div>
+    </section>
+    <section class="main">
+        <div class="main-container">
+            <div class="main-wrapper">
+                <div class="main-box">
+                    <div class="table-box">
+                        <table class="table">
+                            <thead class="thead">
+                                <tr>
+                                    <th class="th-item">ID</th>
+                                    <th class="th-item">Trạng thái</th>
+                                    <th class="th-item">Địa chỉ</th>
+                                    <th class="th-item">Tên người dùng</th>
+                                    <th class="th-item">Thời gian</th>
+                                    <th class="th-item ctr">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                <!-- Hiển thị loading -->
+                                <tr *ngIf="isLoading">
+                                    <td colspan="5">
+                                        <div class="loading flex items-center justify-center gap-x-4 py-20">
+                                            <ng-icon class="icon mr-2 animate-spin text-4xl"
+                                                name="matAcUnitOutline"></ng-icon>
+                                            <h2 class="title text-xl">Xin chờ</h2>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Hiển thị dữ liệu người dùng -->
+                                <tr *ngFor="let log of logs" [attr.key]="log.id">
+                                    <td class="td-id"><b>{{ log.id }}</b></td>
+                                    <td class="td-item status">
+                                        <div class="info">
+                                            <b [ngClass]="{informational: log.statusCode >= 100 && log.statusCode <= 199,
+                                                    successful: log.statusCode >= 200 && log.statusCode <= 299,
+                                                    redirection: log.statusCode >= 300 && log.statusCode <= 399,
+                                                    error: log.statusCode >= 400}">
+                                                {{ log.statusCode }}
+                                            </b>
+                                        </div>
+                                        <div class="info">
+                                            <b class="{{log.method}}">{{ log.method }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ log.url }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ log.username }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ log.time | date: 'dd/MM/yyyy HH:mm:ss' }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-action">
+                                        <div class="box-action">
+                                            <a (click)="openDetailDialog(log.id)" class="detail">
+                                                <ng-icon class="icon" name="matCreateOutline"></ng-icon>
+                                                <span>Chi tiết</span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Hiển thị khi không có dữ liệu -->
+                                <tr *ngIf="!isLoading && logs.length === 0">
+                                    <td colspan="5">
+                                        <div class="no-data flex flex-col items-center justify-center py-20">
+                                            <ng-icon class="icon text-5xl" name="matDatasetOutline"></ng-icon>
+                                            <h2 class="title text-xl">Không có dữ liệu</h2>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-pagination [totalUsers]="totalLogs" [currentPage]="pageNumber" (pageChange)="onPageChange($event)">
+        </app-pagination>
+    </section>
+</div>

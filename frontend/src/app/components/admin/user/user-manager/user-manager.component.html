@@ -8,7 +8,7 @@
         </ol>
         <div class="box-breadcumrb">
             <h3 class="breadcumrb-title">Danh sách người dùng</h3>
-            <a [routerLink]="'create'" class="btn-add">
+            <a routerLink="create" class="btn-add">
                 <ng-icon name="matAddCircleOutlineOutline" class="icon" />
                 <span>Thêm người dùng</span>
             </a>
@@ -79,7 +79,7 @@
                                             </a>
                                         </div>
                                         <div class="box-action">
-                                            <a [routerLink]="'delete/' + user.id" class="delete">
+                                            <a (click)="deleteUser(user.id)" class="delete">
                                                 <ng-icon class="icon" name="matDeleteOutline"></ng-icon>
                                                 <span>Xoá</span>
                                             </a>

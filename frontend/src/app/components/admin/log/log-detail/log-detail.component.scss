@@ -1,0 +1,89 @@
+mat-dialog-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 15px 30px;
+    overflow: hidden;
+
+    .title-dialog {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+
+        h2 {
+            font-size: 24px;
+            color: black;
+        }
+    }
+
+    mat-tab-group {
+        margin-bottom: 20px;
+
+        .detail-container {
+            display: flex;
+            flex-direction: column;
+
+            .detail-item {
+                margin: 10px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .rounded {
+                    padding: 5px 10px;
+                    background-color: var(--bs-gray-300);
+                    border-radius: 8px;
+                    color: var(--bs-white);
+                    font-size: 13px;
+                    font-weight: bold;
+
+                    &.information,
+                    &.GET {
+                        color: #438aa7;
+                        background-color: #61affe1a;
+                    }
+
+                    &.successful,
+                    &.POST {
+                        color: #4fbf67;
+                        background-color: #49cc8f1a;
+                    }
+
+                    &.redirection,
+                    &.PUT {
+                        color: #fca130;
+                        background-color: #fca1301a;
+                    }
+
+                    &.error,
+                    &.DELETE {
+                        color: #c00d49;
+                        background-color: #f93e3e1a;
+                    }
+                }
+            }
+        }
+    }
+
+    .dialog-actions {
+        display: flex;
+        justify-content: flex-end;
+        border-top: 1px solid #ccc;
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid rgb(168, 168, 168);
+            background-color: white;
+            border-radius: 8px;
+            color: var(--bs-white);
+            font-weight: bold;
+
+            &:hover {
+                background-color: rgb(168, 168, 168);
+            }
+        }
+    }
+}

@@ -1,32 +1,55 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
+import { AuthService } from '../auth/auth.service';
+import { catchError, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorizeService {
-  constructor(private cookieService: CookieService) {}
+  constructor(
+    private cookieService: CookieService,
+    private authService: AuthService
+  ) {}
 
-  getToken(): string | null {
-    return this.cookieService.get('AccessToken'); // 'AccessToken' là tên cookie chứa token
+  getAccessToken(): string | null {
+    return this.cookieService.get('AccessToken');
   }
 
-  checkTokenExpired(): boolean {
-    const token = this.getToken();
-    if (token) {
-      const decodedToken: any = jwtDecode(token);
-      const expirationTime = decodedToken.exp * 1000; // JWT exp is in seconds, convert to ms
-      const currentTime = Date.now();
-      const timeRemaining = expirationTime - currentTime;
-
-      return timeRemaining <= 30 * 1000;
+  checkTokenExpired() {
+    const token = this.getAccessToken();
+    if (!token) {
+      return this.refreshToken();
     }
-    return false;
+    return of(token);
+  }
+
+  refreshToken() {
+    const token = this.cookieService.get('RefreshToken');
+    return this.authService.refreshToken(token).pipe(
+      switchMap((response) => {
+        console.log(response);
+
+        this.cookieService.set('AccessToken', response.data.accessToken, {
+          expires: new Date(new Date().getTime() + 30 * 60000),
+          path: '/',
+          domain: 'localhost',
+          secure: true,
+          sameSite: 'None',
+        });
+
+        return of(response.data.accessToken);
+      }),
+      catchError((error) => {
+        console.log('Không thể làm mới token. Lỗi: ' + error);
+        return of();
+      })
+    );
   }
 
   getRoles(): string[] {
-    const token = this.getToken();
+    const token = this.getAccessToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
       const role =
@@ -43,7 +66,7 @@ export class AuthorizeService {
   }
 
   getFullName(): any {
-    const token = this.getToken();
+    const token = this.getAccessToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
       return decodedToken.FullName;
