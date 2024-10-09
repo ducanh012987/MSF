@@ -22,7 +22,7 @@ namespace WebApp_API.Controllers
             return Ok(await _roleRepository.GetAllRole(pageNumber, pageSize));
         }
 
-        [HttpGet("getById")]
+        [HttpGet("getById/{id}")]
         public async Task<IActionResult> GetRoleById(int id)
         {
             return Ok(await _roleRepository.GetRoleById(id));
@@ -34,16 +34,16 @@ namespace WebApp_API.Controllers
             return Ok(await _roleRepository.CreateRole(roleName));
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateRole(string roleName)
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateRole(int id, string roleName)
         {
-            return Ok(await _roleRepository.CreateRole(roleName));
+            return Ok(await _roleRepository.UpdateRole(id, roleName));
         }
 
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteRole(string roleName)
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteRole(int id)
         {
-            return Ok(await _roleRepository.CreateRole(roleName));
+            return Ok(await _roleRepository.DeleteRole(id));
         }
     }
 }

@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace WebApp_API.Extenisons
 {
@@ -51,6 +53,12 @@ namespace WebApp_API.Extenisons
                 var serviceProvider = provider.GetRequiredService<IServiceProvider>();
                 return new TokenService(connectionString, jwtSettings, httpContextAccessor, serviceProvider);
             });
+
+            // Đăng ký ILogRepository với LogService
+            services.AddTransient<ILogRepository, LogService>(provider =>
+            {
+                return new LogService(connectionString);
+            });
         }
 
         public static void AddSwaggerServices(this IServiceCollection services)
@@ -65,7 +73,7 @@ namespace WebApp_API.Extenisons
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
                 });
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                /*options.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
                         new OpenApiSecurityScheme
@@ -78,8 +86,42 @@ namespace WebApp_API.Extenisons
                         },
                         Array.Empty<string>()
                     }
-                });
+                });*/
+
+                // Chỉ thêm yêu cầu bảo mật cho các API có thuộc tính [Authorize]
+                options.OperationFilter<AuthorizeCheckOperationFilter>();
             });
+        }
+
+        public class AuthorizeCheckOperationFilter : IOperationFilter
+        {
+            public void Apply(OpenApiOperation operation, OperationFilterContext context)
+            {
+                // Kiểm tra xem controller hoặc action có thuộc tính [Authorize] hay không
+                var hasAuthorize = context.MethodInfo.DeclaringType!
+                    .GetCustomAttributes(true)
+                    .OfType<AuthorizeAttribute>()
+                    .Any() || context.MethodInfo
+                    .GetCustomAttributes(true)
+                    .OfType<AuthorizeAttribute>()
+                    .Any();
+
+                if (hasAuthorize)
+                {
+                    operation.Security.Add(new OpenApiSecurityRequirement
+                    {
+                        { new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            Array.Empty<string>() }
+                    });
+                }
+            }
         }
 
         public static void AddJwtServices(this IServiceCollection services, IConfiguration configuration)

@@ -8,9 +8,9 @@ import { AuthorizeService } from '../authorize/authorize.service';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const cookieService = inject(CookieService);
-  const authService = inject(AuthService);
-  const router = inject(Router);
-  const authorize = inject(AuthorizeService);
+  // const authService = inject(AuthService);
+  // const router = inject(Router);
+  // const authorize = inject(AuthorizeService);
 
   // Danh sách các URL không thêm token
   const excludedUrls = [
@@ -29,34 +29,6 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   const tokenAccess = cookieService.get('AccessToken');
-  if (authorize.checkTokenExpired()) {
-    const token = cookieService.get('RefreshToken');
-    return authService.refreshToken(token).pipe(
-      switchMap((response) => {
-        console.log(response);
-
-        cookieService.set('AccessToken', response.data.accessToken, {
-          expires: new Date(new Date().getTime() + 30 * 60000),
-          path: '/',
-          domain: 'localhost',
-          secure: true,
-          sameSite: 'None',
-        });
-
-        return next(
-          req.clone({
-            setHeaders: {
-              Authorization: `${response.data.accessToken}`,
-            },
-          })
-        );
-      }),
-      catchError((error) => {
-        console.log('Không thể làm mới token. Lỗi: ' + error);
-        return throwError(error);
-      })
-    );
-  }
 
   return next(
     req.clone({

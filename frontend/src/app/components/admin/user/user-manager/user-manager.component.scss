@@ -73,7 +73,6 @@
                 justify-content: center;
                 gap: 0.5rem;
                 border-radius: 0.5rem;
-                background-color: var(--color-primary);
                 padding: 0.5rem 1.25rem;
                 font-size: 1rem;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -81,7 +80,7 @@
                 text-decoration: none;
 
                 &:hover {
-                    background-color: var(--color-primary-hover);
+                    background-color: #989898;
                 }
 
                 .icon {

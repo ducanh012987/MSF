@@ -24,8 +24,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
-    private router: Router,
-    private authorize: AuthorizeService
+    private router: Router
   ) {}
 
   login(user: any): Observable<any> {
@@ -52,12 +51,12 @@ export class AuthService {
   }
 
   logout() {
-    alert('Đăng xuất thành công.');
-    this.cookieService.delete('AccessToken');
-    this.cookieService.delete('RefreshToken');
-
+    this.cookieService.delete('AccessToken', '/', 'localhost', true, 'None');
+    this.cookieService.delete('RefreshToken', '/', 'localhost', true, 'None');
     //this.isLoggedIn = false;
     localStorage.clear();
+    console.log('Đăng xuất thành công');
+    alert('Đăng xuất thành công.');
     this.router.navigate(['/login']);
   }
 }

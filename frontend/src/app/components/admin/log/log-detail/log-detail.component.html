@@ -1,0 +1,55 @@
+<mat-dialog-content>
+    <div class="title-dialog">
+        <h2>Chi tiết log</h2>
+    </div>
+    <mat-tab-group>
+        <div class="detail-container">
+            <div class="detail-item">
+                <strong>ID:</strong>
+                <span class="rounded">{{ log.id }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Trạng thái HTTP:</strong>
+                <span class="rounded" [ngClass]="{
+                            information: log.statusCode >= 100 && log.statusCode <= 199,
+                            successful: log.statusCode >= 200 && log.statusCode <= 299,
+                            redirection: log.statusCode >= 300 && log.statusCode <= 399,
+                            error: log.statusCode >= 400
+                        }">
+                    {{log.statusCode}}
+                </span>
+            </div>
+            <div class="detail-item">
+                <strong>Phương thức HTTP:</strong>
+                <span class="rounded {{log.method}}">{{log.method}}</span>
+            </div>
+            <div class="detail-item">
+                <strong>URL:</strong>
+                <span>{{ log.url }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Địa chỉ IP:</strong>
+                <span>{{ log.clientIpAddress }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Tên IP:</strong>
+                <span>{{ log.clientName }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Tên người dùng:</strong>
+                <span>{{ log.username }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Thời gian:</strong>
+                <span>{{ log.time | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
+            </div>
+            <div class="detail-item">
+                <strong>Thời gian thực hiện:</strong>
+                <span>{{ log.duration }} ms</span>
+            </div>
+        </div>
+    </mat-tab-group>
+    <div class="dialog-actions">
+        <button mat-button (click)="close()">Thoát</button>
+    </div>
+</mat-dialog-content>

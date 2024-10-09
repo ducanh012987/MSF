@@ -64,13 +64,17 @@ export class UserManagerComponent implements OnInit {
     this.getAllUser(page); // Tải lại danh sách người dùng
   }
 
-  editUser(user: any): void {
-    // Navigate to edit user page or open a modal for editing
-  }
-
   deleteUser(id: number): void {
-    // this.userService.deleteUser(id).subscribe(() => {
-    //   this.getUsers(); // Reload user list after deletion
-    // });
+    this.userService.deleteUser(id).subscribe({
+      next: (response) => {
+        alert('Xoá thành công.');
+        console.log(response);
+        this.getAllUser(this.pageNumber);
+      },
+      error: (error) => {
+        console.log(error);
+        this.isLoading = false;
+      },
+    });
   }
 }

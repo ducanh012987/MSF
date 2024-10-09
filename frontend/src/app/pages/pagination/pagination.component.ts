@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
+  matFirstPageOutline,
   matKeyboardArrowLeftOutline,
   matKeyboardArrowRightOutline,
+  matLastPageOutline,
 } from '@ng-icons/material-icons/outline';
 
 @Component({
@@ -13,7 +15,12 @@ import {
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',
   providers: [
-    provideIcons({ matKeyboardArrowLeftOutline, matKeyboardArrowRightOutline }),
+    provideIcons({
+      matKeyboardArrowLeftOutline,
+      matKeyboardArrowRightOutline,
+      matFirstPageOutline,
+      matLastPageOutline,
+    }),
   ],
 })
 export class PaginationComponent {
@@ -28,7 +35,20 @@ export class PaginationComponent {
 
   get pages(): number[] {
     const total = this.totalPages;
-    return Array.from({ length: total }, (_, i) => i + 1); // Mảng [1, 2, ..., total]
+    const current = this.currentPage;
+    const maxVisiblePages = 5;
+
+    let startPage = Math.max(1, current - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(total, startPage + maxVisiblePages - 1);
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    return Array.from(
+      { length: endPage - startPage + 1 },
+      (_, i) => i + startPage
+    );
   }
 
   onPageChange(page: number) {
@@ -46,6 +66,18 @@ export class PaginationComponent {
   goToNextPage() {
     if (this.currentPage < this.totalPages) {
       this.onPageChange(this.currentPage + 1);
+    }
+  }
+
+  goToFirstPage() {
+    if (this.currentPage !== 1) {
+      this.onPageChange(1);
+    }
+  }
+
+  goToLastPage() {
+    if (this.currentPage !== this.totalPages) {
+      this.onPageChange(this.totalPages);
     }
   }
 }

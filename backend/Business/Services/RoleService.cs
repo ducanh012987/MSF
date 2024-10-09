@@ -34,6 +34,9 @@ namespace Business.Services
                 parameters.Add("@PageNumber", pageNumber, DbType.Int32);
                 parameters.Add("@PageSize", pageSize, DbType.Int32);
 
+                // Lấy tổng số role
+                int totalRoles = await connection.ExecuteScalarAsync<int>("GetTotalRoleCount", commandType: CommandType.StoredProcedure);
+
                 //Gọi Stored Procedure bằng Dappper
                 var result = connection.Query<Roles>(
                     "GetAllRole",        //Tên Stored Procedure
@@ -43,7 +46,7 @@ namespace Business.Services
 
                 var pagedResult = new PagedResult<Roles>
                 {
-                    TotalRecords = result.Count,
+                    TotalRecords = totalRoles,
                     PageNumber = pageNumber,
                     PageSize = pageSize,
                     Data = result
