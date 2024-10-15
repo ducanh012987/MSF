@@ -1,11 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Models
 {
@@ -17,6 +11,12 @@ namespace Data.Models
 
         [Required]
         [MaxLength(50)]
-        public string RoleName { get; set; }
+        public string? RoleName { get; set; }
+
+        public bool Status { get; set; }
+
+        public ICollection<User_Roles>? User_Roles { get; set; }
+        public ICollection<Role_Permissions>? Role_Permissions { get; set; }
+        public ICollection<Role_Menu>? Role_Menu { get; set; }
     }
 }

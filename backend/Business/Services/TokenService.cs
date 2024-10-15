@@ -10,6 +10,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -41,14 +42,22 @@ namespace Business.Services
         public string GenerateToken(UserDto userDto)
         {
             // thêm dữ liệu vào token
-            var claims = new[]
+            var claims = new List<Claim>()
             {
                 new Claim(JwtRegisteredClaimNames.Name, userDto.Username!),
                 new Claim(JwtRegisteredClaimNames.Email, userDto.Email!),
                 new Claim("FullName", userDto.Fullname!),
-                new Claim(ClaimTypes.Role, userDto.Roles!.RoleName),
+                //new Claim(ClaimTypes.Role, userDto.Roles!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+
+            if (userDto.ListRoles != null)
+            {
+                foreach (var role in userDto.ListRoles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role.RoleName!));
+                }
+            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

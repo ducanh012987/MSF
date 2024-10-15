@@ -88,13 +88,14 @@
                 </div>
                 <!-- Quyền -->
                 <div class="form-group input">
-                    <label for="RoleId" (click)="roleId">Quyền</label>
-                    <ng-select name="RoleId" [items]="roles" class="select" bindLabel="roleName" bindValue="id"
-                        [ngClass]="{'is-valid':roleId.invalid && roleId.touched}" placeholder="Chọn quyền: "
-                        [(ngModel)]="model.roleId" #roleId="ngModel" required>
+                    <label for="RoleId" (click)="id">Quyền</label>
+                    <ng-select name="RoleId" [items]="filteredRoles" class="select" bindLabel="roleName" bindValue="id"
+                        [ngClass]="{'is-valid':id.invalid && id.touched}" placeholder="Chọn quyền: "
+                        [(ngModel)]="model.roleIds" #id="ngModel" required [multiple]="true" [clearable]="true"
+                        [closeOnSelect]="false">
                     </ng-select>
-                    <div *ngIf="roleId.invalid && roleId.touched" class="error-message">
-                        <div *ngIf="roleId.errors?.['required']">
+                    <div *ngIf="id.invalid && id.touched" class="error-message">
+                        <div *ngIf="id.errors?.['required']">
                             Vui lòng chọn quyền!
                         </div>
                     </div>

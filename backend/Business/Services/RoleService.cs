@@ -1,27 +1,30 @@
 ﻿using Business.Repository;
 using Dapper;
 using Data.Models;
+using DTOs.Request.MenuDTOs;
+using DTOs.Request.PermissionDTOs;
+using DTOs.Request.RoleDTOs;
 using DTOs.Request.UserDTOs;
 using DTOs.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 using System.Data;
+using System.Security;
 
 namespace Business.Services
 {
     public class RoleService : IRoleRepository
     {
         private readonly string _connectionString;
-        private readonly ResponseObject<Roles> _responseObject;
 
-        public RoleService(string connectionString, ResponseObject<Roles> responseObject)
+        public RoleService(string connectionString)
         {
             _connectionString = connectionString;
-            _responseObject = responseObject;
         }
 
         // Lấy tất cả role
-        public async Task<ResponseObject<PagedResult<Roles>>> GetAllRole(int pageNumber, int pageSize)
+        public async Task<ResponseObject<PagedResult<RoleDTO>>> GetAllRole(int pageNumber, int pageSize)
         {
             if (pageNumber <= 0 || pageSize <= 0)
             {
@@ -38,25 +41,25 @@ namespace Business.Services
                 int totalRoles = await connection.ExecuteScalarAsync<int>("GetTotalRoleCount", commandType: CommandType.StoredProcedure);
 
                 //Gọi Stored Procedure bằng Dappper
-                var result = connection.Query<Roles>(
+                var result = await connection.QueryAsync<RoleDTO>(
                     "GetAllRole",        //Tên Stored Procedure
                     parameters,         //Tham số truyền vào
                     commandType: CommandType.StoredProcedure
-                ).ToList();
+                );
 
-                var pagedResult = new PagedResult<Roles>
+                var pagedResult = new PagedResult<RoleDTO>
                 {
                     TotalRecords = totalRoles,
                     PageNumber = pageNumber,
                     PageSize = pageSize,
-                    Data = result
+                    Data = result.ToList()
                 };
-                return new ResponseObject<PagedResult<Roles>> { Status = StatusCodes.Status200OK, Message = "Lấy dữ liệu thành công.", Data = pagedResult };
+                return new ResponseObject<PagedResult<RoleDTO>> { Status = StatusCodes.Status200OK, Message = "Lấy dữ liệu thành công.", Data = pagedResult };
             }
         }
 
         //Lấy role theo id
-        public async Task<ResponseObject<Roles>> GetRoleById(int id)
+        public async Task<ResponseObject<RoleDTO>> GetRoleById(int id)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -64,34 +67,31 @@ namespace Business.Services
                 parameters.Add("@Id", id, DbType.Int32);
 
                 //Gọi Stored Procedure bằng Dappper
-                var result = await connection.QueryFirstOrDefaultAsync<Roles>(
+                var result = await connection.QueryFirstOrDefaultAsync<RoleDTO>(
                     "GetRoleById",        //Tên Stored Procedure
                     parameters,         //Tham số truyền vào
                     commandType: CommandType.StoredProcedure
                 );
-
-                if (result == null)
-                    throw new Exception("Không tìm thấy Role");
-                return _responseObject.ResponseSuccess("Lấy Role thành công.", result);
-                //return new ResponseObject<Roles> { Status = StatusCodes.Status200OK, Message = "Lấy Role thành công.", Data = result };
+                return new ResponseObject<RoleDTO> { Status = StatusCodes.Status200OK, Message = "Lấy Role thành công.", Data = result };
             }
         }
 
         // Tạo role
-        public async Task<ResponseText> CreateRole(string rolename)
+        public async Task<ResponseText> CreateRole(RoleInput roleInput)
         {
-            if (await CheckRoleByRolename(rolename.ToUpper()))
-            {
-                throw new CustomException(StatusCodes.Status400BadRequest, "Role Name đã tồn tại!");
-            }
+            string permissionIdsJson = JsonConvert.SerializeObject(roleInput.PermissionIds);
+            string menuIdsJson = JsonConvert.SerializeObject(roleInput.MenuIds);
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@RoleName", rolename.ToUpper(), DbType.String);
+                parameters.Add("@RoleName", roleInput.RoleName!.ToUpper(), DbType.String);
+                parameters.Add("@Status", roleInput.Status, DbType.Boolean);
+                parameters.Add("@PermissionIds", permissionIdsJson, DbType.String);
+                parameters.Add("@MenuIds", menuIdsJson, DbType.String);
 
                 //Gọi Stored Procedure bằng Dappper
-                var result = connection.Execute(
+                var result = await connection.ExecuteAsync(
                     "CreateRole",        //Tên Stored Procedure
                     parameters,         //Tham số truyền vào
                     commandType: CommandType.StoredProcedure
@@ -101,23 +101,19 @@ namespace Business.Services
         }
 
         // Sửa role
-        public async Task<ResponseText> UpdateRole(int id, string rolename)
+        public async Task<ResponseText> UpdateRole(int id, RoleInput roleInput)
         {
-            if (!await CheckRoleById(id))
-            {
-                throw new CustomException(StatusCodes.Status404NotFound, "Không tìm thấy Role");
-            }
-
-            if (await CheckRoleByRolename(rolename.ToUpper()))
-            {
-                throw new CustomException(StatusCodes.Status400BadRequest, "Role Name đã tồn tại!");
-            }
+            string permissionIdsJson = JsonConvert.SerializeObject(roleInput.PermissionIds);
+            string menuIdsJson = JsonConvert.SerializeObject(roleInput.MenuIds);
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@Id", id, DbType.Int32);
-                parameters.Add("@RoleName", rolename.ToUpper(), DbType.String);
+                parameters.Add("@RoleName", roleInput.RoleName!.ToUpper(), DbType.String);
+                parameters.Add("@Status", roleInput.Status, DbType.Boolean);
+                parameters.Add("@PermissionIds", permissionIdsJson, DbType.String);
+                parameters.Add("@MenuIds", menuIdsJson, DbType.String);
 
                 //Gọi Stored Procedure bằng Dappper
                 var result = await connection.ExecuteAsync(
@@ -132,11 +128,6 @@ namespace Business.Services
         // Xoá role
         public async Task<ResponseText> DeleteRole(int id)
         {
-            if (!await CheckRoleById(id))
-            {
-                throw new CustomException(StatusCodes.Status404NotFound, "Không tìm thấy Role");
-            }
-
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
@@ -149,44 +140,6 @@ namespace Business.Services
                     commandType: CommandType.StoredProcedure
                 );
                 return ResponseText.ResponseSuccess("Xoá thành công.", StatusCodes.Status200OK);
-            }
-        }
-
-        // Kiểm tra role theo rolename
-        public async Task<bool> CheckRoleByRolename(string rolename)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@RoleName", rolename.ToUpper(), DbType.String);
-
-                //Gọi Stored Procedure bằng Dappper
-                var result = await connection.QueryFirstOrDefaultAsync<int>(
-                    "CheckRoleByRolename",        //Tên Stored Procedure
-                    parameters,         //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure
-                );
-
-                return result > 0;
-            }
-        }
-
-        // Kiểm tra role theo id
-        public async Task<bool> CheckRoleById (int id)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@Id", id, DbType.Int32);
-
-                //Gọi Stored Procedure bằng Dappper
-                var result = await connection.QueryFirstOrDefaultAsync<int>(
-                    "CheckRoleById",        //Tên Stored Procedure
-                    parameters,         //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure
-                );
-
-                return result > 0;
             }
         }
     }

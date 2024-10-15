@@ -35,9 +35,9 @@ namespace WebApp_API.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateUser(int id, string fullname, string email, bool locked, int roleid)
+        public async Task<IActionResult> UpdateUser(int id, UserUpdate userUpdate)
         {
-            return Ok(await _userRepository.UpdateUser(id, fullname, email, locked, roleid));
+            return Ok(await _userRepository.UpdateUser(id, userUpdate));
         }
 
         [HttpDelete("delete/{id}")]

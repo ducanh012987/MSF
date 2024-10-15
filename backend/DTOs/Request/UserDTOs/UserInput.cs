@@ -20,7 +20,7 @@ namespace DTOs.Request.UserDTOs
         [Required(ErrorMessage = "Locked không được để trống")]
         public bool Locked { get; set; }
 
-        [Required(ErrorMessage = "RoleId không được để trống")]
-        public int RoleId { get; set; }
+        [Required(ErrorMessage = "RoleIds không được để trống")]
+        public List<int>? RoleIds { get; set; }
     }
 }

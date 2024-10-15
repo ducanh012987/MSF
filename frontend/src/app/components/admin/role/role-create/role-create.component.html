@@ -33,6 +33,51 @@
                 </div>
             </div>
 
+            <div class="box-form">
+                <!-- Trạng thái -->
+                <div class="form-group input">
+                    <label for="Status" (click)="status">Trạng thái</label>
+                    <ng-select name="Status" [items]="statuses" class="select" bindLabel="name" bindValue="value"
+                        [ngClass]="{'is-valid':status.invalid && status.touched}" placeholder="Chọn trạng thái: "
+                        [(ngModel)]="model.status" #status="ngModel" required>
+                    </ng-select>
+                    <div *ngIf="status.invalid && status.touched" class="error-message">
+                        <div *ngIf="status.errors?.['required']">
+                            Vui lòng chọn trạng thái!
+                        </div>
+                    </div>
+                </div>
+                <!-- Menu -->
+                <div class="form-group input">
+                    <label for="MenuId" (click)="menuId">Menu</label>
+                    <ng-select name="MenuId" [items]="filteredMenu" class="select" bindLabel="displayName"
+                        bindValue="id" [ngClass]="{'is-valid':menuId.invalid && menuId.touched}"
+                        placeholder="Chọn menu: " [(ngModel)]="model.menuIds" #menuId="ngModel" required
+                        [multiple]="true" [clearable]="true" [closeOnSelect]="false">
+                    </ng-select>
+                    <div *ngIf="menuId.invalid && menuId.touched" class="error-message">
+                        <div *ngIf="menuId.errors?.['required']">
+                            Vui lòng chọn menu!
+                        </div>
+                    </div>
+                </div>
+                <!-- Permission -->
+                <div class="form-group input">
+                    <label for="PermissionId" (click)="permissionId">Permissions</label>
+                    <ng-select name="PermissionId" [items]="filteredPermissions" class="select"
+                        bindLabel="permissionName" bindValue="id"
+                        [ngClass]="{'is-valid':permissionId.invalid && permissionId.touched}"
+                        placeholder="Chọn Permission: " [(ngModel)]="model.permissionIds" #permissionId="ngModel"
+                        required [multiple]="true" [clearable]="true" [closeOnSelect]="false">
+                    </ng-select>
+                    <div *ngIf="permissionId.invalid && permissionId.touched" class="error-message">
+                        <div *ngIf="permissionId.errors?.['required']">
+                            Vui lòng chọn Permission!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group btn">
                 <button [disabled]="isLoading" class="btn-primary">
                     <ng-container *ngIf="isLoading; else notLoading">

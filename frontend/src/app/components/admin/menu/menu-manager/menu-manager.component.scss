@@ -1,0 +1,290 @@
+.menu-manager-container {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+
+    @media (min-width: 1280px) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .breadcumrb {
+        margin-top: 20px;
+        margin-left: 8px;
+
+        @media (min-width: 768px) {
+            margin-top: 32px;
+        }
+
+        .breadcumrb-nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding-top: 4px;
+            list-style: none;
+
+            @media (min-width: 640px) {
+                margin-right: 64px;
+            }
+
+            li {
+                display: flex;
+                align-items: center;
+
+                .icon {
+                    font-size: 19px;
+                    line-height: normal;
+                    color: #475569;
+                }
+            }
+
+            .breadcumrb-nav-item {
+                padding-left: 8px;
+                font-size: 15px;
+                line-height: normal;
+                color: #475569;
+
+                &:before {
+                    float: left;
+                    padding-right: 0.5rem;
+                    content: "Danh mục /";
+                    color: #6b7280;
+                }
+            }
+        }
+
+        .box-breadcumrb {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .breadcumrb-title {
+                margin: 1rem 0;
+                font-size: 1.5rem;
+                font-weight: bold;
+                text-transform: capitalize;
+                line-height: 2.5rem;
+            }
+
+            .btn-add {
+                display: flex;
+                flex-shrink: 0;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                border-radius: 0.5rem;
+                padding: 0.5rem 1.25rem;
+                font-size: 1rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.2s;
+                text-decoration: none;
+
+                &:hover {
+                    background-color: #989898;
+                }
+
+                .icon {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    .main {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            border-radius: 0.5rem;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+            .main-wrapper {
+                margin-top: -0.5rem;
+                overflow-x: auto;
+
+                .main-box {
+                    display: inline-block;
+                    min-width: 100%;
+                    padding-top: 0.5rem;
+                    vertical-align: middle;
+
+                    .table-box {
+                        overflow: hidden;
+                        border: 1px solid #e5e7eb;
+
+                        @media (min-width: 768px) {
+                            border-radius: 0.5rem;
+                        }
+
+                        .table {
+                            min-width: 100%;
+                            border-collapse: collapse;
+
+                            .thead {
+                                background-color: #f9fafb;
+
+                                .th-item {
+                                    padding-left: 1rem;
+                                    padding-right: 1rem;
+                                    padding-top: 0.875rem;
+                                    padding-bottom: 0.875rem;
+                                    font-size: 0.875rem;
+                                    font-weight: normal;
+                                    color: #6b7280;
+                                    text-align: left;
+
+                                    &.rtl {
+                                        text-align: right;
+                                    }
+
+                                    &.ctr {
+                                        text-align: center;
+                                    }
+                                }
+                            }
+
+                            .tbody {
+                                background-color: #ffffff;
+
+                                .loading {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    gap: 1rem;
+                                    padding-top: 5rem;
+                                    padding-bottom: 5rem;
+
+                                    .icon {
+                                        margin-right: 0.5rem;
+                                        font-size: 2.5rem;
+                                        animation: spin 1s linear infinite;
+                                    }
+
+                                    .title {
+                                        font-size: 1.25rem;
+                                    }
+                                }
+
+                                tr {
+                                    border-bottom: #c1c1c1 1px solid;
+
+                                    &:nth-last-child(1) {
+                                        border-color: transparent;
+                                    }
+                                }
+
+                                .td-id {
+                                    white-space: nowrap;
+                                    padding-left: 1rem;
+                                    padding-right: 1rem;
+                                    padding-top: 1rem;
+                                    padding-bottom: 1rem;
+                                    text-align: left;
+                                    font-size: 0.875rem;
+                                    font-weight: 500;
+                                    color: #4b5563;
+                                }
+
+                                .td-item {
+                                    padding-left: 1rem;
+                                    padding-right: 1rem;
+                                    padding-top: 1rem;
+                                    padding-bottom: 1rem;
+                                    font-size: 1rem;
+                                    color: #6b7280;
+
+                                    .box-avatar {
+                                        display: flex;
+                                        gap: 1rem;
+                                        padding-bottom: 0.5rem;
+
+                                        .avatar {
+                                            border-radius: 9999px;
+                                        }
+                                    }
+
+                                    .info {
+                                        display: flex;
+                                        flex-direction: column;
+                                        row-gap: 5px;
+                                    }
+                                }
+
+                                .td-action {
+                                    white-space: nowrap;
+                                    padding-top: 1rem;
+                                    padding-bottom: 1rem;
+                                    font-size: 0.875rem;
+                                    display: flex;
+                                    justify-content: center;
+                                    column-gap: 10px;
+
+                                    .box-action {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: flex-start;
+                                        gap: 1.5rem;
+
+                                        @media (min-width: 768px) {
+                                            justify-content: center;
+                                        }
+
+                                        .update,
+                                        .delete {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            gap: 0.5rem;
+                                            border-radius: 0.5rem;
+                                            padding-left: 1.25rem;
+                                            padding-right: 1.25rem;
+                                            padding-top: 0.5rem;
+                                            padding-bottom: 0.5rem;
+                                            font-size: 0.875rem;
+                                            font-weight: 500;
+                                            color: #ffffff;
+                                            background-color: #f59e0b;
+                                            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                                            transition: background-color 0.2s ease-in-out;
+                                            cursor: pointer;
+                                            text-decoration: none;
+
+                                            &:hover {
+                                                background-color: #d97706;
+                                            }
+
+                                            .icon {
+                                                font-size: 1.25rem;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .no-data {
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    justify-content: center;
+                                    padding-top: 5rem;
+                                    padding-bottom: 5rem;
+
+                                    .icon {
+                                        font-size: 3rem;
+                                    }
+
+                                    .title {
+                                        font-size: 1.25rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

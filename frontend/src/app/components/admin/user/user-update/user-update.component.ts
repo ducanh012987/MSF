@@ -29,7 +29,8 @@ import { RoleService } from '../../../../services/role/role.service';
 })
 export class UserUpdateComponent {
   model: any = {};
-  roles: any[] = [];
+  roles: any[] = []; // Danh sách quyền đầy đủ
+  filteredRoles: any[] = []; // Danh sách quyền sau khi lọc
   isLoading: boolean = false;
   pageNumber: number = 1;
   pageSize: number = 10;
@@ -60,6 +61,8 @@ export class UserUpdateComponent {
     this.roleService.getAllRole(pageNumber, this.pageSize).subscribe({
       next: (response) => {
         this.roles = response.data.data;
+        // Lọc những quyền có status = true
+        this.filteredRoles = this.roles.filter((role) => role.status === true);
         this.isLoading = false;
       },
       error: (error) => {
@@ -73,6 +76,10 @@ export class UserUpdateComponent {
     this.userService.getUserById(this.userId).subscribe({
       next: (response) => {
         this.model = response.data;
+        // Chuyển danh sách các quyền thành mảng roleIds
+        this.model.roleIds = this.model.listRoles.map(
+          (role: { id: any }) => role.id
+        );
         this.isLoading = false;
       },
       error: (error) => {
@@ -83,27 +90,23 @@ export class UserUpdateComponent {
   }
 
   updateUser(): void {
-    this.userService
-      .updateUser(
-        this.userId,
-        this.model.fullname,
-        this.model.email,
-        this.model.locked,
-        this.model.roleId
-      )
-      .subscribe({
-        next: (response) => {
-          this.isLoading = false;
-          console.log(response);
-          alert('Cập nhật thành công.');
-          this.router.navigate(['/admin/user-manager']);
-        },
-        error: (error) => {
-          console.log(error);
-          alert('Đã xảy ra lỗi: ' + error);
-          this.isLoading = false;
-        },
-      });
+    const updatedData = this.model;
+    // Chuyển roleIds thành danh sách quyền cần gửi
+    updatedData.listRoles = this.model.roleIds.map((id: any) => ({ id }));
+
+    this.userService.updateUser(this.userId, updatedData).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+        console.log(response);
+        alert('Cập nhật thành công.');
+        this.router.navigate(['/admin/user-manager']);
+      },
+      error: (error) => {
+        console.log(error);
+        alert('Đã xảy ra lỗi: ' + error);
+        this.isLoading = false;
+      },
+    });
   }
 
   onSubmit() {

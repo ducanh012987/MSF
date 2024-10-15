@@ -1,12 +1,12 @@
 ﻿using Business.Repository;
 using Dapper;
-using Data.Models;
 using DTOs.Request.AccessDTOs;
 using DTOs.Request.UserDTOs;
 using DTOs.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 using System.Data;
 
 namespace Business.Services
@@ -15,17 +15,13 @@ namespace Business.Services
     {
         private readonly string _connectionString;
         private readonly PasswordHasher<string> _passwordHasher;
-        private readonly ResponseObject<LoginResult> _responseObject;
         private readonly ITokenRepository _tokenRepository;
-        private readonly IRoleRepository _roleRepository;
 
-        public UserService(string connectionString, ResponseObject<LoginResult> responseObject, ITokenRepository tokenRepository, IRoleRepository roleRepository)
+        public UserService(string connectionString, ITokenRepository tokenRepository)
         {
             _connectionString = connectionString;
             _passwordHasher = new PasswordHasher<string>();
-            _responseObject = responseObject;
             _tokenRepository = tokenRepository;
-            _roleRepository = roleRepository;
         }
 
         public async Task<ResponseObject<LoginResult>> Login(LoginRequest loginRequest)
@@ -54,17 +50,11 @@ namespace Business.Services
             var refreshToken = _tokenRepository.GenerateRefreshToken(user);
             var userRequest = UserRequest.FromUserDto(user);
             var loginResult = LoginResult.LoginSuccess(token, refreshToken, userRequest);
-            return _responseObject.ResponseSuccess("Đăng nhập thành công.", loginResult);
+            return new ResponseObject<LoginResult> { Status = StatusCodes.Status200OK, Message = "Đăng nhập thành công.", Data = loginResult };
         }
 
         public async Task<ResponseText> Register(RegisterRequest registerRequest)
         {
-            // Check user
-            if (await CheckUserByUsername(registerRequest.Username!))
-            {
-                throw new CustomException(StatusCodes.Status400BadRequest, "User đã tồn tại!");
-            }
-
             // mã hoá mật khẩu
             var hashedPassword = HashPassword(registerRequest.Password!);
 
@@ -76,8 +66,7 @@ namespace Business.Services
                 parameters.Add("@Password", hashedPassword, DbType.String);
                 parameters.Add("@Fullname", registerRequest.Fullname, DbType.String);
                 parameters.Add("@Email", registerRequest.Email, DbType.String);
-                parameters.Add("Locked", 0, DbType.Boolean);
-                parameters.Add("RoleId", 2, DbType.Int32);
+                parameters.Add("@Locked", 0, DbType.Boolean);
 
                 //Gọi Stored Procedure bằng Dappper
                 var result = await connection.ExecuteAsync(
@@ -106,25 +95,18 @@ namespace Business.Services
                 int totalUsers = await connection.ExecuteScalarAsync<int>("GetTotalUserCount", commandType: CommandType.StoredProcedure);
 
                 // Lấy danh sách user
-                var result = connection.Query<UserDto, Roles, UserDto>(
+                var result = await connection.QueryAsync<UserDto>(
                     "GetAllUser",        //Tên Stored Procedure
-                    (userDto, role) =>  // Callback function để ánh xạ role vào user
-                    {
-                        userDto.RoleId = role.Id;
-                        userDto.Roles = role;
-                        return userDto;
-                    },
                     parameters,         //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure,
-                    splitOn: "RoleId" // Dapper sẽ chia dữ liệu tại RoleId
-                ).ToList();
+                    commandType: CommandType.StoredProcedure
+                );
 
                 var pagedResult = new PagedResult<UserDto>
                 {
                     TotalRecords = totalUsers,
                     PageNumber = pageNumber,
                     PageSize = pageSize,
-                    Data = result
+                    Data = result.ToList()
                 };
                 return new ResponseObject<PagedResult<UserDto>> { Status = StatusCodes.Status200OK, Message = "Lấy dữ liệu thành công.", Data = pagedResult };
             }
@@ -138,22 +120,12 @@ namespace Business.Services
                 parameters.Add("@Id", id, DbType.Int32);
 
                 //Gọi Stored Procedure bằng Dappper
-                var result = await connection.QueryAsync<UserDto, Roles, UserDto>(
+                var result = await connection.QueryFirstOrDefaultAsync<UserDto>(
                     "GetUserById",        //Tên Stored Procedure
-                    (userDto, role) =>  // Callback function để ánh xạ role vào user
-                    {
-                        userDto.RoleId = role.Id;
-                        userDto.Roles = role;
-                        return userDto;
-                    },
                     parameters,         //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure,
-                    splitOn: "RoleId" // Dapper sẽ chia dữ liệu tại RoleId
+                    commandType: CommandType.StoredProcedure
                 );
-
-                if (result == null)
-                    throw new CustomException(StatusCodes.Status404NotFound, "Không tìm thấy User");
-                return new ResponseObject<UserDto> { Status = StatusCodes.Status200OK, Message = "Lấy dữ liệu thành công.", Data = result.FirstOrDefault() };
+                return new ResponseObject<UserDto> { Status = StatusCodes.Status200OK, Message = "Lấy dữ liệu thành công.", Data = result };
             }
         }
 
@@ -165,34 +137,18 @@ namespace Business.Services
                 parameters.Add("@Username", username, DbType.String);
 
                 //Gọi Stored Procedure bằng Dappper
-                var result = await connection.QueryAsync<UserDto, Roles, UserDto>(
+                var result = await connection.QueryFirstOrDefaultAsync<UserDto>(
                     "GetUserByUsername",   //Tên Stored Procedure
-                    (userDto, role) =>  // Callback function để ánh xạ role vào user
-                    {
-                        userDto.RoleId = role.Id;
-                        userDto.Roles = role;
-                        return userDto;
-                    },
                     parameters,            //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure,
-                    splitOn: "RoleId" // Dapper sẽ chia dữ liệu tại RoleId
+                    commandType: CommandType.StoredProcedure
                 );
-                return result.FirstOrDefault()!;
+                return result!;
             }
         }
 
         public async Task<ResponseText> CreateUser(UserInput userInput)
         {
-            // Check user
-            if (await CheckUserByUsername(userInput.Username!))
-            {
-                throw new CustomException(StatusCodes.Status400BadRequest, "User đã tồn tại!");
-            }
-
-            if (!await _roleRepository.CheckRoleById(userInput.RoleId))
-            {
-                throw new CustomException(StatusCodes.Status404NotFound, "Role không tồn tại!");
-            }
+            string roleIdsJson = JsonConvert.SerializeObject(userInput.RoleIds);
 
             // mã hoá mật khẩu
             var hashedPassword = HashPassword("1");
@@ -205,8 +161,8 @@ namespace Business.Services
                 parameters.Add("@Password", hashedPassword, DbType.String);
                 parameters.Add("@Fullname", userInput.Fullname, DbType.String);
                 parameters.Add("@Email", userInput.Email, DbType.String);
-                parameters.Add("Locked", userInput.Locked, DbType.Boolean);
-                parameters.Add("RoleId", userInput.RoleId, DbType.Int32);
+                parameters.Add("@Locked", userInput.Locked, DbType.Boolean);
+                parameters.Add("@RoleIds", roleIdsJson, DbType.String);
 
                 //Gọi Stored Procedure bằng Dappper
                 var result = await connection.ExecuteAsync(
@@ -219,26 +175,18 @@ namespace Business.Services
             }
         }
 
-        public async Task<ResponseText> UpdateUser(int id, string fullname, string email, bool locked, int roleid)
+        public async Task<ResponseText> UpdateUser(int id, UserUpdate userUpdate)
         {
-            if (!await CheckUserById(id))
-            {
-                throw new CustomException(StatusCodes.Status404NotFound, "User không tồn tại!");
-            }
-
-            if (!await _roleRepository.CheckRoleById(roleid))
-            {
-                throw new CustomException(StatusCodes.Status404NotFound, "Role không tồn tại!");
-            }
+            string roleIdsJson = JsonConvert.SerializeObject(userUpdate.RoleIds);
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@Id", id, DbType.Int32);
-                parameters.Add("@Fullname", fullname, DbType.String);
-                parameters.Add("@Email", email, DbType.String);
-                parameters.Add("@Locked", locked, DbType.Boolean);
-                parameters.Add("@RoleId", roleid, DbType.Int32);
+                parameters.Add("@Fullname", userUpdate.Fullname, DbType.String);
+                parameters.Add("@Email", userUpdate.Email, DbType.String);
+                parameters.Add("@Locked", userUpdate.Locked, DbType.Boolean);
+                parameters.Add("@RoleIds", roleIdsJson, DbType.String);
 
                 //Gọi Stored Procedure bằng Dappper
                 var result = await connection.ExecuteAsync(
@@ -252,11 +200,6 @@ namespace Business.Services
 
         public async Task<ResponseText> DeleteUser(int id)
         {
-            if (!await CheckUserById(id))
-            {
-                throw new CustomException(StatusCodes.Status404NotFound, "User không tồn tại!");
-            }
-
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
@@ -269,41 +212,6 @@ namespace Business.Services
                     commandType: CommandType.StoredProcedure
                 );
                 return ResponseText.ResponseSuccess("Xoá thành công.", StatusCodes.Status200OK);
-            }
-        }
-
-        public async Task<bool> CheckUserByUsername(string username)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@Username", username, DbType.String);
-
-                //Gọi Stored Procedure bằng Dappper
-                var result = await connection.QueryFirstOrDefaultAsync<int>(
-                    "CheckUserByUsername",   //Tên Stored Procedure
-                    parameters,            //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure
-                );
-                return result > 0;
-            }
-        }
-
-        public async Task<bool> CheckUserById(int id)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@Id", id, DbType.Int32);
-
-                //Gọi Stored Procedure bằng Dappper
-                var result = await connection.QueryFirstOrDefaultAsync<int>(
-                    "CheckUserById",        //Tên Stored Procedure
-                    parameters,         //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure
-                );
-
-                return result > 0;
             }
         }
 
@@ -328,17 +236,10 @@ namespace Business.Services
                 parameters.Add("@Id", id, DbType.Int32);
 
                 //Gọi Stored Procedure bằng Dappper
-                var result = await connection.QueryAsync<UserDto, Roles, UserDto>(
+                var result = await connection.QueryAsync<UserDto>(
                     "GetUserById",        //Tên Stored Procedure
-                    (userDto, role) =>  // Callback function để ánh xạ role vào user
-                    {
-                        userDto.RoleId = role.Id;
-                        userDto.Roles = role;
-                        return userDto;
-                    },
                     parameters,         //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure,
-                    splitOn: "RoleId" // Dapper sẽ chia dữ liệu tại RoleId
+                    commandType: CommandType.StoredProcedure
                 );
 
                 if (result == null)

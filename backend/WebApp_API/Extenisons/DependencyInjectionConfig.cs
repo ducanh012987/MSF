@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Security.Claims;
 
 namespace WebApp_API.Extenisons
 {
@@ -17,32 +18,17 @@ namespace WebApp_API.Extenisons
     {
         public static void AddCustomServices(this IServiceCollection services, string connectionString)
         {
-            // Đăng ký ResponseObject cho LoginResult
-            services.AddTransient<ResponseObject<LoginResult>>(provider =>
-            {
-                return new ResponseObject<LoginResult>();
-            });
-
             // Đăng ký IUserRepository với UserService
             services.AddTransient<IUserRepository, UserService>(provider =>
             {
-                var responseObject = provider.GetRequiredService<ResponseObject<LoginResult>>();
                 var tokenRepository = provider.GetRequiredService<ITokenRepository>();
-                var roleRepository = provider.GetRequiredService<IRoleRepository>();
-                return new UserService(connectionString, responseObject, tokenRepository, roleRepository);
-            });
-
-            // Đăng ký ResponseObject cho Roles
-            services.AddTransient<ResponseObject<Roles>>(provider =>
-            {
-                return new ResponseObject<Roles>();
+                return new UserService(connectionString, tokenRepository);
             });
 
             // Đăng ký IRoleRepository với RoleService
             services.AddTransient<IRoleRepository, RoleService>(provider =>
             {
-                var responseObject = provider.GetRequiredService<ResponseObject<Roles>>();
-                return new RoleService(connectionString, responseObject);
+                return new RoleService(connectionString);
             });
 
             // Đăng ký ITokenRepository với TokenService
@@ -58,6 +44,18 @@ namespace WebApp_API.Extenisons
             services.AddTransient<ILogRepository, LogService>(provider =>
             {
                 return new LogService(connectionString);
+            });
+
+            // Đăng ký IPermissionRepository với PermissionService
+            services.AddTransient<IPermissionRepository, PermissionService>(provider =>
+            {
+                return new PermissionService(connectionString);
+            });
+
+            // Đăng ký IMenuRepository với MenuService
+            services.AddTransient<IMenuRepository, MenuService>(provider =>
+            {
+                return new MenuService(connectionString);
             });
         }
 
@@ -142,7 +140,8 @@ namespace WebApp_API.Extenisons
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = jwtSettings!.Issuer,
                         ValidAudience = jwtSettings.Audience,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
+                        RoleClaimType = ClaimTypes.Role,
                     };
 
                     options.Events = new JwtBearerEvents

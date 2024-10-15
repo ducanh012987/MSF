@@ -77,4 +77,20 @@ export class RoleManagerComponent implements OnInit {
       },
     });
   }
+
+  getMenu(role: { listMenu: { displayName: string }[] } | null): string {
+    return role?.listMenu?.map((menu) => menu.displayName).join(', ') || '';
+  }
+
+  getPermissions(
+    role: {
+      listPermissions: { permissionName: string }[];
+    } | null
+  ): string {
+    return (
+      role?.listPermissions
+        ?.map((permission) => permission.permissionName)
+        .join(', ') || ''
+    );
+  }
 }

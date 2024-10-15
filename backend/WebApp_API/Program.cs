@@ -1,10 +1,5 @@
-﻿using DTOs;
-using Data.DbContexts;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System.Text;
 using WebApp_API.Middlewares;
 using WebApp_API.Extenisons;
 
@@ -72,7 +67,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // Bỏ qua active log cho Swagger
-app.UseWhen(context => !context.Request.Path.StartsWithSegments("/swagger"), appBuilder =>
+app.UseWhen(context => !context.Request.Path.StartsWithSegments("/swagger") &&
+                        !context.Request.Path.StartsWithSegments("/api/Log"), appBuilder =>
 {
     appBuilder.UseMiddleware<ActivityLoggerMiddleware>();
 });

@@ -13,6 +13,12 @@ import { RoleCreateComponent } from './components/admin/role/role-create/role-cr
 import { RoleUpdateComponent } from './components/admin/role/role-update/role-update.component';
 import { LogDetailComponent } from './components/admin/log/log-detail/log-detail.component';
 import { LogManagerComponent } from './components/admin/log/log-manager/log-manager.component';
+import { MenuUpdateComponent } from './components/admin/menu/menu-update/menu-update.component';
+import { MenuCreateComponent } from './components/admin/menu/menu-create/menu-create.component';
+import { MenuManagerComponent } from './components/admin/menu/menu-manager/menu-manager.component';
+import { PermissionManagerComponent } from './components/admin/permission/permission-manager/permission-manager.component';
+import { PermissionCreateComponent } from './components/admin/permission/permission-create/permission-create.component';
+import { PermissionUpdateComponent } from './components/admin/permission/permission-update/permission-update.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -57,6 +63,30 @@ export const routes: Routes = [
       {
         path: 'role-manager/update/:id',
         component: RoleUpdateComponent,
+      },
+      {
+        path: 'menu-manager',
+        component: MenuManagerComponent,
+      },
+      {
+        path: 'menu-manager/create',
+        component: MenuCreateComponent,
+      },
+      {
+        path: 'menu-manager/update/:id',
+        component: MenuUpdateComponent,
+      },
+      {
+        path: 'permission-manager',
+        component: PermissionManagerComponent,
+      },
+      {
+        path: 'permission-manager/create',
+        component: PermissionCreateComponent,
+      },
+      {
+        path: 'permission-manager/update/:id',
+        component: PermissionUpdateComponent,
       },
       {
         path: 'log-manager',

@@ -12,10 +12,8 @@ namespace Business.Repository
         Task<ResponseObject<UserDto>> GetUserById(int id);
         Task<UserDto> GetUserByUsername(string Username);
         Task<ResponseText> CreateUser(UserInput userInput);
-        Task<ResponseText> UpdateUser(int id, string fullname, string email, bool locked, int roleid);
+        Task<ResponseText> UpdateUser(int id, UserUpdate userUpdate);
         Task<ResponseText> DeleteUser(int id);
-        Task<bool> CheckUserByUsername(string Username);
-        Task<bool> CheckUserById(int id);
         Task<UserDto> GetUser(int id);
     }
 }

@@ -21,15 +21,15 @@ export class RoleService {
     return this.http.get(`${this.roleUrl}/getById/${id}`);
   }
 
-  createRole(roleName: string): Observable<any> {
-    return this.http.post(`${this.roleUrl}/create?roleName=${roleName}`, {
+  createRole(role: any): Observable<any> {
+    return this.http.post(`${this.roleUrl}/create`, role, {
       responseType: 'text',
       withCredentials: true,
     });
   }
 
-  updateRole(id: number, roleName: string): Observable<any> {
-    return this.http.put(`${this.roleUrl}/update/${id}?roleName=${roleName}`, {
+  updateRole(id: number, role: any): Observable<any> {
+    return this.http.put(`${this.roleUrl}/update/${id}`, role, {
       responseType: 'text',
       withCredentials: true,
     });
