@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace DTOs.Responses
+﻿namespace DTOs.Responses
 {
     public class ResponseObject<T>
     {
@@ -21,16 +19,6 @@ namespace DTOs.Responses
         {
             Status = status;
             Message = message;
-        }
-
-        public ResponseObject<T> ResponseSuccess(string message, T data)
-        {
-            return new ResponseObject<T>(StatusCodes.Status200OK, message, data);
-        }
-
-        public ResponseObject<T> ResponseSuccess(string message)
-        {
-            return new ResponseObject<T>(StatusCodes.Status200OK, message);
         }
     }
 }

@@ -24,6 +24,9 @@
                                 <tr>
                                     <th class="th-item">ID</th>
                                     <th class="th-item">Tên quyền</th>
+                                    <th class="th-item">Menu</th>
+                                    <th class="th-item">Permissions</th>
+                                    <th class="th-item">Trạng thái</th>
                                     <th class="th-item ctr">Hành động</th>
                                 </tr>
                             </thead>
@@ -45,6 +48,21 @@
                                     <td class="td-item">
                                         <div class="info">
                                             <b>{{ role.roleName }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ getMenu(role) }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ getPermissions(role) }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ role.status === true ? "Mở" : "Khoá" }}</b>
                                         </div>
                                     </td>
                                     <td class="td-action">

@@ -197,6 +197,132 @@
                     }
                 }
 
+                ::ng-deep .ng-select.select {
+                    font-size: 14px;
+
+                    &.ng-select-opened {
+                        &.ng-select-bottom>.ng-select-container {
+                            border-bottom-right-radius: 0;
+                            border-bottom-left-radius: 0;
+                        }
+
+                        &.ng-select-top>.ng-select-container {
+                            border-top-right-radius: 0;
+                            border-top-left-radius: 0;
+                        }
+                    }
+
+                    &.ng-select-single {
+                        .ng-select-container {
+                            height: auto;
+
+                            .ng-value-container .ng-input {
+                                height: 100%;
+                                top: 0;
+
+                                >input {
+                                    height: 100%;
+                                }
+                            }
+                        }
+
+                        .ng-dropdown-panel {
+                            border-color: var(--color-dark);
+
+                            &.ng-select-bottom {
+                                border-top-color: hsl(0, 0%, 90%);
+                            }
+
+                            &.ng-select-top {
+                                border-bottom-color: hsl(0, 0%, 90%);
+                            }
+                        }
+                    }
+
+                    .ng-select-container {
+                        border-radius: 10px;
+                        width: 100%;
+                        border-color: var(--color-dark);
+                        min-height: 100%;
+                        display: flex;
+                        align-items: center;
+
+                        .ng-value-container {
+                            padding: 10px 0;
+
+                            .ng-placeholder {
+                                position: relative;
+                            }
+
+                            .ng-value {
+                                padding-left: 5px;
+                            }
+                        }
+                    }
+
+                    .ng-dropdown-panel {
+                        &.ng-select-bottom {
+                            border-bottom-right-radius: 10px;
+                            border-bottom-left-radius: 10px;
+
+                            .ng-dropdown-panel-items .ng-option:last-child {
+                                border-bottom-right-radius: 10px;
+                                border-bottom-left-radius: 10px;
+                            }
+                        }
+
+                        &.ng-select-top {
+                            border-top-right-radius: 10px;
+                            border-top-left-radius: 10px;
+
+                            .ng-dropdown-panel-items .ng-option:first-child {
+                                border-top-right-radius: 10px;
+                                border-top-left-radius: 10px;
+                            }
+                        }
+                    }
+
+                    &:focus {
+                        .ng-select-container {
+                            border-color: var(--color-primary);
+                        }
+                    }
+
+                    &.is-valid {
+                        .ng-select-container {
+                            border-color: var(--color-danger);
+
+                            .ng-value-container {
+                                .ng-placeholder {
+                                    color: var(--color-danger);
+                                }
+                            }
+
+                            .ng-clear-wrapper {
+                                color: var(--color-danger);
+                            }
+
+                            .ng-arrow-wrapper {
+                                .ng-arrow {
+                                    border-color: var(--color-danger) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+                                }
+                            }
+                        }
+
+                        .ng-dropdown-panel {
+                            border-color: var(--color-danger);
+
+                            &.ng-select-bottom {
+                                border-top-color: hsl(0, 0%, 90%);
+                            }
+
+                            &.ng-select-top {
+                                border-bottom-color: hsl(0, 0%, 90%);
+                            }
+                        }
+                    }
+                }
+
                 .error-message {
                     margin-left: 8px;
                     font-size: 14px;

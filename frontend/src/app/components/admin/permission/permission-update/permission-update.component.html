@@ -1,0 +1,71 @@
+<div class="permission-update-container">
+    <section class="breadcumrb">
+        <ol class="breadcumrb-nav">
+            <li>
+                <ng-icon class="icon" name="matHomeOutline"></ng-icon>
+            </li>
+            <li class="breadcumrb-nav-item link" routerLink="/admin/permission-manager">
+                Permission
+            </li>
+            <li class="breadcumrb-nav-item">Cập nhật permission</li>
+        </ol>
+        <div class="box-breadcumrb">
+            <h3 class="breadcumrb-title">Cập nhật permission</h3>
+        </div>
+    </section>
+    <section class="main">
+        <form class="form-container" (ngSubmit)="onSubmit()" #permissionUpdateForm="ngForm">
+            <div class="box-form">
+                <!-- ID -->
+                <div class="form-group input">
+                    <label for="Id">ID</label>
+                    <input id="Id" type="text" name="Id" [(ngModel)]="model.id" #id="ngModel" required readonly
+                        class="disabled-input" />
+                </div>
+            </div>
+            <div class="box-form">
+                <!-- Tên hiển thị -->
+                <div class="form-group input">
+                    <label for="PermissionName">Tên hiển thị</label>
+                    <input id="PermissionName" type="text" name="PermissionName" placeholder="Tên hiển thị"
+                        [ngClass]="{'is-valid':permissionName.invalid && permissionName.touched}"
+                        [(ngModel)]="model.permissionName" #permissionName="ngModel" required maxlength="50" />
+                    <div *ngIf=" permissionName.invalid && permissionName.touched" class="error-message">
+                        <div *ngIf="permissionName.errors?.['required']">
+                            Vui lòng nhập tên hiển thị!
+                        </div>
+                        <div *ngIf="permissionName.errors?.['maxlength']">
+                            Tên hiển thị không được quá 50 ký tự!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-form">
+                <!-- Trạng thái -->
+                <div class="form-group input">
+                    <label for="Status" (click)="status">Trạng thái</label>
+                    <ng-select name="Status" [items]="statuses" class="select" bindLabel="name" bindValue="value"
+                        [ngClass]="{'is-valid':status.invalid && status.touched}" placeholder="Chọn trạng thái: "
+                        [(ngModel)]="model.status" #status="ngModel" required>
+                    </ng-select>
+                    <div *ngIf="status.invalid && status.touched" class="error-message">
+                        <div *ngIf="status.errors?.['required']">
+                            Vui lòng chọn trạng thái!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group btn">
+                <button [disabled]="isLoading" class="btn-primary">
+                    <ng-container *ngIf="isLoading; else notLoading">
+                        <span>Xin chờ!</span>
+                    </ng-container>
+                    <ng-template #notLoading>Cập nhật</ng-template>
+                </button>
+                <a routerLink="/admin/permission-manager" class="btn-secondary"> Trở lại </a>
+            </div>
+        </form>
+    </section>
+</div>

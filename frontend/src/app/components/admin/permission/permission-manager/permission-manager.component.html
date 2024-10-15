@@ -1,0 +1,88 @@
+<div class="permission-manager-container">
+    <section class="breadcumrb">
+        <ol class="breadcumrb-nav">
+            <li>
+                <ng-icon class="icon" name="matHomeOutline"></ng-icon>
+            </li>
+            <li class="breadcumrb-nav-item">Permission</li>
+        </ol>
+        <div class="box-breadcumrb">
+            <h3 class="breadcumrb-title">Danh sách permission</h3>
+            <a routerLink="create" class="btn-add">
+                <ng-icon name="matAddCircleOutlineOutline" class="icon" />
+                <span>Thêm permission</span>
+            </a>
+        </div>
+    </section>
+    <section class="main">
+        <div class="main-container">
+            <div class="main-wrapper">
+                <div class="main-box">
+                    <div class="table-box">
+                        <table class="table">
+                            <thead class="thead">
+                                <tr>
+                                    <th class="th-item">ID</th>
+                                    <th class="th-item">Tên permission</th>
+                                    <th class="th-item">Trạng thái</th>
+                                    <th class="th-item ctr">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                <!-- Hiển thị loading -->
+                                <tr *ngIf="isLoading">
+                                    <td colspan="5">
+                                        <div class="loading flex items-center justify-center gap-x-4 py-20">
+                                            <ng-icon class="icon mr-2 animate-spin text-4xl"
+                                                name="matAcUnitOutline"></ng-icon>
+                                            <h2 class="title text-xl">Xin chờ</h2>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Hiển thị dữ liệu người dùng -->
+                                <tr *ngFor="let item of permissions" [attr.key]="item.id">
+                                    <td class="td-id"><b>{{ item.id }}</b></td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ item.permissionName }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-item">
+                                        <div class="info">
+                                            <b>{{ item.status === true ? "Mở" : "Khoá" }}</b>
+                                        </div>
+                                    </td>
+                                    <td class="td-action">
+                                        <div class="box-action">
+                                            <a [routerLink]="'update/' + item.id" class="update">
+                                                <ng-icon class="icon" name="matCreateOutline"></ng-icon>
+                                                <span>Sửa</span>
+                                            </a>
+                                        </div>
+                                        <div class="box-action">
+                                            <a (click)="deletePermission(item.id)" class="delete">
+                                                <ng-icon class="icon" name="matDeleteOutline"></ng-icon>
+                                                <span>Xoá</span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Hiển thị khi không có dữ liệu -->
+                                <tr *ngIf="!isLoading && permissions.length === 0">
+                                    <td colspan="5">
+                                        <div class="no-data flex flex-col items-center justify-center py-20">
+                                            <ng-icon class="icon text-5xl" name="matDatasetOutline"></ng-icon>
+                                            <h2 class="title text-xl">Không có dữ liệu</h2>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

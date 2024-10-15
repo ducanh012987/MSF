@@ -11,26 +11,22 @@ namespace Data.Models
 
         [Required]
         [MaxLength(50)]
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string Fullname { get; set; }
+        public string? Fullname { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
-        public bool? Locked { get; set; }
+        public bool Locked { get; set; }
 
-        [Required]
-        public int RoleId { get; set; }
-
-        [ForeignKey("RoleId")]
-        public Roles Roles { get; set; }
+        public ICollection<User_Roles>? User_Roles { get; set; }
     }
 }

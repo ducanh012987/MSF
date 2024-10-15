@@ -5,6 +5,9 @@ import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
 import { RoleService } from '../../../../services/role/role.service';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { MenuService } from '../../../../services/menu/menu.service';
+import { PermissionService } from '../../../../services/permission/permission.service';
 
 @Component({
   selector: 'app-role-create',
@@ -15,6 +18,7 @@ import { RoleService } from '../../../../services/role/role.service';
     CommonModule,
     RouterLink,
     FormsModule,
+    NgSelectModule,
   ],
   templateUrl: './role-create.component.html',
   styleUrl: './role-create.component.scss',
@@ -26,16 +30,72 @@ import { RoleService } from '../../../../services/role/role.service';
 })
 export class RoleCreateComponent implements OnInit {
   model: any = {};
+  menu: any[] = []; // Danh sách menu đầy đủ
+  filteredMenu: any[] = []; // Danh sách menu sau khi lọc
+  permissions: any[] = []; // Danh sách permission đầy đủ
+  filteredPermissions: any[] = []; // Danh sách permission sau khi lọc
   isLoading: boolean = false;
   pageNumber: number = 1;
   pageSize: number = 10;
 
-  constructor(private roleService: RoleService, private router: Router) {}
+  statuses = [
+    { value: true, name: 'Mở' },
+    { value: false, name: 'Khoá' },
+  ];
 
-  ngOnInit(): void {}
+  constructor(
+    private roleService: RoleService,
+    private router: Router,
+    private menuService: MenuService,
+    private permissionService: PermissionService
+  ) {}
+
+  ngOnInit(): void {
+    this.isLoading = true;
+    this.getAllMenu();
+    this.getAllPermission();
+  }
+
+  getAllMenu(): void {
+    this.menuService.getAllMenu().subscribe({
+      next: (response) => {
+        this.menu = response.data;
+        // Lọc những menu có status = true
+        this.filteredMenu = this.menu.filter((menu) => menu.status === true);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.log(error);
+        this.isLoading = false;
+      },
+    });
+  }
+
+  getAllPermission(): void {
+    this.permissionService.getAllPermission().subscribe({
+      next: (response) => {
+        this.permissions = response.data;
+        // Lọc những permissions có status = true
+        this.filteredPermissions = this.permissions.filter(
+          (permission) => permission.status === true
+        );
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.log(error);
+        this.isLoading = false;
+      },
+    });
+  }
 
   createRole(): void {
-    this.roleService.createRole(this.model.roleName).subscribe({
+    const createdData = this.model;
+    createdData.listMenu = this.model.menuIds.map((id: any) => ({ id }));
+    createdData.listPermissions = this.model.permissionIds.map((id: any) => ({
+      id,
+    }));
+
+    this.roleService.createRole(createdData).subscribe({
       next: (response) => {
         this.isLoading = false;
         console.log(response);

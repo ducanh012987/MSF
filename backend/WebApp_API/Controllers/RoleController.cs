@@ -1,4 +1,5 @@
 ﻿using Business.Repository;
+using DTOs.Request.RoleDTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,15 +30,15 @@ namespace WebApp_API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateRole(string roleName)
+        public async Task<IActionResult> CreateRole(RoleInput roleInput)
         {
-            return Ok(await _roleRepository.CreateRole(roleName));
+            return Ok(await _roleRepository.CreateRole(roleInput));
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateRole(int id, string roleName)
+        public async Task<IActionResult> UpdateRole(int id, RoleInput roleInput)
         {
-            return Ok(await _roleRepository.UpdateRole(id, roleName));
+            return Ok(await _roleRepository.UpdateRole(id, roleInput));
         }
 
         [HttpDelete("delete/{id}")]

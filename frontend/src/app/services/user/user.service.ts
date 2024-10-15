@@ -28,20 +28,11 @@ export class UserService {
     });
   }
 
-  updateUser(
-    id: number,
-    fullname: string,
-    email: string,
-    locked: boolean,
-    roleid: number
-  ): Observable<any> {
-    return this.http.put(
-      `${this.userUrl}/update/${id}?fullname=${fullname}&email=${email}&locked=${locked}&roleid=${roleid}`,
-      {
-        responseType: 'text',
-        withCredentials: true,
-      }
-    );
+  updateUser(id: number, user: any): Observable<any> {
+    return this.http.put(`${this.userUrl}/update/${id}`, user, {
+      responseType: 'text',
+      withCredentials: true,
+    });
   }
 
   deleteUser(id: number): Observable<any> {

@@ -30,6 +30,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 export class UserCreateComponent implements OnInit {
   model: any = {};
   roles: any[] = [];
+  filteredRoles: any[] = [];
   isLoading: boolean = false;
   pageNumber: number = 1;
   pageSize: number = 10;
@@ -54,6 +55,8 @@ export class UserCreateComponent implements OnInit {
     this.roleService.getAllRole(pageNumber, this.pageSize).subscribe({
       next: (response) => {
         this.roles = response.data.data;
+        // Lọc những quyền có status = true
+        this.filteredRoles = this.roles.filter((role) => role.status === true);
         this.isLoading = false;
       },
       error: (error) => {
@@ -64,7 +67,11 @@ export class UserCreateComponent implements OnInit {
   }
 
   createUser(): void {
-    this.userService.createUser(this.model).subscribe({
+    const createdData = this.model;
+    // Chuyển roleIds thành danh sách quyền cần gửi
+    createdData.listRoles = this.model.roleIds.map((id: any) => ({ id }));
+
+    this.userService.createUser(createdData).subscribe({
       next: (response) => {
         this.isLoading = false;
         console.log(response);

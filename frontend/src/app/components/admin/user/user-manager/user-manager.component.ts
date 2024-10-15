@@ -31,7 +31,19 @@ import { PaginationComponent } from '../../../../pages/pagination/pagination.com
   ],
 })
 export class UserManagerComponent implements OnInit {
-  users: any[] = [];
+  users: {
+    id: number;
+    username: string;
+    password: string;
+    fullname: string;
+    email: string;
+    locked: boolean;
+    listRoles: {
+      id: number;
+      roleName: string;
+      status: boolean;
+    }[];
+  }[] = [];
   isLoading: boolean = false;
   pageNumber: number = 1;
   pageSize: number = 10;
@@ -76,5 +88,9 @@ export class UserManagerComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  getRoleNames(user: { listRoles: { roleName: string }[] }): string {
+    return user.listRoles.map((role) => role.roleName).join(', ');
   }
 }

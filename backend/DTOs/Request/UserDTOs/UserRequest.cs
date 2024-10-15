@@ -1,5 +1,5 @@
-﻿using Data.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using DTOs.Request.RoleDTOs;
+using Newtonsoft.Json;
 
 namespace DTOs.Request.UserDTOs
 {
@@ -9,10 +9,13 @@ namespace DTOs.Request.UserDTOs
         public string? Fullname { get; set; }
         public string? Email { get; set; }
 
-        public int RoleId { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
+        public string? Roles { get; set; } // Dữ liệu JSON
 
-        [ForeignKey("RoleId")]
-        public Roles? Roles { get; set; }
+        public List<RoleRequest>? ListRoles
+        {
+            get => string.IsNullOrEmpty(Roles) ? null : JsonConvert.DeserializeObject<List<RoleRequest>>(Roles!);
+        }
 
         public static UserRequest FromUserDto(UserDto user)
         {
@@ -21,8 +24,7 @@ namespace DTOs.Request.UserDTOs
                 Username = user.Username,
                 Fullname = user.Fullname,
                 Email = user.Email,
-                RoleId = user.RoleId,
-                Roles = user.Roles!
+                Roles = user.Roles
             };
         }
     }
