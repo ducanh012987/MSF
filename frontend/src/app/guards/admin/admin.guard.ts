@@ -1,37 +1,19 @@
-import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthorizeService } from '../../services/authorize/authorize.service';
-import { CookieService } from 'ngx-cookie-service';
-import { of, switchMap, tap } from 'rxjs';
 
 export const adminGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-  const authorize = inject(AuthorizeService);
-  const cookieService = inject(CookieService);
+  // Lấy danh sách permissions từ localStorage và parse thành mảng
+  const storedPermissions = localStorage.getItem('permissions');
+  const permissions = storedPermissions ? JSON.parse(storedPermissions) : [];
 
-  const getRefreshToken = cookieService.get('RefreshToken');
-  if (getRefreshToken) {
-    return authorize.checkTokenExpired().pipe(
-      switchMap((token) => {
-        if (token && authorize.hasRole('ADMIN')) {
-          return of(true);
-        }
-        alert('Bạn không có quyền truy cập vào trang này!');
-        router.navigate(['/home']);
-        return of(false);
-      }),
-      tap((canActivate) => {
-        if (!canActivate) {
-          console.log('Đã xảy ra lỗi khi làm mới token!');
-          cookieService.delete('AccessToken');
-          cookieService.delete('RefreshToken');
-          router.navigate(['/login']);
-        }
-      })
-    );
+  // Kiểm tra xem có bất kỳ quyền nào kết thúc bằng '.View'
+  const hasViewPermission = permissions.some((perm: string) =>
+    perm.endsWith('.View')
+  );
+
+  if (hasViewPermission) {
+    return true; // Người dùng có quyền, cho phép truy cập
+  } else {
+    alert('Bạn không có quyền truy cập!');
+    return false; // Chặn truy cập
   }
-  cookieService.delete('AccessToken');
-  cookieService.delete('RefreshToken');
-  router.navigate(['/login']);
-  return false;
 };

@@ -59,7 +59,7 @@
                 </div>
 
                 <!-- Icon -->
-                <div class="form-group input">
+                <!-- <div class="form-group input">
                     <label for="Icon">Icon</label>
                     <input id="Icon" type="text" name="Icon" placeholder="Icon"
                         [ngClass]="{'is-valid':icon.invalid && icon.touched}" [(ngModel)]="model.icon" #icon="ngModel"
@@ -72,20 +72,22 @@
                             Icon không được quá 50 ký tự!
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="box-form">
                 <!-- Trạng thái -->
                 <div class="form-group input">
-                    <label for="Status" (click)="status">Trạng thái</label>
-                    <ng-select name="Status" [items]="statuses" class="select" bindLabel="name" bindValue="value"
-                        [ngClass]="{'is-valid':status.invalid && status.touched}" placeholder="Chọn trạng thái: "
-                        [(ngModel)]="model.status" #status="ngModel" required>
-                    </ng-select>
-                    <div *ngIf="status.invalid && status.touched" class="error-message">
-                        <div *ngIf="status.errors?.['required']">
-                            Vui lòng chọn trạng thái!
+                    <div class="form-group input">
+                        <label>Trạng thái</label>
+                        <div class="box-container">
+                            <div class="group-status">
+                                <mat-radio-group [(ngModel)]="model.status" name="Status">
+                                    <mat-radio-button *ngFor="let status of statuses" [value]="status.value">
+                                        {{ status.name }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
                         </div>
                     </div>
                 </div>

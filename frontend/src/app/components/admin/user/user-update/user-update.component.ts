@@ -4,9 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { UserService } from '../../../../services/user/user.service';
 import { RoleService } from '../../../../services/role/role.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-user-update',
@@ -17,7 +18,8 @@ import { RoleService } from '../../../../services/role/role.service';
     CommonModule,
     RouterLink,
     FormsModule,
-    NgSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
   ],
   templateUrl: './user-update.component.html',
   styleUrl: './user-update.component.scss',
@@ -31,6 +33,8 @@ export class UserUpdateComponent {
   model: any = {};
   roles: any[] = []; // Danh sách quyền đầy đủ
   filteredRoles: any[] = []; // Danh sách quyền sau khi lọc
+
+  selectedRole: { [key: number]: boolean } = {};
   isLoading: boolean = false;
   pageNumber: number = 1;
   pageSize: number = 10;
@@ -57,6 +61,28 @@ export class UserUpdateComponent {
     this.getAllRole(this.pageNumber);
   }
 
+  getUserById(): void {
+    this.userService.getUserById(this.userId).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.model = response.data;
+        // Chuyển danh sách các quyền thành mảng roleIds
+        this.model.roleIds = this.model.listRoles.map(
+          (role: { id: any }) => role.id
+        );
+
+        this.model.listRoles.forEach((menu: any) => {
+          this.selectedRole[menu.id] = true; // Đặt mặc định là false
+        });
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.log(error);
+        this.isLoading = false;
+      },
+    });
+  }
+
   getAllRole(pageNumber: number): void {
     this.roleService.getAllRole(pageNumber, this.pageSize).subscribe({
       next: (response) => {
@@ -72,29 +98,21 @@ export class UserUpdateComponent {
     });
   }
 
-  getUserById(): void {
-    this.userService.getUserById(this.userId).subscribe({
-      next: (response) => {
-        this.model = response.data;
-        // Chuyển danh sách các quyền thành mảng roleIds
-        this.model.roleIds = this.model.listRoles.map(
-          (role: { id: any }) => role.id
-        );
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.log(error);
-        this.isLoading = false;
-      },
-    });
+  onCheckboxRoleChange(isChecked: boolean, selectedRole: any): void {
+    this.selectedRole[selectedRole.id] = isChecked;
+  }
+
+  getSelectedRoleIds(): number[] {
+    const selectedIds = this.filteredRoles
+      .filter((role) => this.selectedRole[role.id])
+      .map((role) => role.id);
+    this.model.roleIds = selectedIds;
+    return selectedIds;
   }
 
   updateUser(): void {
-    const updatedData = this.model;
-    // Chuyển roleIds thành danh sách quyền cần gửi
-    updatedData.listRoles = this.model.roleIds.map((id: any) => ({ id }));
-
-    this.userService.updateUser(this.userId, updatedData).subscribe({
+    this.getSelectedRoleIds();
+    this.userService.updateUser(this.userId, this.model).subscribe({
       next: (response) => {
         this.isLoading = false;
         console.log(response);

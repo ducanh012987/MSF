@@ -78,6 +78,10 @@
                 display: block;
                 text-decoration: none;
 
+                span {
+                    background: none;
+                }
+
                 &:hover {
                     background-color: #495057;
                 }

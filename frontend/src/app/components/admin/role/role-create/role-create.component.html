@@ -36,44 +36,60 @@
             <div class="box-form">
                 <!-- Trạng thái -->
                 <div class="form-group input">
-                    <label for="Status" (click)="status">Trạng thái</label>
-                    <ng-select name="Status" [items]="statuses" class="select" bindLabel="name" bindValue="value"
-                        [ngClass]="{'is-valid':status.invalid && status.touched}" placeholder="Chọn trạng thái: "
-                        [(ngModel)]="model.status" #status="ngModel" required>
-                    </ng-select>
-                    <div *ngIf="status.invalid && status.touched" class="error-message">
-                        <div *ngIf="status.errors?.['required']">
-                            Vui lòng chọn trạng thái!
+                    <label>Trạng thái</label>
+                    <div class="box-container">
+                        <div class="group-status">
+                            <mat-radio-group [(ngModel)]="model.status" name="Status">
+                                <mat-radio-button *ngFor="let status of statuses" [value]="status.value">
+                                    {{ status.name }}
+                                </mat-radio-button>
+                            </mat-radio-group>
                         </div>
+                    </div>
+                    <div *ngIf="model.status == null" class="error-message">
+                        Vui lòng chọn trạng thái!
                     </div>
                 </div>
                 <!-- Menu -->
                 <div class="form-group input">
-                    <label for="MenuId" (click)="menuId">Menu</label>
-                    <ng-select name="MenuId" [items]="filteredMenu" class="select" bindLabel="displayName"
-                        bindValue="id" [ngClass]="{'is-valid':menuId.invalid && menuId.touched}"
-                        placeholder="Chọn menu: " [(ngModel)]="model.menuIds" #menuId="ngModel" required
-                        [multiple]="true" [clearable]="true" [closeOnSelect]="false">
-                    </ng-select>
-                    <div *ngIf="menuId.invalid && menuId.touched" class="error-message">
-                        <div *ngIf="menuId.errors?.['required']">
-                            Vui lòng chọn menu!
+                    <label>Menu</label>
+                    <div class="box-container">
+                        <div class="group-menu">
+                            <mat-checkbox *ngFor="let menu of filteredMenu" [(ngModel)]="selectedMenu[menu.id]"
+                                (ngModelChange)="onCheckboxMenuChange($event, menu)" [name]="menu.displayName">
+                                {{ menu.displayName }}
+                            </mat-checkbox>
                         </div>
+                    </div>
+                    <div *ngIf="getSelectedMenuIds().length == 0" class="error-message">
+                        Vui lòng chọn menu!
                     </div>
                 </div>
                 <!-- Permission -->
                 <div class="form-group input">
-                    <label for="PermissionId" (click)="permissionId">Permissions</label>
-                    <ng-select name="PermissionId" [items]="filteredPermissions" class="select"
-                        bindLabel="permissionName" bindValue="id"
-                        [ngClass]="{'is-valid':permissionId.invalid && permissionId.touched}"
-                        placeholder="Chọn Permission: " [(ngModel)]="model.permissionIds" #permissionId="ngModel"
-                        required [multiple]="true" [clearable]="true" [closeOnSelect]="false">
-                    </ng-select>
-                    <div *ngIf="permissionId.invalid && permissionId.touched" class="error-message">
-                        <div *ngIf="permissionId.errors?.['required']">
-                            Vui lòng chọn Permission!
+                    <label>Permissions</label>
+                    <div class="box-container">
+                        <!-- Cột bên trái: danh sách nhóm -->
+                        <div class="group-list">
+                            <ul>
+                                <li *ngFor="let group of groupedPermissions | keyvalue"
+                                    [class.active]="group.key === selectedGroup" (click)="selectGroup(group.key)">
+                                    {{ group.key }}
+                                </li>
+                            </ul>
                         </div>
+                        <!-- Cột bên phải: checkbox thuộc nhóm đã chọn -->
+                        <div class="group-permissions">
+                            <mat-checkbox *ngFor="let permission of groupedPermissions[selectedGroup]"
+                                [(ngModel)]="selectedPermission[permission.id]"
+                                (ngModelChange)="onCheckboxPermissionChange($event, permission)"
+                                [name]="permission.permissionName">
+                                {{ permission.permissionName.split('.')[1] }}
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                    <div *ngIf="getSelectedPermissionIds().length == 0" class="error-message">
+                        Vui lòng chọn permission!
                     </div>
                 </div>
             </div>

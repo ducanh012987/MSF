@@ -16,18 +16,40 @@
     <section class="main">
         <form class="form-container" (ngSubmit)="onSubmit()" #permissionCreateForm="ngForm">
             <div class="box-form">
-                <!-- Tên hiển thị -->
+                <!-- Tên quyền -->
                 <div class="form-group input">
-                    <label for="PermissionName">Tên hiển thị</label>
-                    <input id="PermissionName" type="text" name="PermissionName" placeholder="Tên hiển thị"
+                    <label for="PermissionName">Tên quyền</label>
+                    <input id="PermissionName" type="text" name="PermissionName" placeholder="Tên quyền"
                         [ngClass]="{'is-valid':permissionName.invalid && permissionName.touched}"
                         [(ngModel)]="model.permissionName" #permissionName="ngModel" required maxlength="50" />
                     <div *ngIf=" permissionName.invalid && permissionName.touched" class="error-message">
                         <div *ngIf="permissionName.errors?.['required']">
-                            Vui lòng nhập tên hiển thị!
+                            Vui lòng nhập tên quyền!
                         </div>
                         <div *ngIf="permissionName.errors?.['maxlength']">
+                            Tên quyền không được quá 50 ký tự!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-form">
+                <!-- Tên hiển thị -->
+                <div class="form-group input">
+                    <label for="DisplayName">Tên hiển thị</label>
+                    <input id="DisplayName" type="text" name="DisplayName" placeholder="Tên hiển thị"
+                        [ngClass]="{'is-valid':displayName.invalid && displayName.touched}"
+                        [(ngModel)]="model.displayName" #displayName="ngModel" required maxlength="50"
+                        pattern="^[a-zA-Z0-9]+\.[a-zA-Z0-9]+$" />
+                    <div *ngIf=" displayName.invalid && displayName.touched" class="error-message">
+                        <div *ngIf="displayName.errors?.['required']">
+                            Vui lòng nhập tên hiển thị!
+                        </div>
+                        <div *ngIf="displayName.errors?.['maxlength']">
                             Tên hiển thị không được quá 50 ký tự!
+                        </div>
+                        <div *ngIf="permissionName.errors?.['pattern']">
+                            Tên quyền phải phân tách bằng dấu chấm (GroupName.Action)!
                         </div>
                     </div>
                 </div>
@@ -36,13 +58,18 @@
             <div class="box-form">
                 <!-- Trạng thái -->
                 <div class="form-group input">
-                    <label for="Status" (click)="status">Trạng thái</label>
-                    <ng-select name="Status" [items]="statuses" class="select" bindLabel="name" bindValue="value"
-                        [ngClass]="{'is-valid':status.invalid && status.touched}" placeholder="Chọn trạng thái: "
-                        [(ngModel)]="model.status" #status="ngModel" required>
-                    </ng-select>
-                    <div *ngIf="status.invalid && status.touched" class="error-message">
-                        <div *ngIf="status.errors?.['required']">
+                    <div class="form-group input">
+                        <label>Trạng thái</label>
+                        <div class="box-container">
+                            <div class="group-status">
+                                <mat-radio-group [(ngModel)]="model.status" name="Status">
+                                    <mat-radio-button *ngFor="let status of statuses" [value]="status.value">
+                                        {{ status.name }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                        <div *ngIf="model.status == null" class="error-message">
                             Vui lòng chọn trạng thái!
                         </div>
                     </div>

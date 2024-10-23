@@ -6,7 +6,8 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
 import { UserService } from '../../../../services/user/user.service';
 import { RoleService } from '../../../../services/role/role.service';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-user-create',
@@ -17,7 +18,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CommonModule,
     RouterLink,
     FormsModule,
-    NgSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
   ],
   templateUrl: './user-create.component.html',
   styleUrl: './user-create.component.scss',
@@ -31,6 +33,8 @@ export class UserCreateComponent implements OnInit {
   model: any = {};
   roles: any[] = [];
   filteredRoles: any[] = [];
+
+  selectedRole: { [key: number]: boolean } = {};
   isLoading: boolean = false;
   pageNumber: number = 1;
   pageSize: number = 10;
@@ -66,12 +70,20 @@ export class UserCreateComponent implements OnInit {
     });
   }
 
-  createUser(): void {
-    const createdData = this.model;
-    // Chuyển roleIds thành danh sách quyền cần gửi
-    createdData.listRoles = this.model.roleIds.map((id: any) => ({ id }));
+  onCheckboxRoleChange(isChecked: boolean, selectedRole: any): void {
+    this.selectedRole[selectedRole.id] = isChecked;
+  }
 
-    this.userService.createUser(createdData).subscribe({
+  getSelectedRoleIds(): number[] {
+    const selectedIds = this.roles
+      .filter((role) => this.selectedRole[role.id])
+      .map((role) => role.id);
+    this.model.roleIds = selectedIds;
+    return selectedIds;
+  }
+
+  createUser(): void {
+    this.userService.createUser(this.model).subscribe({
       next: (response) => {
         this.isLoading = false;
         console.log(response);

@@ -11,6 +11,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Security.Claims;
+using WebApp_API.Authorization;
 
 namespace WebApp_API.Extenisons
 {
@@ -57,6 +58,9 @@ namespace WebApp_API.Extenisons
             {
                 return new MenuService(connectionString);
             });
+
+            //Singleton
+            services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
         }
 
         public static void AddSwaggerServices(this IServiceCollection services)
@@ -141,7 +145,7 @@ namespace WebApp_API.Extenisons
                         ValidIssuer = jwtSettings!.Issuer,
                         ValidAudience = jwtSettings.Audience,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
-                        RoleClaimType = ClaimTypes.Role,
+                        /*RoleClaimType = ClaimTypes.Role,*/
                     };
 
                     options.Events = new JwtBearerEvents
@@ -160,10 +164,10 @@ namespace WebApp_API.Extenisons
             // Cấu hình Authorization
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminPolicy", policy =>
-                    policy.RequireRole("ADMIN"));
-                options.AddPolicy("UserPolicy", policy =>
-                    policy.RequireRole("USER"));
+                options.AddPolicy("PermissionPolicy", policy =>
+                {
+                    policy.Requirements.Add(new PermissionRequirement(""));
+                });
             });
         }
     }

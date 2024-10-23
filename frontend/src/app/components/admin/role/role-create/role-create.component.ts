@@ -8,6 +8,8 @@ import { RoleService } from '../../../../services/role/role.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MenuService } from '../../../../services/menu/menu.service';
 import { PermissionService } from '../../../../services/permission/permission.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-role-create',
@@ -18,7 +20,8 @@ import { PermissionService } from '../../../../services/permission/permission.se
     CommonModule,
     RouterLink,
     FormsModule,
-    NgSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
   ],
   templateUrl: './role-create.component.html',
   styleUrl: './role-create.component.scss',
@@ -30,10 +33,15 @@ import { PermissionService } from '../../../../services/permission/permission.se
 })
 export class RoleCreateComponent implements OnInit {
   model: any = {};
-  menu: any[] = []; // Danh sách menu đầy đủ
+  menu: any[] = [];
+  permissions: any[] = [];
   filteredMenu: any[] = []; // Danh sách menu sau khi lọc
-  permissions: any[] = []; // Danh sách permission đầy đủ
   filteredPermissions: any[] = []; // Danh sách permission sau khi lọc
+
+  groupedPermissions: { [key: string]: any[] } = {};
+  selectedGroup: string = '';
+  selectedMenu: { [key: number]: boolean } = {};
+  selectedPermission: { [key: number]: boolean } = {};
   isLoading: boolean = false;
   pageNumber: number = 1;
   pageSize: number = 10;
@@ -79,6 +87,11 @@ export class RoleCreateComponent implements OnInit {
         this.filteredPermissions = this.permissions.filter(
           (permission) => permission.status === true
         );
+
+        // Nhóm quyền theo groupName
+        this.groupedPermissions = this.groupPermissions(
+          this.filteredPermissions
+        );
         this.isLoading = false;
       },
       error: (error) => {
@@ -88,14 +101,57 @@ export class RoleCreateComponent implements OnInit {
     });
   }
 
-  createRole(): void {
-    const createdData = this.model;
-    createdData.listMenu = this.model.menuIds.map((id: any) => ({ id }));
-    createdData.listPermissions = this.model.permissionIds.map((id: any) => ({
-      id,
-    }));
+  // Phương thức nhóm quyền
+  groupPermissions(permissions: any[]): {
+    [key: string]: any[];
+  } {
+    const grouped = permissions.reduce((groups, permission) => {
+      const groupName = permission.permissionName.split('.')[0]; // Lấy phần trước dấu chấm
+      if (!groups[groupName]) {
+        groups[groupName] = []; // Tạo nhóm nếu chưa tồn tại
+      }
+      groups[groupName].push(permission); // Thêm quyền vào nhóm
+      return groups;
+    }, {} as { [key: string]: any[] });
 
-    this.roleService.createRole(createdData).subscribe({
+    // Sắp xếp các nhóm theo thứ tự A-Z
+    return Object.keys(grouped).reduce((sortedGroups, key) => {
+      sortedGroups[key] = grouped[key];
+      return sortedGroups;
+    }, {} as { [key: string]: any[] });
+  }
+
+  // Phương thức chọn group
+  selectGroup(groupName: string): void {
+    this.selectedGroup = groupName; // Cập nhật selectedGroup
+  }
+
+  onCheckboxPermissionChange(isChecked: boolean, selectedRole: any): void {
+    this.selectedPermission[selectedRole.id] = isChecked;
+  }
+
+  getSelectedPermissionIds(): number[] {
+    const selectedIds = this.permissions
+      .filter((permission) => this.selectedPermission[permission.id])
+      .map((permission) => permission.id);
+    this.model.permissionIds = selectedIds;
+    return selectedIds;
+  }
+
+  onCheckboxMenuChange(isChecked: boolean, selectedRole: any): void {
+    this.selectedMenu[selectedRole.id] = isChecked;
+  }
+
+  getSelectedMenuIds(): number[] {
+    const selectedIds = this.menu
+      .filter((menu) => this.selectedMenu[menu.id])
+      .map((menu) => menu.id);
+    this.model.menuIds = selectedIds;
+    return selectedIds;
+  }
+
+  createRole(): void {
+    this.roleService.createRole(this.model).subscribe({
       next: (response) => {
         this.isLoading = false;
         console.log(response);

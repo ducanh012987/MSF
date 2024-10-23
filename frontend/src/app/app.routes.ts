@@ -19,6 +19,7 @@ import { MenuManagerComponent } from './components/admin/menu/menu-manager/menu-
 import { PermissionManagerComponent } from './components/admin/permission/permission-manager/permission-manager.component';
 import { PermissionCreateComponent } from './components/admin/permission/permission-create/permission-create.component';
 import { PermissionUpdateComponent } from './components/admin/permission/permission-update/permission-update.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -38,7 +39,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: HomeAdminComponent,
-    canActivate: [adminGuard],
+    canActivate: [authGuard],
     children: [
       {
         path: 'user-manager',
@@ -97,5 +98,9 @@ export const routes: Routes = [
         component: LogDetailComponent,
       },
     ],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];

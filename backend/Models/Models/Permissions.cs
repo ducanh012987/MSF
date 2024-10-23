@@ -13,6 +13,14 @@ namespace Data.Models
         [MaxLength(50)]
         public string? PermissionName { get; set; }
 
+        [Required]
+        [MaxLength(50)]
+        public string? DisplayName { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string? GroupName { get; set; }
+
         public bool Status { get; set; }
 
         public ICollection<Role_Permissions>? Role_Permissions { get; set; }

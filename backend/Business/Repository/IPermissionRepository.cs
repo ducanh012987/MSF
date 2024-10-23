@@ -10,5 +10,7 @@ namespace Business.Repository
         Task<ResponseText> CreatePermission(PermissionInput permissionInput);
         Task<ResponseText> UpdatePermission(int id, PermissionInput permissionInput);
         Task<ResponseText> DeletePermission(int id);
+
+        Task<bool> CheckRolePermission(int roleId, string permissionName);
     }
 }

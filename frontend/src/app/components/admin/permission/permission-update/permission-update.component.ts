@@ -4,8 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { PermissionService } from '../../../../services/permission/permission.service';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-permission-update',
@@ -16,7 +16,7 @@ import { PermissionService } from '../../../../services/permission/permission.se
     CommonModule,
     RouterLink,
     FormsModule,
-    NgSelectModule,
+    MatRadioModule,
   ],
   templateUrl: './permission-update.component.html',
   styleUrl: './permission-update.component.scss',
@@ -47,7 +47,6 @@ export class PermissionUpdateComponent {
     this.route.params.subscribe((params) => {
       this.permissionId = params['id'];
     });
-    console.log('aaaaaaaaa=', this.permissionId);
 
     this.getPermissionById();
   }

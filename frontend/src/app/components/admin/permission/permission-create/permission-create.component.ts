@@ -5,7 +5,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-permission-create',
@@ -16,7 +16,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CommonModule,
     RouterLink,
     FormsModule,
-    NgSelectModule,
+    MatRadioModule,
   ],
   templateUrl: './permission-create.component.html',
   styleUrl: './permission-create.component.scss',

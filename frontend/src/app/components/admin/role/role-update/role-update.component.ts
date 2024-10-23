@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
 import { RoleService } from '../../../../services/role/role.service';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { MenuService } from '../../../../services/menu/menu.service';
 import { PermissionService } from '../../../../services/permission/permission.service';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 @Component({
   selector: 'app-role-update',
   standalone: true,
@@ -18,7 +18,8 @@ import { PermissionService } from '../../../../services/permission/permission.se
     CommonModule,
     RouterLink,
     FormsModule,
-    NgSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
   ],
   templateUrl: './role-update.component.html',
   styleUrl: './role-update.component.scss',
@@ -27,13 +28,19 @@ import { PermissionService } from '../../../../services/permission/permission.se
       matHomeOutline,
     }),
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class RoleUpdateComponent {
   model: any = {};
-  menu: any[] = []; // Danh sách menu đầy đủ
+  menu: any[] = [];
+  permissions: any[] = [];
   filteredMenu: any[] = []; // Danh sách menu sau khi lọc
-  permissions: any[] = []; // Danh sách permission đầy đủ
   filteredPermissions: any[] = []; // Danh sách permission sau khi lọc
+
+  groupedPermissions: { [key: string]: any[] } = {};
+  selectedGroup: string = '';
+  selectedMenu: { [key: number]: boolean } = {};
+  selectedPermission: { [key: number]: boolean } = {};
   isLoading: boolean = false;
   roleId!: number;
 
@@ -55,15 +62,17 @@ export class RoleUpdateComponent {
     this.route.params.subscribe((params) => {
       this.roleId = params['id'];
     });
-    this.getRoleById();
+    this.getRoleById(this.roleId);
     this.getAllMenu();
     this.getAllPermission();
   }
 
-  getRoleById(): void {
-    this.roleService.getRoleById(this.roleId).subscribe({
+  getRoleById(id: number): void {
+    this.roleService.getRoleById(id).subscribe({
       next: (response) => {
+        console.log(response);
         this.model = response.data;
+
         // Chuyển danh sách các menu thành mảng menuIds
         this.model.menuIds = this.model.listMenu.map(
           (menu: { id: any }) => menu.id
@@ -72,6 +81,15 @@ export class RoleUpdateComponent {
         this.model.permissionIds = this.model.listPermissions.map(
           (permission: { id: any }) => permission.id
         );
+
+        this.model.listPermissions.forEach((permission: any) => {
+          this.selectedPermission[permission.id] = true; // Đặt mặc định là false
+        });
+
+        this.model.listMenu.forEach((menu: any) => {
+          this.selectedMenu[menu.id] = true; // Đặt mặc định là false
+        });
+
         this.isLoading = false;
       },
       error: (error) => {
@@ -99,11 +117,18 @@ export class RoleUpdateComponent {
   getAllPermission(): void {
     this.permissionService.getAllPermission().subscribe({
       next: (response) => {
-        this.permissions = response.data;
-        // Lọc những permissions có status = true
+        this.permissions = response.data; // Lưu danh sách quyền
+
+        // Lọc những permission có status = true
         this.filteredPermissions = this.permissions.filter(
           (permission) => permission.status === true
         );
+
+        // Nhóm quyền theo groupName
+        this.groupedPermissions = this.groupPermissions(
+          this.filteredPermissions
+        );
+
         this.isLoading = false;
       },
       error: (error) => {
@@ -113,14 +138,59 @@ export class RoleUpdateComponent {
     });
   }
 
-  updateRole(): void {
-    const updatedData = this.model;
-    updatedData.listMenu = this.model.menuIds.map((id: any) => ({ id }));
-    updatedData.listPermissions = this.model.permissionIds.map((id: any) => ({
-      id,
-    }));
+  // Phương thức nhóm quyền
+  groupPermissions(permissions: any[]): {
+    [key: string]: any[];
+  } {
+    const grouped = permissions.reduce((groups, permission) => {
+      const groupName = permission.permissionName.split('.')[0]; // Lấy phần trước dấu chấm
+      if (!groups[groupName]) {
+        groups[groupName] = []; // Tạo nhóm nếu chưa tồn tại
+      }
+      groups[groupName].push(permission); // Thêm quyền vào nhóm
+      return groups;
+    }, {} as { [key: string]: any[] });
 
-    this.roleService.updateRole(this.roleId, updatedData).subscribe({
+    // Sắp xếp các nhóm theo thứ tự A-Z
+    return Object.keys(grouped).reduce((sortedGroups, key) => {
+      sortedGroups[key] = grouped[key];
+      return sortedGroups;
+    }, {} as { [key: string]: any[] });
+  }
+
+  // Phương thức chọn group
+  selectGroup(groupName: string): void {
+    this.selectedGroup = groupName; // Cập nhật selectedGroup
+  }
+
+  onCheckboxPermissionChange(isChecked: boolean, selectedRole: any): void {
+    this.selectedPermission[selectedRole.id] = isChecked;
+  }
+
+  getSelectedPermissionIds(): number[] {
+    const selectedIds = this.permissions
+      .filter((permission) => this.selectedPermission[permission.id])
+      .map((permission) => permission.id);
+    this.model.permissionIds = selectedIds;
+    return selectedIds;
+  }
+
+  onCheckboxMenuChange(isChecked: boolean, selectedRole: any): void {
+    this.selectedMenu[selectedRole.id] = isChecked;
+  }
+
+  getSelectedMenuIds(): number[] {
+    const selectedIds = this.menu
+      .filter((menu) => this.selectedMenu[menu.id])
+      .map((menu) => menu.id);
+    this.model.menuIds = selectedIds;
+    return selectedIds;
+  }
+
+  updateRole(): void {
+    this.getSelectedPermissionIds();
+    this.getSelectedMenuIds();
+    this.roleService.updateRole(this.roleId, this.model).subscribe({
       next: (response) => {
         this.isLoading = false;
         console.log(response);

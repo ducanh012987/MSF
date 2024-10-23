@@ -5,7 +5,8 @@
                 <span class="icon-search">
                     <ng-icon class="icon" name="matSearchOutline" />
                 </span>
-                <input type="text" class="input-search" placeholder="Search for..." />
+                <input type="text" class="input-search" placeholder="Search for..." [(ngModel)]="searchText"
+                    (input)="onSearchChange()" />
             </div>
         </div>
         <div class="topbar-right">
