@@ -14,7 +14,7 @@ import baseUrl from '../../../types/baseUrl';
   standalone: true,
   imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
   model: any = {};
@@ -25,20 +25,28 @@ export class LoginComponent implements OnInit {
   lockoutRemainingTime: number = 0;
   interval: any;
 
-  constructor(private authService: AuthService, public captchaService: CaptchaService, private router: Router, private cookieService: CookieService) { }
+  constructor(
+    private authService: AuthService,
+    public captchaService: CaptchaService,
+    private router: Router,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit(): void {
     this.checkLockoutStatus();
   }
 
   togglePasswordVisibility(): void {
-    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
   checkLockoutStatus() {
     const lockoutEndTime = Number(localStorage.getItem('lockoutEndTime')) || 0;
     if (Date.now() < lockoutEndTime) {
-      this.lockoutRemainingTime = Math.ceil((lockoutEndTime - Date.now()) / 1000);
+      this.lockoutRemainingTime = Math.ceil(
+        (lockoutEndTime - Date.now()) / 1000
+      );
       this.startLockoutCountdown();
     }
   }
@@ -55,51 +63,68 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    const enteredCatcha = (document.getElementById('captchaInput') as HTMLInputElement).value;
+    const enteredCatcha = (
+      document.getElementById('captchaInput') as HTMLInputElement
+    ).value;
 
     const failedAttempts = Number(localStorage.getItem('failedAttempts')) || 0;
 
     //debugger;
-    this.captchaService.validateCaptcha(enteredCatcha).pipe(
-      switchMap(result => {
-        if (result?.success) {
-          return this.authService.login(this.model).pipe(
-            tap(response => {
-              localStorage.removeItem('failedAttempts');
-              localStorage.removeItem('lockoutEndTime');
+    this.captchaService
+      .validateCaptcha(enteredCatcha)
+      .pipe(
+        switchMap((result) => {
+          if (result?.success) {
+            return this.authService.login(this.model).pipe(
+              tap((response) => {
+                localStorage.removeItem('failedAttempts');
+                localStorage.removeItem('lockoutEndTime');
 
-              console.log(response, alert("Đăng nhập thành công."));
-              this.lockoutRemainingTime = 0;
-              //this.authService.isLoggedIn = true;
-              this.router.navigate(['home']);
-            }),
-            catchError(error => {
-              const newFailedAttempts = failedAttempts + 1;
-              localStorage.setItem('failedAttempts', newFailedAttempts.toString());
+                alert('Đăng nhập thành công.');
+                console.log(response);
+                this.lockoutRemainingTime = 0;
+                //this.authService.isLoggedIn = true;
+                this.router.navigate(['home']);
+              }),
+              catchError((error) => {
+                const newFailedAttempts = failedAttempts + 1;
+                localStorage.setItem(
+                  'failedAttempts',
+                  newFailedAttempts.toString()
+                );
 
-              if (newFailedAttempts >= this.maxFailedAttempts) {
-                const newLockoutEndTime = Date.now() + this.lockoutTime * 1000;
-                localStorage.setItem('lockoutEndTime', newLockoutEndTime.toString());
-                this.checkLockoutStatus();
-              }
+                if (newFailedAttempts >= this.maxFailedAttempts) {
+                  const newLockoutEndTime =
+                    Date.now() + this.lockoutTime * 1000;
+                  localStorage.setItem(
+                    'lockoutEndTime',
+                    newLockoutEndTime.toString()
+                  );
+                  this.checkLockoutStatus();
+                }
 
-              console.error("Đăng nhập thất bại", error, alert("Sai tài khoản hoặc mật khẩu."));
-              this.captchaService.refreshCaptcha();
-              return of(null);
-            })
-          );
-        } else {
-          alert("Sai mã CATCHA. Vui lòng thử lại.");
-          this.captchaService.refreshCaptcha();
+                console.error(
+                  'Đăng nhập thất bại',
+                  error,
+                  alert('Sai tài khoản hoặc mật khẩu.')
+                );
+                this.captchaService.refreshCaptcha();
+                return of(null);
+              })
+            );
+          } else {
+            alert('Sai mã CATCHA. Vui lòng thử lại.');
+            this.captchaService.refreshCaptcha();
+            return of(null);
+          }
+        }),
+        catchError((error) => {
+          alert('Vui lòng nhập mã CAPTCHA');
+          console.error('Xác thực CAPTCHA thất bại', error);
           return of(null);
-        }
-      }),
-      catchError(error => {
-        alert("Vui lòng nhập mã CAPTCHA");
-        console.error('Xác thực CAPTCHA thất bại', error);
-        return of(null);
-      })
-    ).subscribe();
+        })
+      )
+      .subscribe();
   }
 
   onSubmit(event: Event): void {

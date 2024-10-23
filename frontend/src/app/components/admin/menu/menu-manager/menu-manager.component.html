@@ -8,7 +8,7 @@
         </ol>
         <div class="box-breadcumrb">
             <h3 class="breadcumrb-title">Danh sách menu</h3>
-            <a routerLink="create" class="btn-add">
+            <a routerLink="create" class="btn-add" *ngIf="hasPermission('Menu.Create')">
                 <ng-icon name="matAddCircleOutlineOutline" class="icon" />
                 <span>Thêm menu</span>
             </a>
@@ -25,7 +25,7 @@
                                     <th class="th-item">ID</th>
                                     <th class="th-item">Tên menu</th>
                                     <th class="th-item">Url</th>
-                                    <th class="th-item">Icon</th>
+                                    <!-- <th class="th-item">Icon</th> -->
                                     <th class="th-item">Trạng thái</th>
                                     <th class="th-item ctr">Hành động</th>
                                 </tr>
@@ -55,11 +55,11 @@
                                             <b>{{ item.url }}</b>
                                         </div>
                                     </td>
-                                    <td class="td-item">
+                                    <!-- <td class="td-item">
                                         <div class="info">
                                             <b>{{ item.icon }}</b>
                                         </div>
-                                    </td>
+                                    </td> -->
                                     <td class="td-item">
                                         <div class="info">
                                             <b>{{ item.status === true ? "Mở" : "Khoá" }}</b>
@@ -67,13 +67,15 @@
                                     </td>
                                     <td class="td-action">
                                         <div class="box-action">
-                                            <a [routerLink]="'update/' + item.id" class="update">
+                                            <a [routerLink]="'update/' + item.id" class="update"
+                                                *ngIf="hasPermission('Menu.Update')">
                                                 <ng-icon class="icon" name="matCreateOutline"></ng-icon>
                                                 <span>Sửa</span>
                                             </a>
                                         </div>
                                         <div class="box-action">
-                                            <a (click)="deleteMenu(item.id)" class="delete">
+                                            <a (click)="deleteMenu(item.id)" class="delete"
+                                                *ngIf="hasPermission('Menu.Delete')">
                                                 <ng-icon class="icon" name="matDeleteOutline"></ng-icon>
                                                 <span>Xoá</span>
                                             </a>

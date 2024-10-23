@@ -2,12 +2,13 @@
 using DTOs.Request.UserDTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp_API.Authorization;
 
 namespace WebApp_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Policy = "PermissionPolicy")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -16,6 +17,7 @@ namespace WebApp_API.Controllers
             _userRepository = userRepository;
         }
 
+        [AuthorizePermission(Permissions.User.View)]
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAll(int pageNumber, int pageSize)
         {
@@ -28,18 +30,21 @@ namespace WebApp_API.Controllers
             return Ok(await _userRepository.GetUserById(id));
         }
 
+        [AuthorizePermission(Permissions.User.Create)]
         [HttpPost("create")]
         public async Task<IActionResult> CreateUser(UserInput userInput)
         {
             return Ok(await _userRepository.CreateUser(userInput));
         }
 
+        [AuthorizePermission(Permissions.User.Update)]
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserUpdate userUpdate)
         {
             return Ok(await _userRepository.UpdateUser(id, userUpdate));
         }
 
+        [AuthorizePermission(Permissions.User.Delete)]
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

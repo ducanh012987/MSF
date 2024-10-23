@@ -52,6 +52,11 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseCors("AllowAngularApp");
+
+// Đăng ký middleware trả lỗi 401, 403
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -61,14 +66,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowAngularApp");
-
 app.UseAuthentication();
 app.UseAuthorization();
 
 // Bỏ qua active log cho Swagger
 app.UseWhen(context => !context.Request.Path.StartsWithSegments("/swagger") &&
-                        !context.Request.Path.StartsWithSegments("/api/Log"), appBuilder =>
+                        !context.Request.Path.StartsWithSegments("/api/Log") &&
+                        !context.Request.Path.StartsWithSegments("/api/Captcha"), appBuilder =>
 {
     appBuilder.UseMiddleware<ActivityLoggerMiddleware>();
 });

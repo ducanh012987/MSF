@@ -3,32 +3,40 @@
   "WorkspaceRootPath": "F:\\MSF\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|f:\\msf\\backend\\webapp_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|f:\\msf\\backend\\webapp_api\\authorization\\permissions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|solutionrelative:webapp_api\\authorization\\permissions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|F:\\MSF\\backend\\webapp_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|solutionrelative:webapp_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2BF91A7-9FA9-4439-B650-38FA1ADA964D}|Business\\Business.csproj|f:\\msf\\backend\\business\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2BF91A7-9FA9-4439-B650-38FA1ADA964D}|Business\\Business.csproj|solutionrelative:business\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|F:\\MSF\\backend\\webapp_api\\controllers\\permissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|solutionrelative:webapp_api\\controllers\\permissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|f:\\msf\\backend\\webapp_api\\middlewares\\activityloggermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|solutionrelative:webapp_api\\middlewares\\activityloggermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|F:\\MSF\\backend\\webapp_api\\controllers\\logcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|solutionrelative:webapp_api\\controllers\\logcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|f:\\msf\\backend\\webapp_api\\extenisons\\dependencyinjectionconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|F:\\MSF\\backend\\webapp_api\\controllers\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|solutionrelative:webapp_api\\controllers\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|F:\\MSF\\backend\\webapp_api\\authorization\\permissionauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|solutionrelative:webapp_api\\authorization\\permissionauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|F:\\MSF\\backend\\webapp_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|solutionrelative:webapp_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|F:\\MSF\\backend\\webapp_api\\extenisons\\dependencyinjectionconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5D5B2AE9-5907-4FCC-A043-85E167FEBF25}|WebApp_API\\WebApp_API.csproj|solutionrelative:webapp_api\\extenisons\\dependencyinjectionconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2A42B1CF-CE0F-49C1-8E2B-8EAF17CE26ED}|DTOs\\DTOs.csproj|f:\\msf\\backend\\dtos\\request\\userdtos\\userrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2A42B1CF-CE0F-49C1-8E2B-8EAF17CE26ED}|DTOs\\DTOs.csproj|solutionrelative:dtos\\request\\userdtos\\userrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2BF91A7-9FA9-4439-B650-38FA1ADA964D}|Business\\Business.csproj|f:\\msf\\backend\\business\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2BF91A7-9FA9-4439-B650-38FA1ADA964D}|Business\\Business.csproj|solutionrelative:business\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2A42B1CF-CE0F-49C1-8E2B-8EAF17CE26ED}|DTOs\\DTOs.csproj|f:\\msf\\backend\\dtos\\request\\userdtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2A42B1CF-CE0F-49C1-8E2B-8EAF17CE26ED}|DTOs\\DTOs.csproj|solutionrelative:dtos\\request\\userdtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2BF91A7-9FA9-4439-B650-38FA1ADA964D}|Business\\Business.csproj|F:\\MSF\\backend\\business\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2BF91A7-9FA9-4439-B650-38FA1ADA964D}|Business\\Business.csproj|solutionrelative:business\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,98 +46,116 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "WebApp_API\\Controllers\\UserController.cs",
-              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Controllers\\UserController.cs*",
-              "RelativeToolTip": "WebApp_API\\Controllers\\UserController.cs*",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAoAAAA",
+              "DocumentIndex": 2,
+              "Title": "PermissionController.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Controllers\\PermissionController.cs",
+              "RelativeDocumentMoniker": "WebApp_API\\Controllers\\PermissionController.cs",
+              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Controllers\\PermissionController.cs",
+              "RelativeToolTip": "WebApp_API\\Controllers\\PermissionController.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwCAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T04:39:26.987Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DependencyInjectionConfig.cs",
-              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Extenisons\\DependencyInjectionConfig.cs",
-              "RelativeDocumentMoniker": "WebApp_API\\Extenisons\\DependencyInjectionConfig.cs",
-              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Extenisons\\DependencyInjectionConfig.cs*",
-              "RelativeToolTip": "WebApp_API\\Extenisons\\DependencyInjectionConfig.cs*",
-              "ViewState": "AQIAAH0AAAAAAAAAAAAkwI8AAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T04:36:48.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UserRequest.cs",
-              "DocumentMoniker": "F:\\MSF\\backend\\DTOs\\Request\\UserDTOs\\UserRequest.cs",
-              "RelativeDocumentMoniker": "DTOs\\Request\\UserDTOs\\UserRequest.cs",
-              "ToolTip": "F:\\MSF\\backend\\DTOs\\Request\\UserDTOs\\UserRequest.cs",
-              "RelativeToolTip": "DTOs\\Request\\UserDTOs\\UserRequest.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAwAAAA6AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T03:37:57.3Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-20T07:07:55.34Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "UserDto.cs",
-              "DocumentMoniker": "F:\\MSF\\backend\\DTOs\\Request\\UserDTOs\\UserDto.cs",
-              "RelativeDocumentMoniker": "DTOs\\Request\\UserDTOs\\UserDto.cs",
-              "ToolTip": "F:\\MSF\\backend\\DTOs\\Request\\UserDTOs\\UserDto.cs",
-              "RelativeToolTip": "DTOs\\Request\\UserDTOs\\UserDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAJAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Program.cs",
+              "RelativeDocumentMoniker": "WebApp_API\\Program.cs",
+              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Program.cs",
+              "RelativeToolTip": "WebApp_API\\Program.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAAAMwDkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T03:40:27.157Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-17T08:30:58.565Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ActivityLoggerMiddleware.cs",
-              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Middlewares\\ActivityLoggerMiddleware.cs",
-              "RelativeDocumentMoniker": "WebApp_API\\Middlewares\\ActivityLoggerMiddleware.cs",
-              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Middlewares\\ActivityLoggerMiddleware.cs",
-              "RelativeToolTip": "WebApp_API\\Middlewares\\ActivityLoggerMiddleware.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 4,
+              "Title": "MenuController.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Controllers\\MenuController.cs",
+              "RelativeDocumentMoniker": "WebApp_API\\Controllers\\MenuController.cs",
+              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Controllers\\MenuController.cs",
+              "RelativeToolTip": "WebApp_API\\Controllers\\MenuController.cs",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAgwCEAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T03:36:09.862Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-17T06:48:24.654Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TokenService.cs",
-              "DocumentMoniker": "F:\\MSF\\backend\\Business\\Services\\TokenService.cs",
-              "RelativeDocumentMoniker": "Business\\Services\\TokenService.cs",
-              "ToolTip": "F:\\MSF\\backend\\Business\\Services\\TokenService.cs*",
-              "RelativeToolTip": "Business\\Services\\TokenService.cs*",
-              "ViewState": "AQIAACgAAAAAAAAAAAAYwDsAAAANAAAA",
+              "DocumentIndex": 3,
+              "Title": "LogController.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Controllers\\LogController.cs",
+              "RelativeDocumentMoniker": "WebApp_API\\Controllers\\LogController.cs",
+              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Controllers\\LogController.cs",
+              "RelativeToolTip": "WebApp_API\\Controllers\\LogController.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAAABMAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T03:03:45.939Z",
+              "WhenOpened": "2024-10-17T06:47:14.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Permissions.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Authorization\\Permissions.cs",
+              "RelativeDocumentMoniker": "WebApp_API\\Authorization\\Permissions.cs",
+              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Authorization\\Permissions.cs",
+              "RelativeToolTip": "WebApp_API\\Authorization\\Permissions.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAABoAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T02:35:56.485Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "F:\\MSF\\backend\\Business\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "Business\\Services\\UserService.cs",
-              "ToolTip": "F:\\MSF\\backend\\Business\\Services\\UserService.cs",
-              "RelativeToolTip": "Business\\Services\\UserService.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAQwDIAAAA8AAAA",
+              "Title": "PermissionAuthorizationHandler.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Authorization\\PermissionAuthorizationHandler.cs",
+              "RelativeDocumentMoniker": "WebApp_API\\Authorization\\PermissionAuthorizationHandler.cs",
+              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Authorization\\PermissionAuthorizationHandler.cs",
+              "RelativeToolTip": "WebApp_API\\Authorization\\PermissionAuthorizationHandler.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAuwDkAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T03:01:19.47Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-15T12:21:23.345Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DependencyInjectionConfig.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Extenisons\\DependencyInjectionConfig.cs",
+              "RelativeDocumentMoniker": "WebApp_API\\Extenisons\\DependencyInjectionConfig.cs",
+              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Extenisons\\DependencyInjectionConfig.cs",
+              "RelativeToolTip": "WebApp_API\\Extenisons\\DependencyInjectionConfig.cs",
+              "ViewState": "AQIAAIUAAAAAAAAAAAAAwKUAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T04:36:48.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\WebApp_API\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "WebApp_API\\Controllers\\UserController.cs",
+              "ToolTip": "F:\\MSF\\backend\\WebApp_API\\Controllers\\UserController.cs",
+              "RelativeToolTip": "WebApp_API\\Controllers\\UserController.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAQwAoAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T04:39:26.987Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "F:\\MSF\\backend\\Business\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "Business\\Services\\TokenService.cs",
+              "ToolTip": "F:\\MSF\\backend\\Business\\Services\\TokenService.cs",
+              "RelativeToolTip": "Business\\Services\\TokenService.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAwwDkAAABQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T03:03:45.939Z"
             }
           ]
         }

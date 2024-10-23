@@ -2,12 +2,13 @@
 using DTOs.Request.PermissionDTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp_API.Authorization;
 
 namespace WebApp_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Policy = "PermissionPolicy")]
     public class PermissionController : ControllerBase
     {
         private readonly IPermissionRepository _permissionRepository;
@@ -17,6 +18,7 @@ namespace WebApp_API.Controllers
             _permissionRepository = permissionRepository;
         }
 
+        [AuthorizePermission(Permissions.Permission.View)]
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAll()
         {
@@ -35,12 +37,14 @@ namespace WebApp_API.Controllers
             return Ok(await _permissionRepository.CreatePermission(permissionInput));
         }
 
+        [AuthorizePermission(Permissions.Permission.Update)]
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateRole(int id, PermissionInput permissionInput)
         {
             return Ok(await _permissionRepository.UpdatePermission(id, permissionInput));
         }
 
+        [AuthorizePermission(Permissions.Permission.Delete)]
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteRole(int id)
         {

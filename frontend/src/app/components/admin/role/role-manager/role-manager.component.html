@@ -8,7 +8,7 @@
         </ol>
         <div class="box-breadcumrb">
             <h3 class="breadcumrb-title">Danh sách quyền</h3>
-            <a routerLink="create" class="btn-add">
+            <a routerLink="create" class="btn-add" *ngIf="hasPermission('Role.Create')">
                 <ng-icon name="matAddCircleOutlineOutline" class="icon" />
                 <span>Thêm quyền</span>
             </a>
@@ -51,12 +51,12 @@
                                         </div>
                                     </td>
                                     <td class="td-item">
-                                        <div class="info">
+                                        <div class="info" [title]="getMenu(role)">
                                             <b>{{ getMenu(role) }}</b>
                                         </div>
                                     </td>
                                     <td class="td-item">
-                                        <div class="info">
+                                        <div class="info" [title]="getPermissions(role)">
                                             <b>{{ getPermissions(role) }}</b>
                                         </div>
                                     </td>
@@ -67,13 +67,15 @@
                                     </td>
                                     <td class="td-action">
                                         <div class="box-action">
-                                            <a [routerLink]="'update/' + role.id" class="update">
+                                            <a [routerLink]="'update/' + role.id" class="update"
+                                                *ngIf="hasPermission('Role.Update')">
                                                 <ng-icon class="icon" name="matCreateOutline"></ng-icon>
                                                 <span>Sửa</span>
                                             </a>
                                         </div>
                                         <div class="box-action">
-                                            <a (click)="deleteRole(role.id)" class="delete">
+                                            <a (click)="deleteRole(role.id)" class="delete"
+                                                *ngIf="hasPermission('Role.Delete')">
                                                 <ng-icon class="icon" name="matDeleteOutline"></ng-icon>
                                                 <span>Xoá</span>
                                             </a>

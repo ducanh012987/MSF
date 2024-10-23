@@ -1,12 +1,13 @@
 ﻿using Business.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp_API.Authorization;
 
 namespace WebApp_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Policy = "PermissionPolicy")]
     public class LogController : ControllerBase
     {
         private readonly ILogRepository _logRepository;
@@ -16,6 +17,7 @@ namespace WebApp_API.Controllers
             _logRepository = logRepository;
         }
 
+        [AuthorizePermission(Permissions.Log.View)]
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAll(int pageNumber, int pageSize)
         {

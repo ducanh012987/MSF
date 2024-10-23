@@ -176,6 +176,20 @@
                     }
                 }
 
+                .box-container {
+                    display: flex;
+                    height: 100%;
+                    border: 1px solid #dcdada;
+
+                    .group-status {
+                        padding: 10px;
+
+                        mat-radio-button {
+                            display: block;
+                        }
+                    }
+                }
+
                 input {
                     padding: 10px 0;
                     outline: none;

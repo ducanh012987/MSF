@@ -55,7 +55,7 @@ namespace Business.Services
             {
                 foreach (var role in userDto.ListRoles)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, role.RoleName!));
+                    claims.Add(new Claim(ClaimTypes.Role, role.Id!.ToString()));
                 }
             }
 

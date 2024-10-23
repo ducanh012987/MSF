@@ -196,16 +196,10 @@
                                     padding-bottom: 1rem;
                                     font-size: 1rem;
                                     color: #6b7280;
-
-                                    .box-avatar {
-                                        display: flex;
-                                        gap: 1rem;
-                                        padding-bottom: 0.5rem;
-
-                                        .avatar {
-                                            border-radius: 9999px;
-                                        }
-                                    }
+                                    max-width: 150px;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
 
                                     .info {
                                         display: flex;

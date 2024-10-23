@@ -4,8 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { MenuService } from '../../../../services/menu/menu.service';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-menu-create',
@@ -16,7 +16,7 @@ import { MenuService } from '../../../../services/menu/menu.service';
     CommonModule,
     RouterLink,
     FormsModule,
-    NgSelectModule,
+    MatRadioModule,
   ],
   templateUrl: './menu-create.component.html',
   styleUrl: './menu-create.component.scss',

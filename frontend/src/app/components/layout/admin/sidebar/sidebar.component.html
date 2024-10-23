@@ -35,12 +35,10 @@
             </a>
             <div *ngIf="isCategory" id="collapsePages" class="collapse" aria-labelledby="headingPages"
                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" routerLink="user-manager">Users</a>
-                    <a class="collapse-item" routerLink="role-manager">Roles</a>
-                    <a class="collapse-item" routerLink="menu-manager">Menu</a>
-                    <a class="collapse-item" routerLink="permission-manager">Permissions</a>
-                    <a class="collapse-item" routerLink="log-manager">Logs</a>
+                <div class="collapse-inner rounded" *ngFor="let item of menu">
+                    <a class="collapse-item" [routerLink]="item.url">
+                        <span>{{item.displayName}}</span>
+                    </a>
                 </div>
             </div>
         </li>
