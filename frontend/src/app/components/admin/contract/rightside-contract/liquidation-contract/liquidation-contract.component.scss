@@ -1,0 +1,102 @@
+.panel-group {
+    .title-heading {
+        background: #285D32;
+        position: relative;
+        padding: 9px 0px 9px 0px;
+        border-radius: 2px;
+
+        .panel-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFFFFF;
+            position: relative;
+            padding-left: 15px;
+        }
+    }
+
+    .panel-body {
+        padding: 15px;
+
+        .form {
+            margin-left: -10px;
+            margin-right: -10px;
+
+            &.form-group {
+                display: flex;
+                flex-wrap: wrap;
+
+                .form-infor {
+                    display: flex;
+                    flex-direction: column;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    flex: 0 0 25%;
+                    max-width: 25%;
+                    margin-bottom: 4px !important;
+
+                    ::ng-deep {
+                        .p-inputtext {
+                            box-shadow: none;
+                            padding: 0px 5px;
+                        }
+
+                        .p-calendar {
+                            height: 30px;
+
+                            .p-inputtext {
+                                padding: 0px 5px 0px 5px !important;
+                                box-shadow: none;
+                            }
+
+                            .p-icon-wrapper {
+                                position: absolute;
+                                top: 15%;
+
+                                .p-icon {
+                                    width: 20px;
+                                    height: 20px;
+                                }
+                            }
+                        }
+
+                        .p-calendar-disabled {
+                            input {
+                                background-color: #f1f1f1;
+                            }
+                        }
+                    }
+
+                    .form-control {
+                        width: 100%;
+                    }
+
+                    p-calendar {
+                        cursor: pointer;
+                    }
+
+                    input {
+                        font-size: 14px;
+                        padding: 0px 5px 0px 5px !important;
+                        border: 1px solid #d4d4d4;
+                        height: 30px;
+                        margin-bottom: 8px;
+                        box-shadow: none;
+
+                        &:disabled {
+                            background-color: #f1f1f1;
+                        }
+                    }
+
+                    label {
+                        height: auto;
+                        font-size: 14px;
+                        color: #4e4e4e;
+                        display: block;
+                        margin-bottom: 2px;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}

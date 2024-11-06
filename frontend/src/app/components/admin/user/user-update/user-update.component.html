@@ -1,109 +1,145 @@
 <div class="user-update-container">
-    <section class="breadcumrb">
-        <ol class="breadcumrb-nav">
-            <li>
-                <ng-icon class="icon" name="matHomeOutline"></ng-icon>
-            </li>
-            <li class="breadcumrb-nav-item link" routerLink="/admin/user-manager">
-                Người dùng
-            </li>
-            <li class="breadcumrb-nav-item">Cập nhật người dùng</li>
-        </ol>
-        <div class="box-breadcumrb">
-            <h3 class="breadcumrb-title">Cập nhật người dùng</h3>
+  <section class="breadcumrb">
+    <ol class="breadcumrb-nav">
+      <li>
+        <ng-icon class="icon" name="matHomeOutline"></ng-icon>
+      </li>
+      <li class="breadcumrb-nav-item link" routerLink="/admin/user-manager">
+        Người dùng
+      </li>
+      <li class="breadcumrb-nav-item">Cập nhật người dùng</li>
+    </ol>
+    <div class="box-breadcumrb">
+      <h3 class="breadcumrb-title">Cập nhật người dùng</h3>
+    </div>
+  </section>
+  <section class="main">
+    <form
+      class="form-container"
+      (ngSubmit)="onSubmit(userUpdateForm)"
+      #userUpdateForm="ngForm"
+    >
+      <div class="box-form">
+        <!-- ID -->
+        <div class="form-group input">
+          <label for="Username">Tên người dùng</label>
+          <input
+            id="Username"
+            type="text"
+            name="Username"
+            [(ngModel)]="model.username"
+            #username="ngModel"
+            required
+            readonly
+            class="disabled-input"
+          />
         </div>
-    </section>
-    <section class="main">
-        <form class="form-container" (ngSubmit)="onSubmit()" #userUpdateForm="ngForm">
-            <div class="box-form">
-                <!-- ID -->
-                <div class="form-group input">
-                    <label for="Username">Tên người dùng</label>
-                    <input id="Username" type="text" name="Username" [(ngModel)]="model.username" #username="ngModel"
-                        required readonly class="disabled-input" />
-                </div>
-            </div>
+      </div>
 
-            <div class="box-form">
-                <!-- Họ và tên -->
-                <div class="form-group input">
-                    <label for="FullName">Họ và tên</label>
-                    <input id="FullName" type="text" name="FullName" placeholder="Họ và tên"
-                        [ngClass]="{ 'is-valid': fullname.invalid && fullname.touched}" [(ngModel)]="model.fullname"
-                        #fullname="ngModel" required maxlength="100" />
-                    <div *ngIf=" fullname.invalid && fullname.touched" class="error-message">
-                        <div *ngIf="fullname.errors?.['required']">
-                            Vui lòng nhập họ và tên!
-                        </div>
-                        <div *ngIf="fullname.errors?.['maxlength']">
-                            Họ và tên không được quá 100 ký tự!
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Email -->
-                <div class="form-group input">
-                    <label for="Email">Email</label>
-                    <input id="Email" type="email" name="Email" placeholder="Địa chỉ email"
-                        [ngClass]="{'is-valid':email.invalid && email.touched}" [(ngModel)]="model.email"
-                        #email="ngModel" required maxlength="50" email />
-                    <div *ngIf="email.invalid && email.touched" class="error-message">
-                        <div *ngIf="email.errors?.['required']">
-                            Vui lòng nhập địa chỉ email!
-                        </div>
-                        <div *ngIf="email.errors?.['email']">
-                            Vui lòng nhập địa chỉ email hợp lệ!
-                        </div>
-                        <div *ngIf="email.errors?.['maxlength']">
-                            Địa chỉ email không được quá 50 ký tự!
-                        </div>
-                    </div>
-                </div>
+      <div class="box-form">
+        <!-- Họ và tên -->
+        <div class="form-group input">
+          <label for="FullName">Họ và tên</label>
+          <input
+            id="FullName"
+            type="text"
+            name="FullName"
+            placeholder="Họ và tên"
+            [ngClass]="{ 'is-valid': fullname.invalid && fullname.touched }"
+            [(ngModel)]="model.fullname"
+            #fullname="ngModel"
+            required
+            maxlength="100"
+          />
+          <div
+            *ngIf="fullname.invalid && fullname.touched"
+            class="error-message"
+          >
+            <div *ngIf="fullname.errors?.['required']">
+              Vui lòng nhập họ và tên!
             </div>
-
-            <div class="box-form">
-                <!-- Trạng thái -->
-                <div class="form-group input">
-                    <label>Trạng thái</label>
-                    <div class="box-container">
-                        <div class="group-status">
-                            <mat-radio-group [(ngModel)]="model.locked" name="Status">
-                                <mat-radio-button *ngFor="let status of statuses" [value]="status.value">
-                                    {{ status.name }}
-                                </mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                    </div>
-                    <div *ngIf="model.locked == null" class="error-message">
-                        Vui lòng chọn trạng thái!
-                    </div>
-                </div>
-                <!-- Vai trò -->
-                <div class="form-group input">
-                    <label>Vai trò</label>
-                    <div class="box-container">
-                        <div class="group-role">
-                            <mat-checkbox *ngFor="let role of filteredRoles" [(ngModel)]="selectedRole[role.id]"
-                                (ngModelChange)="onCheckboxRoleChange($event, role)" [name]="role.roleName">
-                                {{ role.roleName }}
-                            </mat-checkbox>
-                        </div>
-                    </div>
-                    <div *ngIf="getSelectedRoleIds().length == 0" class="error-message">
-                        Vui lòng chọn vai trò!
-                    </div>
-                </div>
+            <div *ngIf="fullname.errors?.['maxlength']">
+              Họ và tên không được quá 100 ký tự!
             </div>
+          </div>
+        </div>
 
-            <div class="form-group btn">
-                <button [disabled]="isLoading" class="btn-primary">
-                    <ng-container *ngIf="isLoading; else notLoading">
-                        <span>Xin chờ!</span>
-                    </ng-container>
-                    <ng-template #notLoading>Cập nhật</ng-template>
-                </button>
-                <a routerLink="/admin/user-manager" class="btn-secondary"> Trở lại </a>
+        <!-- Email -->
+        <div class="form-group input">
+          <label for="Email">Email</label>
+          <input
+            id="Email"
+            type="email"
+            name="Email"
+            placeholder="Địa chỉ email"
+            [ngClass]="{ 'is-valid': email.invalid && email.touched }"
+            [(ngModel)]="model.email"
+            #email="ngModel"
+            required
+            maxlength="50"
+            email
+          />
+          <div *ngIf="email.invalid && email.touched" class="error-message">
+            <div *ngIf="email.errors?.['required']">
+              Vui lòng nhập địa chỉ email!
             </div>
-        </form>
-    </section>
+            <div *ngIf="email.errors?.['email']">
+              Vui lòng nhập địa chỉ email hợp lệ!
+            </div>
+            <div *ngIf="email.errors?.['maxlength']">
+              Địa chỉ email không được quá 50 ký tự!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-form">
+        <!-- Trạng thái -->
+        <div class="form-group input">
+          <label>Trạng thái</label>
+          <div class="box-container">
+            <div class="group-status">
+              <mat-radio-group [(ngModel)]="model.locked" name="Status">
+                <mat-radio-button
+                  *ngFor="let status of statuses"
+                  [value]="status.value"
+                >
+                  {{ status.name }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+        <!-- Vai trò -->
+        <div class="form-group input">
+          <label>Vai trò</label>
+          <div class="box-container">
+            <div class="group-role">
+              <mat-checkbox
+                *ngFor="let role of filteredRoles"
+                [(ngModel)]="selectedRole[role.id]"
+                (ngModelChange)="onCheckboxRoleChange($event, role)"
+                [name]="role.roleName"
+              >
+                {{ role.roleName }}
+              </mat-checkbox>
+            </div>
+          </div>
+          <div *ngIf="!isRoleSelected()" class="error-message">
+            Vui lòng chọn vai trò!
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group btn">
+        <button [disabled]="isLoading" class="btn-primary">
+          <ng-container *ngIf="isLoading; else notLoading">
+            <span>Xin chờ!</span>
+          </ng-container>
+          <ng-template #notLoading>Cập nhật</ng-template>
+        </button>
+        <a routerLink="/admin/user-manager" class="btn-secondary"> Trở lại </a>
+      </div>
+    </form>
+  </section>
 </div>

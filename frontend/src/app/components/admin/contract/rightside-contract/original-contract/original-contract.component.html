@@ -1,0 +1,363 @@
+<div class="panel-group">
+  <div class="title-heading">
+    <h4 class="panel-title">Nội dung hợp đồng</h4>
+  </div>
+  <div class="panel-body">
+    <form class="form form-group">
+      <div class="form-infor flex-50">
+        <label>Loại hợp đồng:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor flex-50">
+        <label>Đơn vị cung cấp:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Năm kinh phí:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          maxlength="4"
+          pattern="^[0-9]*$"
+          (input)="validateInput($event)"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Lãnh đạo phụ trách:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Cán bộ phụ trách:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Trạng thái:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Số hợp đồng:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Tên hợp đồng:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Nguồn kinh phí</label>
+        <p-dropdown
+          class="form-control"
+          [options]=""
+          optionLabel="name"
+          [showClear]="true"
+          placeholder="--Tự động lấy từ d.sách h.hoá--"
+          emptyMessage=" "
+        ></p-dropdown>
+      </div>
+      <div class="form-infor">
+        <label>Ngày ký:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Số ngày thực hiện:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Tiến độ hợp đồng:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Ngày kết thúc hợp đồng:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Ngày có hiệu lực:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Giá trị hợp đồng ban đầu:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Giá trị thực tế:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Đã thanh toán:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Còn thanh toán:</label>
+        <input class="form-control" pInputText type="text" value="0" disabled />
+      </div>
+      <div class="form-infor note">
+        <label>Ghi chú:</label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          maxlength="500"
+          placeholder="--"
+          disabled
+        />
+      </div>
+      <div class="form-infor file">
+        <label>Tải file:</label>
+        <div class="file-upload">
+          <label for="fileInput" class="file-label">
+            <ng-icon class="icon" name="matFolderZipOutline"></ng-icon>
+            <span>Chọn tệp</span>
+          </label>
+          <input
+            class="form-control"
+            type="file"
+            id="fileInput"
+            placeholder="Không có tệp tin được chọn"
+          />
+        </div>
+      </div>
+    </form>
+
+    <div class="container-fluid">
+      <h4>Chi tiết hàng hoá</h4>
+    </div>
+
+    <div class="container-fluid">
+      <div class="form-action">
+        <div class="action">
+          <input
+            class="form-control"
+            pInputText
+            type="text"
+            placeholder="Tìm kiếm theo mã, tên, model"
+          />
+          <button pButton class="btn-action search">
+            <ng-icon class="icon" name="matSearchOutline"></ng-icon>
+            <span>Tìm kiếm</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="content-table">
+        <p-table
+          #dt
+          [value]="customers"
+          [(selection)]="selectedCustomers"
+          dataKey="name"
+          [rowHover]="true"
+          [loading]="loading"
+          [scrollable]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [filterDelay]="0"
+          [globalFilterFields]="[
+            'name',
+            'country.name',
+            'representative.name',
+            'status'
+          ]"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="text-center" style="width: 40px">STT</th>
+              <th class="text-center">Nhóm hàng hoá</th>
+              <th class="text-center">Loại hàng hoá</th>
+              <th class="text-center">Tên hàng</th>
+              <th class="text-center">Mã hàng</th>
+              <th class="text-center">Đơn vị tính</th>
+              <th class="text-center">Nguồn kinh phí</th>
+              <th class="text-center">Năm sản xuất</th>
+              <th class="text-center">Model</th>
+              <th class="text-center">Hãng sản xuất</th>
+              <th class="text-center">Xuất xứ</th>
+              <th class="text-center">Số lượng HĐ</th>
+              <th class="text-center">Đơn giá HĐ</th>
+              <th class="text-center">Thành tiền</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-customer>
+            <tr>
+              <td class="text-center">{{ customer.id }}</td>
+              <td class="text-center">{{ customer.country.name }}</td>
+              <td class="text-center">{{ customer.company }}</td>
+              <td class="text-center">{{ customer.representative.name }}</td>
+              <td class="text-center">{{ customer.name }}</td>
+              <td class="text-center">{{ customer.country.name }}</td>
+              <td>
+                <p-dropdown
+                  class="form-control"
+                  [options]="customers"
+                  optionLabel="name"
+                  [filter]="true"
+                  filterBy="name"
+                  [showClear]="true"
+                  placeholder="Chọn nguồn kinh phí"
+                  emptyMessage="Không có dữ liệu"
+                  emptyFilterMessage="Không tìm được kết quả"
+                  appendTo="body"
+                ></p-dropdown>
+              </td>
+              <td>
+                <input
+                  class="form-control text-right"
+                  pInputText
+                  type="text"
+                  maxlength="4"
+                  pattern="^[0-9]*$"
+                  (input)="validateInput($event)"
+                />
+              </td>
+              <td>
+                <input
+                  class="form-control"
+                  pInputText
+                  type="text"
+                  maxlength="50"
+                />
+              </td>
+              <td>
+                <p-dropdown
+                  class="form-control"
+                  [options]="[]"
+                  optionLabel="name"
+                  [filter]="true"
+                  filterBy="name"
+                  [showClear]="true"
+                  emptyMessage="Không có dữ liệu"
+                  emptyFilterMessage="Không tìm được kết quả"
+                  appendTo="body"
+                ></p-dropdown>
+              </td>
+              <td>
+                <p-dropdown
+                  class="form-control"
+                  [options]="[]"
+                  optionLabel="name"
+                  [filter]="true"
+                  filterBy="name"
+                  [showClear]="true"
+                  emptyMessage="Không có dữ liệu"
+                  emptyFilterMessage="Không tìm được kết quả"
+                  appendTo="body"
+                ></p-dropdown>
+              </td>
+              <td>
+                <input
+                  class="form-control text-right"
+                  pInputText
+                  type="text"
+                  maxlength="4"
+                />
+              </td>
+              <td>
+                <input
+                  class="form-control text-right"
+                  pInputText
+                  type="text"
+                  maxlength="4"
+                />
+              </td>
+              <td class="text-right">{{ customer.country.name }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="12" class="text-center">Không có bản ghi nào!</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

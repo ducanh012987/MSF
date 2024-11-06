@@ -1,0 +1,66 @@
+<div class="rightside-contract-container">
+  <div class="content-system">
+    <div class="main-action">
+      <div class="action-group">
+        <button pButton class="btn-action add">
+          <ng-icon class="icon" name="matAddOutline"></ng-icon>
+          <span>Thêm mới</span>
+        </button>
+        <button pButton class="btn-action edit" disabled>
+          <ng-icon class="icon custom" name="matSaveAltOutline"></ng-icon>
+          <span>Lưu</span>
+        </button>
+        <button pButton class="btn-action delete" disabled>
+          <ng-icon class="icon custom" name="matCancelOutline"></ng-icon>
+          <span>Huỷ thay đổi</span>
+        </button>
+        <button pButton class="btn-action delete" disabled>
+          <ng-icon class="icon custom" name="matDeleteForeverOutline"></ng-icon>
+          <span>Xoá</span>
+        </button>
+        <button pButton class="btn-action" disabled>
+          <span>Thanh lý</span>
+        </button>
+        <button pButton class="btn-action search" disabled>
+          <ng-icon class="icon custom" name="matTaskOutline"></ng-icon>
+          <span>Quyết toán</span>
+        </button>
+        <button pButton class="btn-action print">
+          <ng-icon
+            class="icon custom"
+            name="matLocalPrintshopOutline"
+          ></ng-icon>
+          <span>In hợp đồng</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-tabs-box">
+      <p-tabView>
+        <p-tabPanel header="Nội dung">
+          <app-content-contract></app-content-contract>
+        </p-tabPanel>
+        <p-tabPanel header="Phụ lục">
+          <app-appendix-contract></app-appendix-contract>
+        </p-tabPanel>
+        <p-tabPanel header="Nghiệm thu hàng hoá">
+          <app-acceptance-merchandise></app-acceptance-merchandise>
+        </p-tabPanel>
+        <p-tabPanel header="Chi tiết hàng hoá nghiệm thu">
+          <app-detail-merchandise></app-detail-merchandise>
+        </p-tabPanel>
+        <p-tabPanel header="Thanh lý hợp đồng">
+          <app-liquidation-contract></app-liquidation-contract>
+        </p-tabPanel>
+        <p-tabPanel header="Hợp đồng gốc">
+          <app-original-contract></app-original-contract>
+        </p-tabPanel>
+        <p-tabPanel header="Tiến độ thanh toán">
+          <app-payment-progress></app-payment-progress>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+
+    <div></div>
+  </div>
+</div>

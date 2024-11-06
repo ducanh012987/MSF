@@ -1,0 +1,73 @@
+.contract-container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 4px;
+
+    .breadcumrb {
+        margin-bottom: 10px;
+
+        .breadcumrb-nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding-top: 4px;
+            list-style: none;
+
+            @media (min-width: 640px) {
+                margin-right: 64px;
+            }
+
+            li {
+                display: flex;
+                align-items: center;
+
+                .icon {
+                    font-size: 19px;
+                    line-height: normal;
+                    color: #475569;
+                }
+            }
+
+            .breadcumrb-nav-item {
+                padding-left: 8px;
+                font-size: 15px;
+                line-height: normal;
+                color: #475569;
+
+                &:before {
+                    float: left;
+                    padding-right: 0.5rem;
+                    content: "Danh mục /";
+                    color: #6b7280;
+                }
+            }
+        }
+    }
+
+    .content-main {
+        display: flex;
+        width: 100%;
+
+        .app-leftside {
+            position: relative;
+            flex: 1;
+            height: 100%;
+            min-height: 720px;
+            max-width: 570px;
+
+            &.active {
+                flex: none;
+            }
+        }
+
+        .app-rightside {
+            border: none;
+            overflow-x: unset;
+            flex: 1.5;
+            margin-left: 10px;
+            margin-right: -8px;
+        }
+    }
+}

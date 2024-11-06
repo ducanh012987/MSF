@@ -1,0 +1,224 @@
+<div class="leftside-contract-container">
+  <div class="content-main">
+    <div class="action-system ui-resizable" [ngClass]="{ active: isActive }">
+      <button id="btn-changes-s-nav" (click)="toggleActive()">
+        <ng-icon
+          class="icon"
+          name="matKeyboardDoubleArrowLeftOutline"
+        ></ng-icon>
+      </button>
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Danh sách hợp đồng</h3>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="form-infor">
+          <label>Năm kinh phí</label>
+          <input
+            class="form-control"
+            pInputText
+            type="text"
+            placeholder="Nhập năm kinh phí"
+            maxlength="4"
+            pattern="^[0-9]*$"
+            (input)="validateInput($event)"
+          />
+        </div>
+        <div class="form-infor">
+          <label>Số hợp đồng</label>
+          <input
+            class="form-control"
+            pInputText
+            type="text"
+            placeholder="Số hợp đồng"
+            maxlength="50"
+          />
+        </div>
+        <div class="form-infor">
+          <label>Loại hợp đồng</label>
+          <p-dropdown
+            class="form-control"
+            [options]=""
+            optionLabel="name"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            placeholder="Chọn loại hợp đồng"
+            emptyMessage="Không có dữ liệu"
+            emptyFilterMessage="Không tìm thấy!"
+          ></p-dropdown>
+        </div>
+        <div class="form-infor">
+          <label>Tên hợp đồng</label>
+          <input
+            class="form-control"
+            pInputText
+            type="text"
+            placeholder="Tên hợp đồng"
+            maxlength="250"
+          />
+        </div>
+        <div class="form-infor">
+          <label>Trạng thái</label>
+          <p-dropdown
+            class="form-control"
+            [options]=""
+            optionLabel="name"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            placeholder="Chọn trạng thái"
+            emptyMessage="Không có dữ liệu"
+            emptyFilterMessage="Không tìm thấy!"
+          ></p-dropdown>
+        </div>
+        <div class="form-infor">
+          <label>Đơn vị cung cấp</label>
+          <p-dropdown
+            class="form-control"
+            [options]=""
+            optionLabel="name"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            placeholder="Chọn Đơn vị cung cấp"
+            emptyMessage="Không có dữ liệu"
+            emptyFilterMessage="Không tìm thấy!"
+          ></p-dropdown>
+        </div>
+        <div class="form-infor">
+          <label>Từ ngày</label>
+          <p-calendar
+            class="form-control"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            [dateFormat]="'dd/mm/yy'"
+            inputId="icondisplay"
+            placeholder="--/--/----"
+          />
+        </div>
+        <div class="form-infor">
+          <label>Đến ngày</label>
+          <p-calendar
+            class="form-control"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            [dateFormat]="'dd/mm/yy'"
+            inputId="icondisplay"
+            placeholder="--/--/----"
+          />
+        </div>
+        <div class="form-infor">
+          <label>Lãnh đạo phụ trách:</label>
+          <p-dropdown
+            class="form-control"
+            [options]=""
+            optionLabel="name"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            placeholder="Lãnh đạo"
+            emptyMessage="Không có dữ liệu"
+            emptyFilterMessage="Không tìm thấy!"
+          ></p-dropdown>
+        </div>
+        <div class="form-infor">
+          <label>Cán bộ phụ trách</label>
+          <p-dropdown
+            class="form-control"
+            [options]=""
+            optionLabel="name"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            placeholder="Chọn cán bộ"
+            emptyMessage="Không có dữ liệu"
+            emptyFilterMessage="Không tìm thấy!"
+          ></p-dropdown>
+        </div>
+        <div class="form-infor">
+          <label>Tên hàng</label>
+          <input
+            class="form-control"
+            pInputText
+            type="text"
+            placeholder="Nhập tên hàng"
+            maxlength="250"
+          />
+        </div>
+        <div class="form-infor">
+          <label>Mã hàng</label>
+          <input
+            class="form-control"
+            pInputText
+            type="text"
+            placeholder="Nhập mã hàng"
+            maxlength="50"
+          />
+        </div>
+        <div class="form-infor action-main">
+          <div class="d-flex">
+            <div class="infor">
+              <label>Tiến độ hợp đồng</label>
+              <p-dropdown
+                class="form-control"
+                [options]=""
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Chọn tiến độ hợp đồng"
+                emptyMessage="Không có dữ liệu"
+                emptyFilterMessage="Không tìm thấy!"
+              ></p-dropdown>
+            </div>
+            <div class="button-group">
+              <button pButton class="btn-action search">
+                <ng-icon class="icon" name="matSearchOutline"></ng-icon>
+                <span>Tìm kiếm</span>
+              </button>
+              <button pButton class="btn-action refresh">
+                <ng-icon class="icon" name="matRefreshOutline"></ng-icon>
+                <span>Làm mới</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="title-table">
+          <h4>Danh sách hợp đồng</h4>
+        </div>
+
+        <div class="content-table">
+          <p-table
+            class="table-responsive"
+            [value]="customers"
+            [paginator]="true"
+            [rows]="10"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th class="text-center">Đơn vị cung cấp</th>
+                <th class="text-center">Số hợp đồng</th>
+                <th class="text-center">Tên hợp đồng</th>
+                <th class="text-center" style="min-width: 135px">
+                  Giá trị hợp đồng
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+              <tr>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.country.name }}</td>
+                <td>{{ customer.company }}</td>
+                <td class="text-right">{{ customer.representative.name }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

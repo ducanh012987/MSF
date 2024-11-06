@@ -20,6 +20,8 @@ import { PermissionManagerComponent } from './components/admin/permission/permis
 import { PermissionCreateComponent } from './components/admin/permission/permission-create/permission-create.component';
 import { PermissionUpdateComponent } from './components/admin/permission/permission-update/permission-update.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { DashboarbComponent } from './components/admin/dashboarb/dashboarb.component';
+import { ContractManagerComponent } from './components/admin/contract/contract-manager/contract-manager.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -41,6 +43,14 @@ export const routes: Routes = [
     component: HomeAdminComponent,
     canActivate: [authGuard],
     children: [
+      {
+        path: 'dashboard',
+        component: DashboarbComponent,
+      },
+      {
+        path: 'contract',
+        component: ContractManagerComponent,
+      },
       {
         path: 'user-manager',
         component: UserManagerComponent,

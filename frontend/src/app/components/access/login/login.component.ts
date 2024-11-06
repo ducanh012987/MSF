@@ -1,25 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { CaptchaService } from '../../../services/captcha/captcha.service';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { of } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
 import baseUrl from '../../../types/baseUrl';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  model: any = {};
+  loginForm: FormGroup<any>;
   private lockoutTime = 60; // Thời gian khóa 60 giây
-  private maxFailedAttempts = 2;
+  private maxFailedAttempts = 5;
   passwordFieldType: string = 'password';
   generateCaptchaUrl = `${baseUrl}/api/Captcha/GenerateCaptcha`;
   lockoutRemainingTime: number = 0;
@@ -29,8 +34,14 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     public captchaService: CaptchaService,
     private router: Router,
-    private cookieService: CookieService
-  ) {}
+    private formBuilder: FormBuilder
+  ) {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      captcha: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.checkLockoutStatus();
@@ -63,6 +74,12 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    if (this.loginForm.invalid) {
+      // Đánh dấu tất cả các trường là đã được chạm để hiển thị lỗi
+      this.loginForm.markAllAsTouched();
+      return; // Dừng lại nếu form không hợp lệ
+    }
+
     const enteredCatcha = (
       document.getElementById('captchaInput') as HTMLInputElement
     ).value;
@@ -75,7 +92,7 @@ export class LoginComponent implements OnInit {
       .pipe(
         switchMap((result) => {
           if (result?.success) {
-            return this.authService.login(this.model).pipe(
+            return this.authService.login(this.loginForm.value).pipe(
               tap((response) => {
                 localStorage.removeItem('failedAttempts');
                 localStorage.removeItem('lockoutEndTime');

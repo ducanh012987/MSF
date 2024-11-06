@@ -1,90 +1,128 @@
 <div class="permission-create-container">
-    <section class="breadcumrb">
-        <ol class="breadcumrb-nav">
-            <li>
-                <ng-icon class="icon" name="matHomeOutline"></ng-icon>
-            </li>
-            <li class="breadcumrb-nav-item link" routerLink="/admin/permission-manager">
-                Permission
-            </li>
-            <li class="breadcumrb-nav-item">Thêm mới permission</li>
-        </ol>
-        <div class="box-breadcumrb">
-            <h3 class="breadcumrb-title">Thêm mới permission</h3>
+  <section class="breadcumrb">
+    <ol class="breadcumrb-nav">
+      <li>
+        <ng-icon class="icon" name="matHomeOutline"></ng-icon>
+      </li>
+      <li
+        class="breadcumrb-nav-item link"
+        routerLink="/admin/permission-manager"
+      >
+        Permission
+      </li>
+      <li class="breadcumrb-nav-item">Thêm mới permission</li>
+    </ol>
+    <div class="box-breadcumrb">
+      <h3 class="breadcumrb-title">Thêm mới permission</h3>
+    </div>
+  </section>
+  <section class="main">
+    <form
+      class="form-container"
+      (ngSubmit)="onSubmit(permissionCreateForm)"
+      #permissionCreateForm="ngForm"
+    >
+      <div class="box-form">
+        <!-- Tên quyền -->
+        <div class="form-group input">
+          <label for="PermissionName">Tên quyền</label>
+          <input
+            id="PermissionName"
+            type="text"
+            name="PermissionName"
+            placeholder="Tên quyền"
+            [ngClass]="{
+              'is-valid': permissionName.invalid && permissionName.touched
+            }"
+            [(ngModel)]="model.permissionName"
+            #permissionName="ngModel"
+            required
+            maxlength="50"
+          />
+          <div
+            *ngIf="permissionName.invalid && permissionName.touched"
+            class="error-message"
+          >
+            <div *ngIf="permissionName.errors?.['required']">
+              Vui lòng nhập tên quyền!
+            </div>
+            <div *ngIf="permissionName.errors?.['maxlength']">
+              Tên quyền không được quá 50 ký tự!
+            </div>
+          </div>
         </div>
-    </section>
-    <section class="main">
-        <form class="form-container" (ngSubmit)="onSubmit()" #permissionCreateForm="ngForm">
-            <div class="box-form">
-                <!-- Tên quyền -->
-                <div class="form-group input">
-                    <label for="PermissionName">Tên quyền</label>
-                    <input id="PermissionName" type="text" name="PermissionName" placeholder="Tên quyền"
-                        [ngClass]="{'is-valid':permissionName.invalid && permissionName.touched}"
-                        [(ngModel)]="model.permissionName" #permissionName="ngModel" required maxlength="50" />
-                    <div *ngIf=" permissionName.invalid && permissionName.touched" class="error-message">
-                        <div *ngIf="permissionName.errors?.['required']">
-                            Vui lòng nhập tên quyền!
-                        </div>
-                        <div *ngIf="permissionName.errors?.['maxlength']">
-                            Tên quyền không được quá 50 ký tự!
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
 
-            <div class="box-form">
-                <!-- Tên hiển thị -->
-                <div class="form-group input">
-                    <label for="DisplayName">Tên hiển thị</label>
-                    <input id="DisplayName" type="text" name="DisplayName" placeholder="Tên hiển thị"
-                        [ngClass]="{'is-valid':displayName.invalid && displayName.touched}"
-                        [(ngModel)]="model.displayName" #displayName="ngModel" required maxlength="50"
-                        pattern="^[a-zA-Z0-9]+\.[a-zA-Z0-9]+$" />
-                    <div *ngIf=" displayName.invalid && displayName.touched" class="error-message">
-                        <div *ngIf="displayName.errors?.['required']">
-                            Vui lòng nhập tên hiển thị!
-                        </div>
-                        <div *ngIf="displayName.errors?.['maxlength']">
-                            Tên hiển thị không được quá 50 ký tự!
-                        </div>
-                        <div *ngIf="permissionName.errors?.['pattern']">
-                            Tên quyền phải phân tách bằng dấu chấm (GroupName.Action)!
-                        </div>
-                    </div>
-                </div>
+      <div class="box-form">
+        <!-- Tên hiển thị -->
+        <div class="form-group input">
+          <label for="DisplayName">Tên hiển thị</label>
+          <input
+            id="DisplayName"
+            type="text"
+            name="DisplayName"
+            placeholder="Tên hiển thị"
+            [ngClass]="{
+              'is-valid': displayName.invalid && displayName.touched
+            }"
+            [(ngModel)]="model.displayName"
+            #displayName="ngModel"
+            required
+            maxlength="50"
+            pattern="^[a-zA-Z0-9]+\.[a-zA-Z0-9]+$"
+          />
+          <div
+            *ngIf="displayName.invalid && displayName.touched"
+            class="error-message"
+          >
+            <div *ngIf="displayName.errors?.['required']">
+              Vui lòng nhập tên hiển thị!
             </div>
+            <div *ngIf="displayName.errors?.['maxlength']">
+              Tên hiển thị không được quá 50 ký tự!
+            </div>
+            <div *ngIf="permissionName.errors?.['pattern']">
+              Tên quyền phải phân tách bằng dấu chấm (GroupName.Action)!
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="box-form">
-                <!-- Trạng thái -->
-                <div class="form-group input">
-                    <div class="form-group input">
-                        <label>Trạng thái</label>
-                        <div class="box-container">
-                            <div class="group-status">
-                                <mat-radio-group [(ngModel)]="model.status" name="Status">
-                                    <mat-radio-button *ngFor="let status of statuses" [value]="status.value">
-                                        {{ status.name }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                        </div>
-                        <div *ngIf="model.status == null" class="error-message">
-                            Vui lòng chọn trạng thái!
-                        </div>
-                    </div>
-                </div>
+      <div class="box-form">
+        <!-- Trạng thái -->
+        <div class="form-group input">
+          <div class="form-group input">
+            <label>Trạng thái</label>
+            <div class="box-container">
+              <div class="group-status">
+                <mat-radio-group [(ngModel)]="model.status" name="Status">
+                  <mat-radio-button
+                    *ngFor="let status of statuses"
+                    [value]="status.value"
+                  >
+                    {{ status.name }}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
             </div>
+            <div *ngIf="model.status == null" class="error-message">
+              Vui lòng chọn trạng thái!
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="form-group btn">
-                <button [disabled]="isLoading" class="btn-primary">
-                    <ng-container *ngIf="isLoading; else notLoading">
-                        <span>Xin chờ!</span>
-                    </ng-container>
-                    <ng-template #notLoading>Thêm mới</ng-template>
-                </button>
-                <a routerLink="/admin/permission-manager" class="btn-secondary"> Trở lại </a>
-            </div>
-        </form>
-    </section>
+      <div class="form-group btn">
+        <button [disabled]="isLoading" class="btn-primary">
+          <ng-container *ngIf="isLoading; else notLoading">
+            <span>Xin chờ!</span>
+          </ng-container>
+          <ng-template #notLoading>Thêm mới</ng-template>
+        </button>
+        <a routerLink="/admin/permission-manager" class="btn-secondary">
+          Trở lại
+        </a>
+      </div>
+    </form>
+  </section>
 </div>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
@@ -143,14 +143,26 @@ export class RoleCreateComponent implements OnInit {
   }
 
   getSelectedMenuIds(): number[] {
-    const selectedIds = this.menu
-      .filter((menu) => this.selectedMenu[menu.id])
+    var perIds = this.getSelectedPermissionIds();
+
+    const selectedMenuIds = this.menu
+      .filter((menu) => {
+        return this.permissions.some((permission) => {
+          const idMatch = perIds.includes(permission.id);
+          const displayNameMatch = menu.displayName == permission.groupName;
+          const permissionNameMatch =
+            permission.permissionName.includes('View');
+          return idMatch && displayNameMatch && permissionNameMatch;
+        });
+      })
       .map((menu) => menu.id);
-    this.model.menuIds = selectedIds;
-    return selectedIds;
+    this.model.menuIds = selectedMenuIds;
+    return selectedMenuIds;
   }
 
   createRole(): void {
+    this.getSelectedPermissionIds();
+    this.getSelectedMenuIds();
     this.roleService.createRole(this.model).subscribe({
       next: (response) => {
         this.isLoading = false;
@@ -166,8 +178,26 @@ export class RoleCreateComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    if (this.isLoading) {
+  isStatusSelected(): boolean {
+    return this.model.status != null;
+  }
+
+  isPermissionSelected(): boolean {
+    return Object.values(this.selectedPermission).some(
+      (value) => value === true
+    );
+  }
+
+  onSubmit(form: NgForm) {
+    if (
+      form.invalid ||
+      !this.isStatusSelected() ||
+      !this.isPermissionSelected()
+    ) {
+      // Đánh dấu tất cả các trường là "touched" để hiển thị lỗi
+      Object.keys(form.controls).forEach((controlName) => {
+        form.controls[controlName].markAsTouched();
+      });
       return;
     }
     this.isLoading = true;

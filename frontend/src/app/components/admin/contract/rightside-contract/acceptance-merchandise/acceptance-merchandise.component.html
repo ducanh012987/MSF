@@ -1,0 +1,136 @@
+<div class="panel-group">
+  <div class="title-heading">
+    <h4 class="panel-title">Danh sách phiếu nghiệm thu</h4>
+  </div>
+  <div class="panel-body">
+    <form>
+      <p-table
+        #dt
+        [value]="customers"
+        dataKey="name"
+        [rowHover]="true"
+        [loading]="loading"
+        [scrollable]="true"
+        [filterDelay]="0"
+        [paginator]="true"
+        [rows]="10"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="text-center" style="width: 40px">
+              <p-tableHeaderCheckbox />
+            </th>
+            <th class="text-center" style="width: 40px">STT</th>
+            <th class="text-center">Người nghiệm thu</th>
+            <th class="text-center">Ngày nghiệm thu</th>
+            <th class="text-center">Ghi chú</th>
+            <th class="text-center">File</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+          <tr>
+            <td class="text-center">
+              <p-tableCheckbox [value]="customer" />
+            </td>
+            <td class="text-center">{{ customer.id }}</td>
+            <td class="text-center">{{ customer.country.name }}</td>
+            <td class="text-center">{{ customer.company }}</td>
+            <td>
+              {{ customer.representative.name }}
+            </td>
+            <td>{{ customer.name }}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6" class="text-center">Không có bản ghi nào!</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </form>
+  </div>
+</div>
+
+<div class="panel-group" style="margin-top: 15px">
+  <div class="title-heading">
+    <h4 class="panel-title">Danh sách hàng hoá nghiệm thu</h4>
+  </div>
+  <div class="panel-body">
+    <form>
+      <div class="main-action">
+        <button pButton class="btn-action add" disabled>
+          <ng-icon class="icon" name="matAddOutline"></ng-icon>
+          <span>Thêm mới</span>
+        </button>
+        <button pButton class="btn-action delete" disabled>
+          <ng-icon class="icon" name="matDeleteForeverOutline"></ng-icon>
+          <span>Xoá</span>
+        </button>
+      </div>
+      <p-table
+        #dt
+        class="tableStyle"
+        [value]="customers"
+        dataKey="name"
+        [rowHover]="true"
+        [loading]="loading"
+        [scrollable]="true"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="text-center" style="width: 40px">
+              <p-tableHeaderCheckbox />
+            </th>
+            <th class="text-center" style="width: 40px">STT</th>
+            <th class="text-center">Nhóm hàng</th>
+            <th class="text-center">Loại hàng hoá</th>
+            <th class="text-center">Mã hàng</th>
+            <th class="text-center">Tên hàng</th>
+            <th class="text-center">Đơn vị tính</th>
+            <th class="text-center">Số lượng</th>
+            <th class="text-center">Năm sản xuất</th>
+            <th class="text-center">Nguồn kinh phí</th>
+            <th class="text-center">Model</th>
+            <th class="text-center">Hãng sản xuất</th>
+            <th class="text-center">Xuất xứ</th>
+            <th class="text-center">Đơn giá</th>
+            <th class="text-center">Thành tiền</th>
+            <th class="text-center">Chi tiết</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+          <tr>
+            <td class="text-center">
+              <p-tableCheckbox [value]="customer" />
+            </td>
+            <td class="text-center">{{ customer.id }}</td>
+            <td class="text-center">{{ customer.country.name }}</td>
+            <td class="text-center">{{ customer.company }}</td>
+            <td>
+              {{ customer.representative.name }}
+            </td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.name }}</td>
+            <td class="text-center">{{ customer.id }}</td>
+            <td class="text-center">{{ customer.country.name }}</td>
+            <td class="text-center">{{ customer.company }}</td>
+            <td>
+              {{ customer.representative.name }}
+            </td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.name }}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="16" class="text-center">Không có bản ghi nào!</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </form>
+  </div>
+</div>
