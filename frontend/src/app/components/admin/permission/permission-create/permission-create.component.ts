@@ -3,7 +3,7 @@ import { PermissionService } from '../../../../services/permission/permission.se
 import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 
@@ -27,7 +27,11 @@ import { MatRadioModule } from '@angular/material/radio';
   ],
 })
 export class PermissionCreateComponent {
-  model: any = {};
+  model: any = {
+    permissionName: '',
+    displayName: '',
+    status: null,
+  };
   isLoading: boolean = false;
 
   statuses = [
@@ -58,8 +62,12 @@ export class PermissionCreateComponent {
     });
   }
 
-  onSubmit() {
-    if (this.isLoading) {
+  onSubmit(form: NgForm): void {
+    if (form.invalid) {
+      // Đánh dấu tất cả các trường là "touched" để hiển thị lỗi
+      Object.keys(form.controls).forEach((controlName) => {
+        form.controls[controlName].markAsTouched();
+      });
       return;
     }
     this.isLoading = true;

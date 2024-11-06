@@ -1,32 +1,54 @@
 <div class="pagination">
-    <div class="totalUser">
-        <p>Tổng số người dùng: <b>{{ totalUsers }}</b></p>
-    </div>
-    <div class="page">
-        <!-- Nút về trang đầu -->
-        <button (click)="goToFirstPage()" [disabled]="currentPage === 1" class="gotopage">
-            <ng-icon class="icon" name="matFirstPageOutline"></ng-icon>
-        </button>
+  <div class="totalUser">
+    <p>
+      Tổng số dữ liệu: <b>{{ totalUsers }}</b>
+    </p>
+  </div>
+  <div class="page">
+    <!-- Nút về trang đầu -->
+    <button
+      (click)="goToFirstPage()"
+      [disabled]="currentPage === 1"
+      class="gotopage"
+    >
+      <ng-icon class="icon" name="matFirstPageOutline"></ng-icon>
+    </button>
 
-        <!-- Nút về trang trước -->
-        <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="gotopage">
-            <ng-icon class="icon" name="matKeyboardArrowLeftOutline"></ng-icon>
-        </button>
+    <!-- Nút về trang trước -->
+    <button
+      (click)="goToPreviousPage()"
+      [disabled]="currentPage === 1"
+      class="gotopage"
+    >
+      <ng-icon class="icon" name="matKeyboardArrowLeftOutline"></ng-icon>
+    </button>
 
-        <!-- Nút chọn trang -->
-        <button *ngFor="let page of pages" (click)="onPageChange(page)" [class.active]="page === currentPage"
-            class="pagenumber">
-            {{ page }}
-        </button>
+    <!-- Nút chọn trang -->
+    <button
+      *ngFor="let page of pages"
+      (click)="onPageChange(page)"
+      [class.active]="page === currentPage"
+      class="pagenumber"
+    >
+      {{ page }}
+    </button>
 
-        <!-- Nút về trang sau -->
-        <button (click)="goToNextPage()" [disabled]="currentPage === totalPages" class="gotopage">
-            <ng-icon class="icon" name="matKeyboardArrowRightOutline"></ng-icon>
-        </button>
+    <!-- Nút về trang sau -->
+    <button
+      (click)="goToNextPage()"
+      [disabled]="currentPage === totalPages"
+      class="gotopage"
+    >
+      <ng-icon class="icon" name="matKeyboardArrowRightOutline"></ng-icon>
+    </button>
 
-        <!-- Nút về trang cuối -->
-        <button (click)="goToLastPage()" [disabled]="currentPage === totalPages" class="gotopage">
-            <ng-icon class="icon" name="matLastPageOutline"></ng-icon>
-        </button>
-    </div>
+    <!-- Nút về trang cuối -->
+    <button
+      (click)="goToLastPage()"
+      [disabled]="currentPage === totalPages"
+      class="gotopage"
+    >
+      <ng-icon class="icon" name="matLastPageOutline"></ng-icon>
+    </button>
+  </div>
 </div>

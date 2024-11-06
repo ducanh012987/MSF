@@ -28,7 +28,10 @@ namespace Business.Services
         {
             // Kiểm tra username
             var user = await GetUserByUsername(loginRequest.Username!);
-            if (user == null)
+            // kiểm tra mật khẩu
+            var passwordVerifyResult = VerifyPassword(user.Password!, loginRequest.Password!);
+
+            if (user == null || !passwordVerifyResult)
             {
                 throw new CustomException(StatusCodes.Status400BadRequest, "Sai tài khoản hoặc mật khẩu!");
             }
@@ -36,14 +39,6 @@ namespace Business.Services
             if (user.Locked == true)
             {
                 throw new CustomException(StatusCodes.Status400BadRequest, "Tài khoản của bạn bị khoá!");
-            }
-
-            // kiểm tra mật khẩu
-            var passwordVerifyResult = VerifyPassword(user.Password!, loginRequest.Password!);
-
-            if (!passwordVerifyResult)
-            {
-                throw new CustomException(StatusCodes.Status400BadRequest, "Sai tài khoản hoặc mật khẩu!");
             }
 
             var token = _tokenRepository.GenerateToken(user);

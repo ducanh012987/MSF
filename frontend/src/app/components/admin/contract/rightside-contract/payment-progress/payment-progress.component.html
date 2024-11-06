@@ -1,0 +1,47 @@
+<div class="panel-group">
+  <div class="title-heading">
+    <h4 class="panel-title">Tiến độ thanh toán</h4>
+  </div>
+  <div class="panel-body">
+    <div class="text-binding">
+      <label>Tổng giá trị hợp đồng:</label>
+      <strong> (VNĐ)</strong>
+    </div>
+    <p-table
+      #dt
+      [value]="customers"
+      dataKey="name"
+      [rowHover]="true"
+      [loading]="loading"
+      [scrollable]="true"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center" style="width: 40px">STT</th>
+          <th class="text-center">Ngày đề xuất</th>
+          <th class="text-center">Số tiền đề xuất</th>
+          <th class="text-center">Ngày chuyển tiền</th>
+          <th class="text-center">Số tiền thanh toán</th>
+          <th class="text-center">Đạt tỷ lệ %</th>
+          <th class="text-center">Ghi chú</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-customer>
+        <tr>
+          <td class="text-center">{{ customer.id }}</td>
+          <td class="text-center">{{ customer.country.name }}</td>
+          <td class="text-center">{{ customer.company }}</td>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.name }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7" class="text-center">Không có phụ lục nào!</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

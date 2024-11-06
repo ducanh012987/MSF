@@ -1,0 +1,547 @@
+<div class="panel-group">
+  <div class="title-heading">
+    <h4 class="panel-title">Nội dung hợp đồng</h4>
+  </div>
+  <div class="panel-body">
+    <div class="title-body">
+      <h4>Thông tin chung</h4>
+    </div>
+
+    <form class="form form-group" action="">
+      <div class="form-infor">
+        <label>Loại hợp đồng: <span>*</span></label>
+        <p-dropdown
+          class="form-control"
+          [options]=""
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="--Chọn loại hợp đồng--"
+          emptyMessage="Không có dữ liệu"
+          emptyFilterMessage="Không tìm thấy!"
+        ></p-dropdown>
+      </div>
+      <div class="form-infor">
+        <label>Năm kinh phí: <span>*</span></label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="Nhập năm kinh phí"
+          maxlength="4"
+          pattern="^[0-9]*$"
+          (input)="validateInput($event)"
+        />
+      </div>
+      <div class="form-infor">
+        <label>Lãnh đạo phụ trách:</label>
+        <p-dropdown
+          class="form-control"
+          [options]=""
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="--Chọn lãnh đạo duyệt--"
+          emptyMessage="Không có dữ liệu"
+          emptyFilterMessage="Không tìm thấy!"
+        ></p-dropdown>
+      </div>
+      <div class="form-infor">
+        <label>Cán bộ phụ trách: <span>*</span></label>
+        <p-dropdown
+          class="form-control"
+          [options]=""
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="--Chọn người phụ trách--"
+          emptyMessage="Không có dữ liệu"
+          emptyFilterMessage="Không tìm thấy!"
+        ></p-dropdown>
+      </div>
+      <div class="form-infor">
+        <label>Trạng thái: <span>*</span></label>
+        <p-dropdown
+          class="form-control"
+          [options]=""
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="--Chọn trạng thái--"
+          emptyMessage="Không có dữ liệu"
+          emptyFilterMessage="Không tìm thấy!"
+        ></p-dropdown>
+      </div>
+      <div class="form-infor">
+        <label>Số hợp đồng: <span>*</span></label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="Nhập số hợp đồng"
+          maxlength="50"
+        />
+      </div>
+      <div class="form-infor">
+        <label>Tên hợp đồng: <span>*</span></label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="Nhập tên hợp đồng"
+          maxlength="250"
+        />
+      </div>
+      <div class="form-infor">
+        <label>Nguồn kinh phí</label>
+        <p-dropdown
+          class="form-control"
+          [options]=""
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="--Tự động lấy từ danh sách hàng hoá--"
+          emptyMessage="Không có dữ liệu"
+          emptyFilterMessage="Không tìm thấy!"
+        ></p-dropdown>
+      </div>
+      <div class="form-infor">
+        <label>Đơn vị cung cấp: <span>*</span></label>
+        <p-dropdown
+          class="form-control"
+          [options]=""
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="--Chọn công ty--"
+          emptyMessage="Không có dữ liệu"
+          emptyFilterMessage="Không tìm thấy!"
+        ></p-dropdown>
+      </div>
+      <div class="form-infor">
+        <label>Ngày ký: <span>*</span></label>
+        <p-calendar
+          class="form-control"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          [dateFormat]="'dd/mm/yy'"
+          inputId="icondisplay"
+          placeholder="--/--/----"
+        />
+      </div>
+      <div class="form-infor">
+        <label>Ngày có hiệu lực: <span>*</span></label>
+        <p-calendar
+          class="form-control"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          [dateFormat]="'dd/mm/yy'"
+          inputId="icondisplay"
+          placeholder="--/--/----"
+        />
+      </div>
+      <div class="form-infor">
+        <label>Số ngày thực hiện: <span>*</span></label>
+        <input
+          class="form-control"
+          pInputText
+          type="text"
+          placeholder="Nhập số ngày thực hiện"
+          maxlength="5"
+          pattern="^[0-9]*$"
+          (input)="validateInput($event)"
+        />
+      </div>
+      <div class="form-infor">
+        <label>Tiến độ hợp đồng:</label>
+        <input class="form-control" pInputText type="text" disabled />
+      </div>
+      <div class="form-infor">
+        <label>Ngày kết thúc hợp đồng:</label>
+        <p-calendar
+          class="form-control"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          [dateFormat]="'dd/mm/yy'"
+          inputId="icondisplay"
+          placeholder="--/--/----"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Giá trị hợp đồng ban đầu:</label>
+        <input class="form-control" pInputText type="text" disabled />
+      </div>
+      <div class="form-infor">
+        <label>Giá trị thực tế: <span>*</span></label>
+        <input class="form-control" pInputText type="text" disabled />
+      </div>
+      <div class="form-infor">
+        <label>Đã thanh toán:</label>
+        <input class="form-control" pInputText type="text" value="0" disabled />
+      </div>
+      <div class="form-infor">
+        <label>Còn thanh toán:</label>
+        <input class="form-control" pInputText type="text" disabled />
+      </div>
+      <div class="form-infor note">
+        <label>Ghi chú:</label>
+        <input class="form-control" pInputText type="text" maxlength="500" />
+      </div>
+      <div class="form-infor file">
+        <label>Tải file:</label>
+        <div class="file-upload">
+          <label for="fileInput" class="file-label">
+            <ng-icon class="icon" name="matFolderZipOutline"></ng-icon>
+            <span>Chọn tệp</span>
+          </label>
+          <input
+            class="form-control"
+            type="file"
+            id="fileInput"
+            placeholder="Không có tệp tin được chọn"
+          />
+        </div>
+      </div>
+    </form>
+
+    <div class="container-fluid">
+      <h4>Chi tiết hàng hoá</h4>
+    </div>
+
+    <div class="container-fluid">
+      <div class="form-action">
+        <div class="action">
+          <input
+            class="form-control"
+            pInputText
+            type="text"
+            placeholder="Tìm kiếm theo mã, tên, model"
+          />
+          <button pButton class="btn-action search">
+            <ng-icon class="icon" name="matSearchOutline"></ng-icon>
+            <span>Tìm kiếm</span>
+          </button>
+        </div>
+        <div class="action">
+          <button pButton class="btn-action add" (click)="showDialog()">
+            <ng-icon class="icon" name="matAddOutline"></ng-icon>
+            <span>Thêm</span>
+          </button>
+          <button pButton class="btn-action delete">
+            <ng-icon class="icon" name="matDeleteForeverOutline"></ng-icon>
+            <span>Xoá</span>
+          </button>
+        </div>
+
+        <div class="model-dialog" style="position: absolute">
+          <p-dialog
+            header="Chọn hàng hoá"
+            [(visible)]="visible"
+            [modal]="true"
+            [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+            [style]="{ width: '90vw' }"
+            [draggable]="false"
+            [resizable]="false"
+            appendTo="body"
+          >
+            <form class="model-body">
+              <div class="content-table" style="width: 49%">
+                <div class="main-action">
+                  <input
+                    class="form-control"
+                    pInputText
+                    type="text"
+                    placeholder="Tìm kiếm..."
+                    maxlength="250"
+                  />
+                  <button pButton class="btn-action search">
+                    <ng-icon class="icon" name="matSearchOutline"></ng-icon>
+                    <span>Tìm kiếm</span>
+                  </button>
+                </div>
+
+                <p-fieldset legend="Danh sách hàng hoá đã chọn">
+                  <p-table
+                    #dt
+                    [value]="customers"
+                    [(selection)]="selectedCustomers"
+                    dataKey="name"
+                    [rowHover]="true"
+                    [loading]="loading"
+                    [scrollable]="true"
+                    scrollHeight="365px"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [filterDelay]="0"
+                    [globalFilterFields]="[
+                      'name',
+                      'country.name',
+                      'representative.name',
+                      'status'
+                    ]"
+                  >
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th class="text-center" style="width: 37px">
+                          <p-tableHeaderCheckbox />
+                        </th>
+                        <th class="text-center" style="width: 40px">STT</th>
+                        <th class="text-center">Nhóm hàng</th>
+                        <th class="text-center">Loại hàng</th>
+                        <th class="text-center">
+                          Mã hàng <br />
+                          Tên hàng
+                        </th>
+                        <th class="text-center" style="width: 90px">
+                          Đơn vị <br />
+                          tính
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                      <tr>
+                        <td class="text-center">
+                          <p-tableCheckbox [value]="customer" />
+                        </td>
+                        <td class="text-center">{{ customer.id }}</td>
+                        <td class="text-center">{{ customer.country.name }}</td>
+                        <td class="text-center">{{ customer.company }}</td>
+                        <td>
+                          {{ customer.representative.name }}
+                        </td>
+                        <td>{{ customer.name }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </p-fieldset>
+
+                <div class="page-switch">
+                  <p-paginator
+                    (onPageChange)="onPageChange($event)"
+                    [first]="first"
+                    [rows]="rows"
+                    [totalRecords]="120"
+                    [rowsPerPageOptions]="[10, 20, 40, 50, 100]"
+                  />
+                </div>
+              </div>
+              <div class="content-table" style="display: block; width: 10%">
+                <div
+                  class="text-center"
+                  style="margin-top: 250px; padding: 10px"
+                >
+                  <button pButton class="btn-action-m">
+                    <ng-icon
+                      class="icon"
+                      name="matArrowForwardOutline"
+                    ></ng-icon>
+                  </button>
+                  <button pButton class="btn-action-m">
+                    <ng-icon class="icon" name="matArrowBackOutline"></ng-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="content-table" style="width: 49%">
+                <div class="main-action padding-px"></div>
+                <p-fieldset legend="Danh sách hàng hoá">
+                  <p-table
+                    #dt
+                    [value]="customers"
+                    [(selection)]="selectedCustomers"
+                    dataKey="name"
+                    [rowHover]="true"
+                    [loading]="loading"
+                    [scrollable]="true"
+                    scrollHeight="365px"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [filterDelay]="0"
+                    [globalFilterFields]="[
+                      'name',
+                      'country.name',
+                      'representative.name',
+                      'status'
+                    ]"
+                  >
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th class="text-center" style="width: 37px">
+                          <p-tableHeaderCheckbox />
+                        </th>
+                        <th class="text-center" style="width: 40px">STT</th>
+                        <th class="text-center">Nhóm hàng</th>
+                        <th class="text-center">Loại hàng</th>
+                        <th class="text-center">
+                          Mã hàng <br />
+                          Tên hàng
+                        </th>
+                        <th class="text-center" style="width: 90px">
+                          Đơn vị <br />
+                          tính
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                      <tr>
+                        <td class="text-center">
+                          <p-tableCheckbox [value]="customer" />
+                        </td>
+                        <td class="text-center">{{ customer.id }}</td>
+                        <td class="text-center">{{ customer.country.name }}</td>
+                        <td class="text-center">{{ customer.company }}</td>
+                        <td>
+                          {{ customer.representative.name }}
+                        </td>
+                        <td>{{ customer.name }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </p-fieldset>
+              </div>
+            </form>
+            <ng-template pTemplate="footer">
+              <button pButton class="btn-action">
+                <span>Xác nhận</span>
+              </button>
+            </ng-template>
+          </p-dialog>
+        </div>
+      </div>
+
+      <div class="content-table">
+        <p-table
+          #dt
+          [value]="customers"
+          [(selection)]="selectedCustomers"
+          dataKey="name"
+          [rowHover]="true"
+          [loading]="loading"
+          [scrollable]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [filterDelay]="0"
+          [globalFilterFields]="[
+            'name',
+            'country.name',
+            'representative.name',
+            'status'
+          ]"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="text-center" style="width: 40px">
+                <p-tableHeaderCheckbox />
+              </th>
+              <th class="text-center" style="width: 50px">STT</th>
+              <th class="text-center" style="min-width: 150px">Nhóm hàng</th>
+              <th class="text-center" style="width: 200px">Loại hàng hoá</th>
+              <th class="text-center" style="min-width: 200px">Tên hàng</th>
+              <th class="text-center" style="min-width: 100px">Mã hàng</th>
+              <th class="text-center">Đơn vị tính</th>
+              <th class="text-center" style="width: 200px">Nguồn kinh phí</th>
+              <th class="text-center" style="width: 95px">Năm sản xuất</th>
+              <th class="text-center" style="width: 95px">Model</th>
+              <th class="text-center">Hãng sản xuất</th>
+              <th class="text-center">Xuất xứ</th>
+              <th class="text-center" style="width: 95px">Số lượng HĐ</th>
+              <th class="text-center">Đơn giá HĐ</th>
+              <th class="text-center">Thành tiền</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-customer>
+            <tr>
+              <td class="text-center">
+                <p-tableCheckbox [value]="customer" />
+              </td>
+              <td class="text-center">{{ customer.id }}</td>
+              <td class="text-center">{{ customer.country.name }}</td>
+              <td class="text-center">{{ customer.company }}</td>
+              <td class="text-center">{{ customer.representative.name }}</td>
+              <td class="text-center">{{ customer.name }}</td>
+              <td class="text-center">{{ customer.country.name }}</td>
+              <td>
+                <p-dropdown
+                  class="form-control"
+                  [options]="customers"
+                  optionLabel="name"
+                  [filter]="true"
+                  filterBy="name"
+                  [showClear]="true"
+                  placeholder="Chọn nguồn kinh phí"
+                  emptyMessage="Không có dữ liệu"
+                  emptyFilterMessage="Không tìm được kết quả"
+                  appendTo="body"
+                ></p-dropdown>
+              </td>
+              <td>
+                <input
+                  class="form-control text-right"
+                  pInputText
+                  type="text"
+                  maxlength="4"
+                  pattern="^[0-9]*$"
+                  (input)="validateInput($event)"
+                />
+              </td>
+              <td>
+                <input
+                  class="form-control"
+                  pInputText
+                  type="text"
+                  maxlength="50"
+                />
+              </td>
+              <td>
+                <p-dropdown
+                  class="form-control"
+                  [options]="[]"
+                  optionLabel="name"
+                  [filter]="true"
+                  filterBy="name"
+                  [showClear]="true"
+                  emptyMessage="Không có dữ liệu"
+                  emptyFilterMessage="Không tìm được kết quả"
+                  appendTo="body"
+                ></p-dropdown>
+              </td>
+              <td>
+                <p-dropdown
+                  class="form-control"
+                  [options]="[]"
+                  optionLabel="name"
+                  [filter]="true"
+                  filterBy="name"
+                  [showClear]="true"
+                  emptyMessage="Không có dữ liệu"
+                  emptyFilterMessage="Không tìm được kết quả"
+                  appendTo="body"
+                ></p-dropdown>
+              </td>
+              <td>
+                <input
+                  class="form-control text-right"
+                  pInputText
+                  type="text"
+                  maxlength="4"
+                />
+              </td>
+              <td>
+                <input
+                  class="form-control text-right"
+                  pInputText
+                  type="text"
+                  maxlength="4"
+                />
+              </td>
+              <td class="text-right">{{ customer.country.name }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,46 +1,61 @@
 <nav>
-    <ul class="navbar-nav-accordion" id="accordionSidebar">
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand" href="/admin">
-            <!-- <div class="sidebar-brand-icon"></div> -->
-            <div class="sidebar-brand-text">
-                <p>ADMIN</p>
-            </div>
-        </a>
+  <ul *ngIf="!isSidebar" class="navbar-nav-accordion" id="accordionSidebar">
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand" href="/admin">
+      <!-- <div class="sidebar-brand-icon"></div> -->
+      <div class="sidebar-brand-text">
+        <p>ADMIN</p>
+      </div>
+    </a>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0" />
 
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="/home">
-                <ng-icon class="icon-matHomeOutline" name="matHomeOutline"></ng-icon>
-                <span>Dashboard</span></a>
-        </li>
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+      <a class="nav-link" routerLink="dashboard">
+        <ng-icon class="icon-matHomeOutline" name="matHomeOutline"></ng-icon>
+        <span>Dashboard</span></a
+      >
+    </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+    <!-- Divider -->
+    <hr class="sidebar-divider" />
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Quản trị
+    <!-- Heading -->
+    <div class="sidebar-heading">Quản trị</div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" routerLink="contract">
+        <span>Hợp đồng</span>
+      </a>
+      <a class="nav-link collapsed" (click)="category()">
+        <span>Danh mục</span>
+        <ng-icon
+          *ngIf="!isCategory"
+          class="icon-matKeyboardArrow"
+          name="matKeyboardArrowDownOutline"
+        ></ng-icon>
+        <ng-icon
+          *ngIf="isCategory"
+          class="icon-matKeyboardArrow"
+          name="matKeyboardArrowUpOutline"
+        ></ng-icon>
+      </a>
+      <div
+        *ngIf="isCategory"
+        id="collapsePages"
+        class="collapse"
+        aria-labelledby="headingPages"
+        data-parent="#accordionSidebar"
+      >
+        <div class="collapse-inner rounded" *ngFor="let item of menu">
+          <a class="collapse-item" [routerLink]="item.url">
+            <span>{{ item.displayName }}</span>
+          </a>
         </div>
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" (click)="category()">
-                <span>Danh mục</span>
-                <ng-icon *ngIf="!isCategory" class="icon-matKeyboardArrow" name="matKeyboardArrowDownOutline"></ng-icon>
-                <ng-icon *ngIf="isCategory" class="icon-matKeyboardArrow" name="matKeyboardArrowUpOutline"></ng-icon>
-            </a>
-            <div *ngIf="isCategory" id="collapsePages" class="collapse" aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <div class="collapse-inner rounded" *ngFor="let item of menu">
-                    <a class="collapse-item" [routerLink]="item.url">
-                        <span>{{item.displayName}}</span>
-                    </a>
-                </div>
-            </div>
-        </li>
-    </ul>
+      </div>
+    </li>
+  </ul>
 </nav>

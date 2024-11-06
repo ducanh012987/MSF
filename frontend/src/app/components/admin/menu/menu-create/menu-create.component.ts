@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
@@ -55,8 +55,16 @@ export class MenuCreateComponent {
     });
   }
 
-  onSubmit() {
-    if (this.isLoading) {
+  isStatusSelected(): boolean {
+    return this.model.status != null;
+  }
+
+  onSubmit(form: NgForm) {
+    if (form.invalid || !this.isStatusSelected()) {
+      // Đánh dấu tất cả các trường là "touched" để hiển thị lỗi
+      Object.keys(form.controls).forEach((controlName) => {
+        form.controls[controlName].markAsTouched();
+      });
       return;
     }
     this.isLoading = true;

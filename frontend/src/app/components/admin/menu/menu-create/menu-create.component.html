@@ -1,57 +1,80 @@
 <div class="menu-create-container">
-    <section class="breadcumrb">
-        <ol class="breadcumrb-nav">
-            <li>
-                <ng-icon class="icon" name="matHomeOutline"></ng-icon>
-            </li>
-            <li class="breadcumrb-nav-item link" routerLink="/admin/menu-manager">
-                Menu
-            </li>
-            <li class="breadcumrb-nav-item">Thêm mới menu</li>
-        </ol>
-        <div class="box-breadcumrb">
-            <h3 class="breadcumrb-title">Thêm mới menu</h3>
-        </div>
-    </section>
-    <section class="main">
-        <form class="form-container" (ngSubmit)="onSubmit()" #menuCreateForm="ngForm">
-            <div class="box-form">
-                <!-- Tên hiển thị -->
-                <div class="form-group input">
-                    <label for="DisplayName">Tên hiển thị</label>
-                    <input id="DisplayName" type="text" name="DisplayName" placeholder="Tên hiển thị"
-                        [ngClass]="{'is-valid':displayName.invalid && displayName.touched}"
-                        [(ngModel)]="model.displayName" #displayName="ngModel" required maxlength="50" />
-                    <div *ngIf=" displayName.invalid && displayName.touched" class="error-message">
-                        <div *ngIf="displayName.errors?.['required']">
-                            Vui lòng nhập tên hiển thị!
-                        </div>
-                        <div *ngIf="displayName.errors?.['maxlength']">
-                            Tên hiển thị không được quá 50 ký tự!
-                        </div>
-                    </div>
-                </div>
+  <section class="breadcumrb">
+    <ol class="breadcumrb-nav">
+      <li>
+        <ng-icon class="icon" name="matHomeOutline"></ng-icon>
+      </li>
+      <li class="breadcumrb-nav-item link" routerLink="/admin/menu-manager">
+        Menu
+      </li>
+      <li class="breadcumrb-nav-item">Thêm mới menu</li>
+    </ol>
+    <div class="box-breadcumrb">
+      <h3 class="breadcumrb-title">Thêm mới menu</h3>
+    </div>
+  </section>
+  <section class="main">
+    <form
+      class="form-container"
+      (ngSubmit)="onSubmit(menuCreateForm)"
+      #menuCreateForm="ngForm"
+    >
+      <div class="box-form">
+        <!-- Tên hiển thị -->
+        <div class="form-group input">
+          <label for="DisplayName">Tên hiển thị</label>
+          <input
+            id="DisplayName"
+            type="text"
+            name="DisplayName"
+            placeholder="Tên hiển thị"
+            [ngClass]="{
+              'is-valid': displayName.invalid && displayName.touched
+            }"
+            [(ngModel)]="model.displayName"
+            #displayName="ngModel"
+            required
+            maxlength="50"
+          />
+          <div
+            *ngIf="displayName.invalid && displayName.touched"
+            class="error-message"
+          >
+            <div *ngIf="displayName.errors?.['required']">
+              Vui lòng nhập tên hiển thị!
             </div>
+            <div *ngIf="displayName.errors?.['maxlength']">
+              Tên hiển thị không được quá 50 ký tự!
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="box-form">
-                <!-- Url -->
-                <div class="form-group input">
-                    <label for="Url">Url</label>
-                    <input id="Url" type="text" name="Url" placeholder="Url"
-                        [ngClass]="{'is-valid':url.invalid && url.touched}" [(ngModel)]="model.url" #url="ngModel"
-                        required maxlength="50" />
-                    <div *ngIf=" url.invalid && url.touched" class="error-message">
-                        <div *ngIf="url.errors?.['required']">
-                            Vui lòng nhập Url!
-                        </div>
-                        <div *ngIf="url.errors?.['maxlength']">
-                            Url không được quá 50 ký tự!
-                        </div>
-                    </div>
-                </div>
+      <div class="box-form">
+        <!-- Url -->
+        <div class="form-group input">
+          <label for="Url">Url</label>
+          <input
+            id="Url"
+            type="text"
+            name="Url"
+            placeholder="Url"
+            [ngClass]="{ 'is-valid': url.invalid && url.touched }"
+            [(ngModel)]="model.url"
+            #url="ngModel"
+            required
+            maxlength="50"
+          />
+          <div *ngIf="url.invalid && url.touched" class="error-message">
+            <div *ngIf="url.errors?.['required']">Vui lòng nhập Url!</div>
+            <div *ngIf="url.errors?.['maxlength']">
+              Url không được quá 50 ký tự!
+            </div>
+          </div>
+        </div>
 
-                <!-- Icon -->
-                <!-- <div class="form-group input">
+        <!-- Icon -->
+        <!-- <div class="form-group input">
                     <label for="Icon">Icon</label>
                     <input id="Icon" type="text" name="Icon" placeholder="Icon"
                         [ngClass]="{'is-valid':icon.invalid && icon.touched}" [(ngModel)]="model.icon" #icon="ngModel"
@@ -65,38 +88,41 @@
                         </div>
                     </div>
                 </div> -->
-            </div>
+      </div>
 
-            <div class="box-form">
-                <!-- Trạng thái -->
-                <div class="form-group input">
-                    <div class="form-group input">
-                        <label>Trạng thái</label>
-                        <div class="box-container">
-                            <div class="group-status">
-                                <mat-radio-group [(ngModel)]="model.status" name="Status">
-                                    <mat-radio-button *ngFor="let status of statuses" [value]="status.value">
-                                        {{ status.name }}
-                                    </mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                        </div>
-                        <div *ngIf="model.status == null" class="error-message">
-                            Vui lòng chọn trạng thái!
-                        </div>
-                    </div>
-                </div>
+      <div class="box-form">
+        <!-- Trạng thái -->
+        <div class="form-group input">
+          <div class="form-group input">
+            <label>Trạng thái</label>
+            <div class="box-container">
+              <div class="group-status">
+                <mat-radio-group [(ngModel)]="model.status" name="Status">
+                  <mat-radio-button
+                    *ngFor="let status of statuses"
+                    [value]="status.value"
+                  >
+                    {{ status.name }}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
             </div>
+            <div *ngIf="!isStatusSelected()" class="error-message">
+              Vui lòng chọn trạng thái!
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="form-group btn">
-                <button [disabled]="isLoading" class="btn-primary">
-                    <ng-container *ngIf="isLoading; else notLoading">
-                        <span>Xin chờ!</span>
-                    </ng-container>
-                    <ng-template #notLoading>Thêm mới</ng-template>
-                </button>
-                <a routerLink="/admin/menu-manager" class="btn-secondary"> Trở lại </a>
-            </div>
-        </form>
-    </section>
+      <div class="form-group btn">
+        <button [disabled]="isLoading" class="btn-primary">
+          <ng-container *ngIf="isLoading; else notLoading">
+            <span>Xin chờ!</span>
+          </ng-container>
+          <ng-template #notLoading>Thêm mới</ng-template>
+        </button>
+        <a routerLink="/admin/menu-manager" class="btn-secondary"> Trở lại </a>
+      </div>
+    </form>
+  </section>
 </div>

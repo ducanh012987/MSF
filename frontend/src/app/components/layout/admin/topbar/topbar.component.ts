@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
+  matMenuOutline,
   matNotificationsOutline,
   matPersonOutline,
   matSearchOutline,
@@ -10,6 +11,7 @@ import { AuthService } from '../../../../services/auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { SearchService } from '../../../../services/search/search.service';
 import { FormsModule } from '@angular/forms';
+import { SidebarService } from '../../../../services/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-topbar',
@@ -21,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     matSearchOutline,
     matNotificationsOutline,
     matPersonOutline,
+    matMenuOutline,
   }),
 })
 export class TopbarComponent {
@@ -29,7 +32,8 @@ export class TopbarComponent {
 
   constructor(
     private authService: AuthService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private sidebarService: SidebarService
   ) {}
 
   avatar() {
@@ -42,5 +46,9 @@ export class TopbarComponent {
 
   onSearchChange() {
     this.searchService.setSearchQuery(this.searchText);
+  }
+
+  toggleSidebar() {
+    this.sidebarService.toggleSidebar();
   }
 }

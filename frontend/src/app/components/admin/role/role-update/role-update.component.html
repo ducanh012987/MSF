@@ -1,110 +1,126 @@
 <div class="role-update-container">
-    <section class="breadcumrb">
-        <ol class="breadcumrb-nav">
-            <li>
-                <ng-icon class="icon" name="matHomeOutline"></ng-icon>
-            </li>
-            <li class="breadcumrb-nav-item link" routerLink="/admin/role-manager">
-                Quyền
-            </li>
-            <li class="breadcumrb-nav-item">Cập nhật quyền</li>
-        </ol>
-        <div class="box-breadcumrb">
-            <h3 class="breadcumrb-title">Cập nhật quyền</h3>
+  <section class="breadcumrb">
+    <ol class="breadcumrb-nav">
+      <li>
+        <ng-icon class="icon" name="matHomeOutline"></ng-icon>
+      </li>
+      <li class="breadcumrb-nav-item link" routerLink="/admin/role-manager">
+        Vai trò
+      </li>
+      <li class="breadcumrb-nav-item">Cập nhật vai trò</li>
+    </ol>
+    <div class="box-breadcumrb">
+      <h3 class="breadcumrb-title">Cập nhật vai trò</h3>
+    </div>
+  </section>
+  <section class="main">
+    <form
+      class="form-container"
+      (ngSubmit)="onSubmit(roleUpdateForm)"
+      #roleUpdateForm="ngForm"
+    >
+      <div class="box-form">
+        <div class="form-group input">
+          <label for="Id">ID</label>
+          <input
+            id="Id"
+            type="text"
+            name="Id"
+            [(ngModel)]="model.id"
+            #id="ngModel"
+            required
+            readonly
+            class="disabled-input"
+          />
         </div>
-    </section>
-    <section class="main">
-        <form class="form-container" (ngSubmit)="onSubmit()" #roleUpdateForm="ngForm">
-            <div class="box-form">
-                <div class="form-group input">
-                    <label for="Id">ID</label>
-                    <input id="Id" type="text" name="Id" [(ngModel)]="model.id" #id="ngModel" required readonly
-                        class="disabled-input" />
-                </div>
 
-                <!-- Tên quyền -->
-                <div class="form-group input">
-                    <label for="Rolename">Tên quyền</label>
-                    <input id="Rolename" type="text" name="Rolename" placeholder="Tên quyền"
-                        [ngClass]="{'is-valid':roleName.invalid && roleName.touched}" [(ngModel)]="model.roleName"
-                        #roleName="ngModel" required maxlength="50" />
-                    <div *ngIf=" roleName.invalid && roleName.touched" class="error-message">
-                        <div *ngIf="roleName.errors?.['required']">
-                            Vui lòng nhập tên quyền!
-                        </div>
-                        <div *ngIf="roleName.errors?.['maxlength']">
-                            Tên quyền không được quá 50 ký tự!
-                        </div>
-                    </div>
-                </div>
+        <!-- Tên quyền -->
+        <div class="form-group input">
+          <label for="Rolename">Tên quyền</label>
+          <input
+            id="Rolename"
+            type="text"
+            name="Rolename"
+            placeholder="Tên quyền"
+            [ngClass]="{ 'is-valid': roleName.invalid && roleName.touched }"
+            [(ngModel)]="model.roleName"
+            #roleName="ngModel"
+            required
+            maxlength="50"
+          />
+          <div
+            *ngIf="roleName.invalid && roleName.touched"
+            class="error-message"
+          >
+            <div *ngIf="roleName.errors?.['required']">
+              Vui lòng nhập tên quyền!
             </div>
-            <div class="box-form">
-                <!-- Trạng thái -->
-                <div class="form-group input">
-                    <label>Trạng thái</label>
-                    <div class="box-container">
-                        <div class="group-status">
-                            <mat-radio-group [(ngModel)]="model.status" name="Status">
-                                <mat-radio-button *ngFor="let status of statuses" [value]="status.value">
-                                    {{ status.name }}
-                                </mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                    </div>
-                </div>
-                <!-- Menu -->
-                <div class="form-group input">
-                    <label>Permissions</label>
-                    <div class="box-container">
-                        <div class="group-menu">
-                            <mat-checkbox *ngFor="let menu of filteredMenu" [(ngModel)]="selectedMenu[menu.id]"
-                                (ngModelChange)="onCheckboxMenuChange($event, menu)" [name]="menu.displayName">
-                                {{ menu.displayName }}
-                            </mat-checkbox>
-                        </div>
-                    </div>
-                    <div *ngIf="getSelectedMenuIds().length == 0" class="error-message">
-                        Vui lòng chọn menu!
-                    </div>
-                </div>
-                <!-- Permission -->
-                <div class="form-group input">
-                    <label>Permissions</label>
-                    <div class="box-container">
-                        <!-- Cột bên trái: danh sách nhóm -->
-                        <div class="group-list">
-                            <ul>
-                                <li *ngFor="let group of groupedPermissions | keyvalue"
-                                    [class.active]="group.key === selectedGroup" (click)="selectGroup(group.key)">
-                                    {{ group.key }}
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Cột bên phải: checkbox thuộc nhóm đã chọn -->
-                        <div class="group-permissions">
-                            <mat-checkbox *ngFor="let permission of groupedPermissions[selectedGroup]"
-                                [(ngModel)]="selectedPermission[permission.id]"
-                                (ngModelChange)="onCheckboxPermissionChange($event, permission)"
-                                [name]="permission.permissionName">
-                                {{ permission.permissionName.split('.')[1] }}
-                            </mat-checkbox>
-                        </div>
-                    </div>
-                    <div *ngIf="getSelectedPermissionIds().length == 0" class="error-message">
-                        Vui lòng chọn permission!
-                    </div>
-                </div>
+            <div *ngIf="roleName.errors?.['maxlength']">
+              Tên quyền không được quá 50 ký tự!
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-form">
+        <!-- Trạng thái -->
+        <div class="form-group input">
+          <label>Trạng thái</label>
+          <div class="box-container">
+            <div class="group-status">
+              <mat-radio-group [(ngModel)]="model.status" name="Status">
+                <mat-radio-button
+                  *ngFor="let status of statuses"
+                  [value]="status.value"
+                >
+                  {{ status.name }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+        <!-- Permission -->
+        <div class="form-group input">
+          <label>Permissions</label>
+          <div class="box-container">
+            <!-- Cột bên trái: danh sách nhóm -->
+            <div class="group-list">
+              <ul>
+                <li
+                  *ngFor="let group of groupedPermissions | keyvalue"
+                  [class.active]="group.key === selectedGroup"
+                  (click)="selectGroup(group.key)"
+                >
+                  {{ group.key }}
+                </li>
+              </ul>
+            </div>
+            <!-- Cột bên phải: checkbox thuộc nhóm đã chọn -->
+            <div class="group-permissions">
+              <mat-checkbox
+                *ngFor="let permission of groupedPermissions[selectedGroup]"
+                [(ngModel)]="selectedPermission[permission.id]"
+                (ngModelChange)="onCheckboxPermissionChange($event, permission)"
+                [name]="permission.permissionName"
+              >
+                {{ permission.permissionName.split(".")[1] }}
+              </mat-checkbox>
+            </div>
+          </div>
+          <div *ngIf="!isPermissionSelected()" class="error-message">
+            Vui lòng chọn permission!
+          </div>
+        </div>
+      </div>
 
-            <div class="form-group btn">
-                <button [disabled]="isLoading" class="btn-primary">
-                    <ng-container *ngIf="isLoading; else notLoading">
-                        <span>Xin chờ!</span>
-                    </ng-container>
-                    <ng-template #notLoading>Cập nhật</ng-template>
-                </button>
-                <a routerLink="/admin/role-manager" class="btn-secondary"> Trở lại </a>
-            </div>
-        </form>
-    </section>
+      <div class="form-group btn">
+        <button [disabled]="isLoading" class="btn-primary">
+          <ng-container *ngIf="isLoading; else notLoading">
+            <span>Xin chờ!</span>
+          </ng-container>
+          <ng-template #notLoading>Cập nhật</ng-template>
+        </button>
+        <a routerLink="/admin/role-manager" class="btn-secondary"> Trở lại </a>
+      </div>
+    </form>
+  </section>
 </div>

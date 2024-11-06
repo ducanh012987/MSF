@@ -1,0 +1,21 @@
+<div class="contract-container">
+  <section class="breadcumrb">
+    <ol class="breadcumrb-nav">
+      <li>
+        <ng-icon class="icon" name="matHomeOutline"></ng-icon>
+      </li>
+      <li class="breadcumrb-nav-item">Hợp đồng</li>
+    </ol>
+  </section>
+  <div class="content-main">
+    <div class="app-leftside" [ngClass]="{ active: isActive }">
+      <app-leftside-contract
+        [isActive]="isActive"
+        (isActiveChange)="isActive = $event"
+      ></app-leftside-contract>
+    </div>
+    <div class="app-rightside">
+      <app-rightside-contract></app-rightside-contract>
+    </div>
+  </div>
+</div>

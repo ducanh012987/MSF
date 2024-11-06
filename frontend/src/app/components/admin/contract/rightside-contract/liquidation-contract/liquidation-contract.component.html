@@ -1,0 +1,28 @@
+<div class="panel-group">
+  <div class="title-heading">
+    <h4 class="panel-title">Thanh lý hợp đồng</h4>
+  </div>
+  <div class="panel-body">
+    <form class="form form-group">
+      <div class="form-infor">
+        <label>Ngày thanh lý:</label>
+        <p-calendar
+          class="form-control"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          [dateFormat]="'dd/mm/yy'"
+          inputId="icondisplay"
+          disabled
+        />
+      </div>
+      <div class="form-infor">
+        <label>Giá trị thanh lý:</label>
+        <input class="form-control" pInputText type="text" value="0" disabled />
+      </div>
+      <div class="form-infor">
+        <label>Thông tin khác:</label>
+        <input class="form-control" pInputText type="text" disabled />
+      </div>
+    </form>
+  </div>
+</div>

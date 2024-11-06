@@ -5,10 +5,13 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   matHomeOutline,
   matKeyboardArrowDownOutline,
+  matKeyboardArrowLeftOutline,
+  matKeyboardArrowRightOutline,
   matKeyboardArrowUpOutline,
 } from '@ng-icons/material-icons/outline';
 import { StorageMenu } from '../../../../services/storage/storage.menu';
 import { StoragePermission } from '../../../../services/storage/storage.permission';
+import { SidebarService } from '../../../../services/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,6 +23,8 @@ import { StoragePermission } from '../../../../services/storage/storage.permissi
     matHomeOutline,
     matKeyboardArrowDownOutline,
     matKeyboardArrowUpOutline,
+    matKeyboardArrowLeftOutline,
+    matKeyboardArrowRightOutline,
   }),
 })
 export class SidebarComponent implements OnInit {
@@ -27,26 +32,18 @@ export class SidebarComponent implements OnInit {
   permissions: any[] = [];
 
   isCategory: boolean = false;
+  isSidebar: boolean = false;
 
   constructor(
     private storageMenu: StorageMenu,
-    private storagePermission: StoragePermission
+    private storagePermission: StoragePermission,
+    private sidebarService: SidebarService
   ) {}
 
   ngOnInit(): void {
-    // Lấy danh sách menu, permissions từ localStorage và parse thành mảng
-    // const storedMenu = localStorage.getItem('menu');
-    // const storedPermissions = localStorage.getItem('permissions');
-    // this.menu = storedMenu ? JSON.parse(storedMenu) : [];
-    // this.permissions = storedPermissions ? JSON.parse(storedPermissions) : [];
-
-    // Lọc menu trùng nhau dựa trên 'id' hoặc 'displayName'
-    const uniqueMenus = this.getUniqueMenus(this.menu);
-
-    // Lọc và sắp xếp menu trước khi gán
-    // this.menu = uniqueMenus
-    //   .filter((menu) => this.canViewMenu(menu)) // Lọc menu dựa trên permissions
-    //   .sort(this.sortMenus); // Sắp xếp menu
+    this.sidebarService.sidebarVisible$.subscribe((visible) => {
+      this.isSidebar = visible;
+    });
 
     this.storageMenu.menu$.subscribe((menu) => {
       this.storagePermission.permissions$.subscribe((permissions) => {
@@ -56,18 +53,6 @@ export class SidebarComponent implements OnInit {
           .filter((menu) => this.canViewMenu(menu)) // Filter based on permissions
           .sort(this.sortMenus); // Apply sorting
       });
-    });
-  }
-
-  getUniqueMenus(menus: any[]): any[] {
-    const seen = new Set();
-    return menus.filter((menu) => {
-      const key = menu.id || menu.displayName; // Xác định tiêu chí so sánh trùng lặp
-      if (seen.has(key)) {
-        return false; // Nếu đã gặp trước đó thì bỏ qua
-      }
-      seen.add(key);
-      return true; // Nếu chưa gặp, giữ lại menu này
     });
   }
 

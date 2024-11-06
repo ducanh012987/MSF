@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
@@ -98,8 +98,20 @@ export class UserCreateComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    if (this.isLoading) {
+  isStatusSelected(): boolean {
+    return this.model.status != null;
+  }
+
+  isRoleSelected(): boolean {
+    return Object.values(this.selectedRole).some((value) => value === true);
+  }
+
+  onSubmit(form: NgForm) {
+    if (form.invalid || !this.isStatusSelected() || !this.isRoleSelected()) {
+      // Đánh dấu tất cả các trường là "touched" để hiển thị lỗi
+      Object.keys(form.controls).forEach((controlName) => {
+        form.controls[controlName].markAsTouched();
+      });
       return;
     }
     this.isLoading = true;

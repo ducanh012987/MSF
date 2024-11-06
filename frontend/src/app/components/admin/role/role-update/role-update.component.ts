@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matHomeOutline } from '@ng-icons/material-icons/outline';
@@ -180,11 +180,21 @@ export class RoleUpdateComponent {
   }
 
   getSelectedMenuIds(): number[] {
-    const selectedIds = this.menu
-      .filter((menu) => this.selectedMenu[menu.id])
+    var perIds = this.getSelectedPermissionIds();
+
+    const selectedMenuIds = this.menu
+      .filter((menu) => {
+        return this.permissions.some((permission) => {
+          const idMatch = perIds.includes(permission.id);
+          const displayNameMatch = menu.displayName == permission.groupName;
+          const permissionNameMatch =
+            permission.permissionName.includes('View');
+          return idMatch && displayNameMatch && permissionNameMatch;
+        });
+      })
       .map((menu) => menu.id);
-    this.model.menuIds = selectedIds;
-    return selectedIds;
+    this.model.menuIds = selectedMenuIds;
+    return selectedMenuIds;
   }
 
   updateRole(): void {
@@ -205,8 +215,18 @@ export class RoleUpdateComponent {
     });
   }
 
-  onSubmit() {
-    if (this.isLoading) {
+  isPermissionSelected(): boolean {
+    return Object.values(this.selectedPermission).some(
+      (value) => value === true
+    );
+  }
+
+  onSubmit(form: NgForm) {
+    if (form.invalid || !this.isPermissionSelected()) {
+      // Đánh dấu tất cả các trường là "touched" để hiển thị lỗi
+      Object.keys(form.controls).forEach((controlName) => {
+        form.controls[controlName].markAsTouched();
+      });
       return;
     }
     this.isLoading = true;
