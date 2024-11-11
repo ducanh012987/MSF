@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
 using System.Data;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Business.Services
 {
@@ -26,26 +28,36 @@ namespace Business.Services
 
         public async Task<ResponseObject<LoginResult>> Login(LoginRequest loginRequest)
         {
-            // Kiểm tra username
-            var user = await GetUserByUsername(loginRequest.Username!);
-            // kiểm tra mật khẩu
-            var passwordVerifyResult = VerifyPassword(user.Password!, loginRequest.Password!);
-
-            if (user == null || !passwordVerifyResult)
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                throw new CustomException(StatusCodes.Status400BadRequest, "Sai tài khoản hoặc mật khẩu!");
+                var parameters = new DynamicParameters();
+                parameters.Add("@Username", loginRequest.Username, DbType.String);
+                parameters.Add("@Password", HashPassword(loginRequest.Password!), DbType.String);
+
+                //Gọi Stored Procedure bằng Dappper
+                var result = await connection.QueryFirstOrDefaultAsync<UserDto>(
+                    "Login",   //Tên Stored Procedure
+                    parameters,            //Tham số truyền vào
+                    commandType: CommandType.StoredProcedure
+                );
+
+                if (result == null)
+                {
+                    throw new CustomException(StatusCodes.Status400BadRequest, "Sai tài khoản hoặc mật khẩu!");
+                }
+
+                if (result.Locked == true)
+                {
+                    throw new CustomException(StatusCodes.Status400BadRequest, "Tài khoản của bạn bị khoá!");
+                }
+
+                var token = _tokenRepository.GenerateToken(result);
+                var refreshToken = _tokenRepository.GenerateRefreshToken(result);
+                var userRequest = UserRequest.FromUserDto(result);
+                var loginResult = LoginResult.LoginSuccess(token, refreshToken, userRequest);
+                return new ResponseObject<LoginResult> { Status = StatusCodes.Status200OK, Message = "Đăng nhập thành công.", Data = loginResult };
             }
 
-            if (user.Locked == true)
-            {
-                throw new CustomException(StatusCodes.Status400BadRequest, "Tài khoản của bạn bị khoá!");
-            }
-
-            var token = _tokenRepository.GenerateToken(user);
-            var refreshToken = _tokenRepository.GenerateRefreshToken(user);
-            var userRequest = UserRequest.FromUserDto(user);
-            var loginResult = LoginResult.LoginSuccess(token, refreshToken, userRequest);
-            return new ResponseObject<LoginResult> { Status = StatusCodes.Status200OK, Message = "Đăng nhập thành công.", Data = loginResult };
         }
 
         public async Task<ResponseText> Register(RegisterRequest registerRequest)
@@ -124,23 +136,6 @@ namespace Business.Services
             }
         }
 
-        public async Task<UserDto> GetUserByUsername(string username)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@Username", username, DbType.String);
-
-                //Gọi Stored Procedure bằng Dappper
-                var result = await connection.QueryFirstOrDefaultAsync<UserDto>(
-                    "GetUserByUsername",   //Tên Stored Procedure
-                    parameters,            //Tham số truyền vào
-                    commandType: CommandType.StoredProcedure
-                );
-                return result!;
-            }
-        }
-
         public async Task<ResponseText> CreateUser(UserInput userInput)
         {
             string roleIdsJson = JsonConvert.SerializeObject(userInput.RoleIds);
@@ -211,16 +206,14 @@ namespace Business.Services
         }
 
         // Mã hoá mật khẩu
-        public string HashPassword(string password)
+        private string HashPassword(string password)
         {
-            return _passwordHasher.HashPassword(null!, password);
-        }
-
-        // Kiểm tra mật khẩu có đúng không
-        public bool VerifyPassword(string hashedPassword, string providedPassword)
-        {
-            var result = _passwordHasher.VerifyHashedPassword(null!, hashedPassword, providedPassword);
-            return result == PasswordVerificationResult.Success;
+            using (var sha256 = SHA256.Create())
+            {
+                var combinedPassword = password;
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(combinedPassword));
+                return Convert.ToBase64String(hashedBytes);
+            }
         }
 
         public async Task<UserDto> GetUser(int id)

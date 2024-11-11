@@ -1,4 +1,16 @@
-h1 {
-    font-size: 2rem;
-    color: red;
+.not-found {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 40px;
+
+    h1 {
+        font-size: 2rem;
+        color: red;
+    }
+
+    p {
+        padding: 10px;
+    }
 }

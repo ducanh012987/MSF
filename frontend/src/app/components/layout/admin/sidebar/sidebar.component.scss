@@ -1,6 +1,6 @@
 // Sidebar container
 #accordionSidebar {
-    background-color: #0051a3;
+    background-color: #285d32;
     width: 250px;
     height: 100vh;
 
@@ -25,7 +25,7 @@
         }
 
         &:hover {
-            color: #adb5bd;
+            color: #217b32;
         }
     }
 
@@ -38,10 +38,9 @@
             display: flex;
             align-items: center;
 
-            &:hover {
-                background-color: #495057;
-                color: #fff;
-                text-decoration: none;
+            &:hover,
+            &.active {
+                background-color: #217b32;
                 cursor: pointer;
             }
 
@@ -83,8 +82,9 @@
                     background: none;
                 }
 
-                &:hover {
-                    background-color: #495057;
+                &:hover,
+                &.active {
+                    background-color: #217b32;
                 }
             }
         }

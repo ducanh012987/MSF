@@ -55,7 +55,7 @@ export class PermissionCreateComponent {
         this.router.navigate(['/admin/permission-manager']);
       },
       error: (error) => {
-        alert('Đã xảy ra lỗi: ' + error);
+        alert('Thêm mới thất bại!');
         this.isLoading = false;
         console.log(error);
       },

@@ -171,7 +171,7 @@ export class RoleCreateComponent implements OnInit {
         this.router.navigate(['/admin/role-manager']);
       },
       error: (error) => {
-        alert('Đã xảy ra lỗi: ' + error);
+        alert('Thêm mới thất bại!');
         this.isLoading = false;
         console.log(error);
       },

@@ -34,6 +34,7 @@ $my-App-theme: mat.define-theme((color: (theme-type: light,
 // @import "../node_modules/primeflex/primeflex.css";
 
 @import "../src/app/ui/p-dialog-hopdong.scss";
+@import "../src/app/ui/confirm-dialog.scss";
 
 /* You can add global styles to this file, and also import other style files */
 * {
