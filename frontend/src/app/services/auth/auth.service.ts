@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import {
-  catchError,
-  map,
-  Observable,
-  of,
-  switchMap,
-  tap,
-  throwError,
-} from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import baseUrl from '../../types/baseUrl';
@@ -57,6 +49,7 @@ export class AuthService {
     localStorage.clear();
     console.log('Đăng xuất thành công');
     alert('Đăng xuất thành công.');
-    this.router.navigate(['/login']);
+    //this.router.navigateByUrl('/login');
+    window.location.href = '/login';
   }
 }

@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   matAddOutline,
@@ -45,4 +45,25 @@ import { PaymentProgressComponent } from './payment-progress/payment-progress.co
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class RightsideContractComponent {}
+export class RightsideContractComponent {
+  @ViewChild(ContentContractComponent)
+  formContentContractComponent!: ContentContractComponent;
+  isEditing = false;
+
+  onSave(): void {
+    if (this.formContentContractComponent) {
+      this.formContentContractComponent.validateForm();
+      this.formContentContractComponent.validateRequiredFields();
+    }
+  }
+
+  addNewItem() {
+    this.isEditing = true;
+    this.formContentContractComponent.resetForm();
+  }
+
+  cancelEdit() {
+    this.isEditing = false;
+    this.formContentContractComponent.resetForm();
+  }
+}

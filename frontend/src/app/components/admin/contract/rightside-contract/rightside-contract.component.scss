@@ -55,7 +55,7 @@
                         background: #F2C94C;
 
                         &:hover {
-                            background-color: #f2c12e;
+                            background-color: #edb50d;
                         }
                     }
 
@@ -63,7 +63,7 @@
                         background: #f55442;
 
                         &:hover {
-                            background-color: #f3341f;
+                            background-color: #d73535;
                         }
                     }
 
@@ -71,7 +71,7 @@
                         background: #285D32;
 
                         &:hover {
-                            background-color: #14521f;
+                            background-color: #217b32;
                         }
                     }
 
@@ -88,7 +88,8 @@
 
                         &.custom {
                             color: white;
-                            font-size: 18px;
+                            font-size: 19px;
+                            padding-top: 1px;
                         }
                     }
 

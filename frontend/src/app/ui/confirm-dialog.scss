@@ -1,0 +1,51 @@
+.p-confirm-dialog {
+    width: 30vw;
+
+    .p-dialog-header {
+        .p-dialog-header-icons {
+            display: none;
+        }
+    }
+
+    .p-dialog-content {
+        height: 60px;
+        padding-top: 25px;
+
+        .p-confirm-dialog-message {
+            width: 100%;
+            text-align: center;
+            font-size: 15px;
+        }
+    }
+
+    .p-dialog-footer {
+        padding: 10px;
+
+        .btn-action {
+            padding: 4px 12px !important;
+            font-size: 14px;
+            color: #FFFFFF;
+            border-radius: 2px;
+            display: flex;
+            line-height: 1.5;
+            margin: 10px;
+            cursor: pointer;
+            box-shadow: none;
+
+            &.cancel {
+                background: #357426;
+                border: none;
+            }
+
+            &.delete {
+                margin-right: 0px;
+                background: #f55442;
+                border: none;
+
+                &:hover {
+                    background-color: #d73535;
+                }
+            }
+        }
+    }
+}

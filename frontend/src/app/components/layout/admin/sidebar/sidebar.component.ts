@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   matHomeOutline,
@@ -16,7 +16,7 @@ import { SidebarService } from '../../../../services/sidebar/sidebar.service';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [NgIconComponent, CommonModule, RouterLink],
+  imports: [NgIconComponent, CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   providers: provideIcons({

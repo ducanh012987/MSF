@@ -91,7 +91,7 @@ export class UserCreateComponent implements OnInit {
         this.router.navigate(['/admin/user-manager']);
       },
       error: (error) => {
-        alert('Đã xảy ra lỗi: ' + error);
+        alert('Thêm mới thất bại!');
         this.isLoading = false;
         console.log(error);
       },

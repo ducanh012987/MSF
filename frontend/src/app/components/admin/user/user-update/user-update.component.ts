@@ -121,7 +121,7 @@ export class UserUpdateComponent {
       },
       error: (error) => {
         console.log(error);
-        alert('Đã xảy ra lỗi: ' + error);
+        alert('Cập nhật thất bại!');
         this.isLoading = false;
       },
     });

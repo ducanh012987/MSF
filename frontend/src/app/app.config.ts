@@ -8,11 +8,14 @@ import {
 } from '@angular/common/http';
 import { tokenInterceptor } from './services/interceptors/token.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ConfirmationService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])), provideAnimationsAsync(),
+    provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
+    provideAnimationsAsync(),
+    ConfirmationService,
   ],
 };

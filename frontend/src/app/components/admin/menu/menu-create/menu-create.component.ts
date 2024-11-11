@@ -48,7 +48,7 @@ export class MenuCreateComponent {
         this.router.navigate(['/admin/menu-manager']);
       },
       error: (error) => {
-        alert('Đã xảy ra lỗi: ' + error);
+        alert('Thêm mới thất bại!');
         this.isLoading = false;
         console.log(error);
       },

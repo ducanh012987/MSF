@@ -2,19 +2,29 @@
   <div class="content-system">
     <div class="main-action">
       <div class="action-group">
-        <button pButton class="btn-action add">
+        <button pButton class="btn-action add" (click)="addNewItem()">
           <ng-icon class="icon" name="matAddOutline"></ng-icon>
           <span>Thêm mới</span>
         </button>
-        <button pButton class="btn-action edit" disabled>
+        <button
+          pButton
+          class="btn-action edit"
+          [disabled]="!isEditing"
+          (click)="onSave()"
+        >
           <ng-icon class="icon custom" name="matSaveAltOutline"></ng-icon>
           <span>Lưu</span>
         </button>
-        <button pButton class="btn-action delete" disabled>
+        <button
+          pButton
+          class="btn-action delete"
+          [disabled]="!isEditing"
+          (click)="cancelEdit()"
+        >
           <ng-icon class="icon custom" name="matCancelOutline"></ng-icon>
           <span>Huỷ thay đổi</span>
         </button>
-        <button pButton class="btn-action delete" disabled>
+        <button pButton class="btn-action delete" [disabled]="!isEditing">
           <ng-icon class="icon custom" name="matDeleteForeverOutline"></ng-icon>
           <span>Xoá</span>
         </button>
